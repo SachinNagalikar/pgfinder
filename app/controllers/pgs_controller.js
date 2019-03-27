@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
-
+ 
 router.get('/', (req, res) => {
     Pg.find()
         .then((pg) => {

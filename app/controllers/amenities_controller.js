@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Amenitie } = require('../models/amenities')
-
+ 
 router.get('/', (req, res) => {
     Amenitie.find()
         .then((amenitie) => {

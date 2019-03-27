@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
+const validator = require('validator')
 
 const { User } = require('../models/user')
 //const {authenticate}=require('../middleware/authenticate')
-
+ 
 
 router.get('/', (req, res) => {
     User.find()

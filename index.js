@@ -3,9 +3,9 @@ const mongoose = require('./config/database')
 const cors = require('cors')
 
 const { pgsRouter } = require('./app/controllers/pgs_controller')
-const { usersRouter } = require('./app/controllers/users_controller')
+const { usersRouter } = require('./app/controllers/users_controllers')
 const { amenitiesRouter } = require('./app/controllers/amenities_controller')
- 
+
 const app = express()
 const port = 3001
 

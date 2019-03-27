@@ -5,7 +5,7 @@ const { Schema } = mongoose
 const pgSchema = new Schema({
     name: {
         type: String,
-        required: true
+        //required: true
     },
     pgName: {
         type: String,
@@ -20,20 +20,16 @@ const pgSchema = new Schema({
         required: true
     },
     roomTypes: [
-        {
-            roomType: {
-                type: String,
-                required: true
-            }
-        }
+        type = String
     ],
-    amenities: {
-        type: Schema.Types.ObjectId,
-        ref: 'Amenitie'
-    },
+    amenities: [
+        type = String
+        // type: Schema.Types.ObjectId,
+        //ref: 'Amenitie'
+    ],
     email: {
         type: String,
-        required: true,
+        //required: true,
         validate: {
             validator: function (value) {
                 if (validator.isEmpty(value)) {
@@ -49,7 +45,7 @@ const pgSchema = new Schema({
     mobile: {
         type: String,
         minlength: 10,
-        required: true
+        //required: true
     },
     address: {
         type: String,
@@ -59,22 +55,12 @@ const pgSchema = new Schema({
         type: String,
         //required: true
     },
-    foods: [
-        {
-            food: {
-                type: String,
-                required: true
-            }
-        }
-    ],
-    pgTypes: [
-        {
-            pgType: {
-                type: String,
-                required: true
-            }
-        }
-    ],
+    foods: {
+        type: String
+    },
+    pgTypes: {
+        type: String
+    },
     description: {
         type: String,
         required: true
@@ -83,10 +69,10 @@ const pgSchema = new Schema({
         type: String,
         required: true
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: 'User'
-    },
+    // user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: 'User'
+    // },
     createdAt: {
         type: Date,
         default: Date.now

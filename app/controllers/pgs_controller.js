@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
- 
+
 router.get('/', (req, res) => {
     Pg.find()
         .then((pg) => {
@@ -9,6 +9,21 @@ router.get('/', (req, res) => {
                 res.send(pg)
             } else {
                 res.send({ notice: "There is no pg's" })
+            }
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
+
+router.get('/:id', (req, res) => {
+    const id = req.params.id
+    Pg.findById(id)
+        .then((pg) => {
+            if (pg) {
+                res.send(pg)
+            } else {
+                res.send({ notice: "there is no pg's" })
             }
         })
         .catch((err) => {

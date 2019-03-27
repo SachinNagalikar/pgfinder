@@ -1,45 +1,32 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,Row,Col,Container } from 'reactstrap';
-import Register from './users/register'
-import Login from './users/login'
+import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
+import Register from './component/user/register'
+import PgShow from './component/pg/pgShow'
+import PgList from './component/pg/listPg'
+import PgNew from './component/pg/newPg'
+import PgEdit from './component/pg/editPg'
 
-import Help from "./users/help";
 class App extends Component {
   render() {
     return (
-      <BrowserRouter> 
-        <div class="VmOpGe">
-          <Container>    
-            <Navbar color="light" expand="md">
-      <NavbarBrand>pgFinder</NavbarBrand>
-              <Col sm={{ size: 'auto', offset: 9 }}>
-       <Link to="/users/register">Register</Link>|
-      <Link to="/users/login">Login</Link>|
-      <Link to='/users/help'>Help</Link></Col> 
-              </Navbar>
-            </Container>
-          <Switch>
-            <Route path="/users/register" component={Register} />
-            <Route path='/users/login' component={Login} />
-            <Route path='/users/help' component={Help}/>
-            </Switch>
-        </div>
-        </BrowserRouter>
-    )
-  }
+      <BrowserRouter>
+        <div>
+          <h2>PG Finder</h2>
+          <Link to="/pg" >PG's</Link> |
+          <Link to="/users/register">Register</Link>
 
+          <Switch>
+            <Route path="/users/register" component={Register} exact={true}></Route>
+            <Route path="/pg" component={PgList} exact={true}></Route>
+            <Route path="/pg/new" component={PgNew} exact={true}></Route>
+            <Route path="/pg/:id" component={PgShow} exact={true}></Route>
+            <Route path="/pg/edit/:id" component={PgEdit} exact={true}></Route>
+          </Switch>
+        </div>
+      </BrowserRouter>
+
+    );
+  }
 }
 
-export default App
+export default App;

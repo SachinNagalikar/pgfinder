@@ -57,7 +57,7 @@ super()
             <div>
                  <div className="container" >
             <div className="row">
-            <div className="col-md-2"></div>
+            <div className="col-md-5"></div>
                 <Form onSubmit={this.handleSubmit}>
                 <h2>login</h2>
                 <Label>

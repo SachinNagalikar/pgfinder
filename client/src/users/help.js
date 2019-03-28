@@ -6,7 +6,7 @@ class Help extends React.Component{
             <div>
                    <div className="container" >
                         <div className="row">
-                        <div className="col-md-6" >
+                        <div className="col-md-8" >
                         <h2>welcome to pgfinder</h2>
                         <h2> the help line number is :-1234567890</h2>
                         </div>

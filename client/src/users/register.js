@@ -154,7 +154,7 @@ class Register extends React.Component{
                      <Label>
                     Last Name<br />
                                 <Input type="text" value={this.state.lastname} onChange={this.handleLast} placeholder="Lastname" />
-                 <span className="errorMessage">{this.state.lastNameError} </span>  
+                 <span className="danger">{this.state.lastNameError} </span>  
                     </Label><br/>
                     <FormGroup >
                     <Label>

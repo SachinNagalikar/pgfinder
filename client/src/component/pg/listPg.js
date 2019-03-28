@@ -2,7 +2,6 @@ import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 
-
 class PgList extends React.Component {
     constructor() {
         super()

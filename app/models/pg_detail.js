@@ -24,8 +24,6 @@ const pgSchema = new Schema({
     ],
     amenities: [
         type = String
-        // type: Schema.Types.ObjectId,
-        //ref: 'Amenitie'
     ],
     email: {
         type: String,

@@ -49,10 +49,12 @@ const pgSchema = new Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        //required: true
-    },
+    image: [
+        {
+            type: String,
+            //required: true
+        }
+    ],
     foods: {
         type: String
     },

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
+const { upload } = require('../middleware/imageUploads')
 
 router.get('/', (req, res) => {
     Pg.find()
@@ -31,8 +32,16 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', upload.array('image', 4), (req, res) => {
     const body = req.body
+    const images = []
+    req.files.forEach(file => {
+        const imageUrl = file.destination
+        const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
+        images.push(link)
+    })
+    // console.log(images)
+    body.image = images
     const pg = new Pg(body)
     pg.save()
         .then((pg) => {

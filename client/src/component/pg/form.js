@@ -1,4 +1,5 @@
 import React from 'react'
+import { fork } from 'child_process';
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            image: ''
+            filename: null
         }
     }
 
@@ -37,7 +38,6 @@ class PgForm extends React.Component {
                 nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
             }))
         }
-
     }
 
     pgTypeChange = (e) => {
@@ -96,22 +96,42 @@ class PgForm extends React.Component {
         this.setState(() => ({ deposit }))
     }
 
+    ImageChange = (e) => {
+        const filename = e.target.files
+        this.setState(() => ({ filename }))
+    }
+
     submitHandle = (e) => {
         e.preventDefault()
-        const formData = {
-            pgName: this.state.pgName,
-            roomTypes: this.state.roomTypes,
-            pgTypes: this.state.pgTypes,
-            foods: this.state.foods,
-            amenities: this.state.amenities,
-            address: this.state.address,
-            description: this.state.description,
-            rules: this.state.rules,
-            pgRent: this.state.pgRent,
-            deposit: this.state.deposit,
-            image: this.state.image
+        const data = new FormData()
+        data.append("pgName", this.state.pgName)
+        data.append("roomTypes", this.state.roomTypes)
+        data.append("pgTypes", this.state.pgTypes)
+        data.append("foods", this.state.foods)
+        data.append("amenities", this.state.amenities)
+        data.append("address", this.state.address)
+        data.append("description", this.state.description)
+        data.append("rules", this.state.rules)
+        data.append("pgRent", this.state.pgRent)
+        data.append("deposit", this.state.deposit)
+        for (const file of this.state.filename) {
+            data.append("image", file)
         }
-        this.props.pgSubmitHandle(formData)
+
+        // const formData = {
+        //     pgName: this.state.pgName,
+        //     roomTypes: this.state.roomTypes,
+        //     pgTypes: this.state.pgTypes,
+        //     foods: this.state.foods,
+        //     amenities: this.state.amenities,
+        //     address: this.state.address,
+        //     description: this.state.description,
+        //     rules: this.state.rules,
+        //     pgRent: this.state.pgRent,
+        //     deposit: this.state.deposit,
+        //     image: this.state.image
+        // }
+        this.props.pgSubmitHandle(data)
     }
 
     render() {
@@ -199,7 +219,10 @@ class PgForm extends React.Component {
                         Deposit:<br />
                         <input type="number" value={this.state.deposit} onChange={this.depositChange} />
                     </label><br />
-                    <img />
+                    <label>
+                        Image :<br />
+                        <input type="file" multiple name="image" onChange={this.ImageChange} />
+                    </label><br />
                     <input type="submit" value="submit" />
                 </form>
             </div >

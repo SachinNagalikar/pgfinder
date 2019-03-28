@@ -1,80 +1,80 @@
 
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import '../../src/App.css'
-class Register extends React.Component{
+class Register extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             firstname: props.firstname ? props.firstname : '',
             middlename: props.middlename ? props.middlename : '',
             lastname: props.lastname ? props.lastname : '',
-            email:props.email?props.email:'',
+            email: props.email ? props.email : '',
             mobile: props.mobile ? props.mobile : '',
             password: props.password ? props.password : '',
             firstNameError: '',
-            lastNameError:'',
+            lastNameError: '',
             emailError: '',
             passwordError: '',
-            mobileError:'',
+            mobileError: '',
             redirectList: false
         }
 
-         this.handleEmail = this.handleEmail.bind(this)
-        this.handleSubmit=this.handleSubmit.bind(this)
+        this.handleEmail = this.handleEmail.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
-    
+
     //to be es6 arrow function based
     handleFirst = (e) => {
         const firstname = e.target.value
-        this.setState(()=>({firstname}))
+        this.setState(() => ({ firstname }))
     }
     handleMiddle = (e) => {
         const middlename = e.target.value
-        this.setState(()=>({middlename}))
+        this.setState(() => ({ middlename }))
     }
-    handleLast= (e) => {
+    handleLast = (e) => {
         const lastname = e.target.value
-        this.setState(()=>({lastname}))
+        this.setState(() => ({ lastname }))
     }
     handleEmail(e) {
         const email = e.target.value
-        this.setState(()=>({email}))
+        this.setState(() => ({ email }))
     }
-    handlePassword=(e)=> {
+    handlePassword = (e) => {
         const password = e.target.value
-        this.setState(()=>({password}))
+        this.setState(() => ({ password }))
     }
     //bind in inline event handler
-    handleMobile=(e)=> {
+    handleMobile = (e) => {
         const mobile = e.target.value
-        this.setState(()=>({mobile}))
+        this.setState(() => ({ mobile }))
     }
 
     validate = () => {
         let isError = false
         const errors = {
             firstNameError: '',
-            middleNameError:'',
-            lastNameError:'',
+            middleNameError: '',
+            lastNameError: '',
             emailError: '',
             passwordError: '',
-            mobileError:''
+            mobileError: ''
         }
-        console.log(errors,"errors")
+        console.log(errors, "errors")
         if (this.state.firstname.length < 3) {
-        
+
             isError = true
             errors.firstNameError = "firstname at least 3 character"
-        } if(this.state.lastname.length===0){
+        } if (this.state.lastname.length === 0) {
             isError = true
-            errors.lastNameError="lastname not be empty"
+            errors.lastNameError = "lastname not be empty"
         }
-        if(this.state.middlename.length===0){
+        if (this.state.middlename.length === 0) {
             isError = true
-            errors.middleNameError="middlename not be empty"
+            errors.middleNameError = "middlename not be empty"
         }
         if (this.state.email.indexOf("@") === -1) {
             isError = true
@@ -85,7 +85,7 @@ class Register extends React.Component{
             errors.passwordError = "password is empty"
         } if (this.state.mobile.length < 10) {
             isError = true
-            errors.mobileError="mobile number not be less than 10 digit"
+            errors.mobileError = "mobile number not be less than 10 digit"
         }
         this.setState({
             ...this.state,
@@ -96,35 +96,35 @@ class Register extends React.Component{
 
     handleSubmit(e) {
         e.preventDefault()
-        const error=this.validate()
+        const error = this.validate()
         const formData = {
             firstname: this.state.firstname,
             middlename: this.state.middlename,
             lastname: this.state.lastname,
-            password:this.state.password,
+            password: this.state.password,
             email: this.state.email,
-            mobile:this.state.mobile
+            mobile: this.state.mobile
         }
         console.log(formData)
         axios.post('/users/login', formData)
-        .then((response) => {  
-            const {token
-        } = response.data
-            
-            localStorage.setItem('token', token)
-            this.props.history.push('/users/login')
-            
-        })
-        .catch((err) => {
-        console.log(err)
-    })
+            .then((response) => {
+                const { token
+                } = response.data
+
+                localStorage.setItem('token', token)
+                this.props.history.push('/users/login')
+
+            })
+            .catch((err) => {
+                console.log(err)
+            })
         this.setState(() => ({
             firstname: '',
             middlename: '',
             lastname: '',
-            password:'',
+            password: '',
             email: '',
-            mobile:''
+            mobile: ''
         }))
 
     }
@@ -135,57 +135,57 @@ class Register extends React.Component{
         }
         return (
             <div >
-            <div className="container" >
-            <div className="row">
-            <div className="col-md-2" ></div>
-                <Form onSubmit={this.handleSubmit}>
+                <div className="container" >
+                    <div className="row">
+                        <div className="col-md-2" ></div>
+                        <Form onSubmit={this.handleSubmit}>
                             <h2>Register</h2>
-                    <Label>
-                     First Name<br />    
-                        <Input type="text" value={this.state.firstname} onChange={this.handleFirst} placeholder="Firstname"  /> 
-                        <span className="menu navigation-menu" color="danger">{this.state.firstNameError}</span>           
-                    </Label> 
-                    <Label>
-                    Middle Name<br />    
-             <Input type="text" value={this.state.middlename} onChange={this.handleMiddle}
+                            <Label>
+                                First Name<br />
+                                <Input type="text" value={this.state.firstname} onChange={this.handleFirst} placeholder="Firstname" />
+                                <span color="danger" className="menu navigation-menu" color="danger">{this.state.firstNameError}</span>
+                            </Label>
+                            <Label>
+                                Middle Name<br />
+                                <Input type="text" value={this.state.middlename} onChange={this.handleMiddle}
                                     placeholder="Middlename" />
-                 <span>{this.state.middleNameError} </span>  
-                 </Label>               
-                     <Label>
-                    Last Name<br />
+                                <span>{this.state.middleNameError} </span>
+                            </Label>
+                            <Label>
+                                Last Name<br />
                                 <Input type="text" value={this.state.lastname} onChange={this.handleLast} placeholder="Lastname" />
-                 <span className="errorMessage">{this.state.lastNameError} </span>  
-                    </Label><br/>
-                    <FormGroup >
-                    <Label>
-                     Email
+                                <span className="errorMessage">{this.state.lastNameError} </span>
+                            </Label><br />
+                            <FormGroup >
+                                <Label>
+                                    Email
                   </Label>
-               <Input type="email" value={this.state.email} onChange={this.handleEmail}
-                        placeholder="Email"  />
-                <span className="color:red;font-weight:bold">{this.state.emailError} </span>
-                    </FormGroup>
-                    <FormGroup >
-                    <Label>
-                       Password<br />
-                <Input type="password" value={this.state.password} onChange={this.handlePassword}
-                            placeholder="Password" />
-                     </Label><br />
-                    <span>{this.state.passwordError}</span>
-                    </FormGroup>
-                    <FormGroup >
-                    <Label>
-                    Mobile<br />       
-            <Input type="text" value={this.state.mobile} onChange={this.handleMobile} placeholder="Mobile"  />
-                        </Label><br />
-                        <span>{this.state.mobileError}</span>    
-                    </FormGroup>
-                    <Button type="submit" value="submit" color="primary">submit</Button>
-                    </Form>
+                                <Input type="email" value={this.state.email} onChange={this.handleEmail}
+                                    placeholder="Email" />
+                                <span className="color:red;font-weight:bold">{this.state.emailError} </span>
+                            </FormGroup>
+                            <FormGroup >
+                                <Label>
+                                    Password<br />
+                                    <Input type="password" value={this.state.password} onChange={this.handlePassword}
+                                        placeholder="Password" />
+                                </Label><br />
+                                <span>{this.state.passwordError}</span>
+                            </FormGroup>
+                            <FormGroup >
+                                <Label>
+                                    Mobile<br />
+                                    <Input type="text" value={this.state.mobile} onChange={this.handleMobile} placeholder="Mobile" />
+                                </Label><br />
+                                <span>{this.state.mobileError}</span>
+                            </FormGroup>
+                            <Button type="submit" value="submit" color="primary">submit</Button>
+                        </Form>
                     </div>
                 </div>
-                
+
             </div>
         )
-    }   
+    }
 }
 export default Register

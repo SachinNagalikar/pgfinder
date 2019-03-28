@@ -135,22 +135,22 @@ class Register extends React.Component{
         }
         return (
             <div >
-            <div className="container" striped>
+            <div className="container" >
             <div className="row">
-            <div className="col-md-2" bordered></div>
+            <div className="col-md-2" ></div>
                 <Form onSubmit={this.handleSubmit}>
-                  <h2>Register</h2>
+                            <h2>Register</h2>
                     <Label>
                      First Name<br />    
                         <Input type="text" value={this.state.firstname} onChange={this.handleFirst} placeholder="Firstname"  /> 
                         <span className="menu navigation-menu" color="danger">{this.state.firstNameError}</span>           
-                    </Label> <tab></tab>
+                    </Label> 
                     <Label>
                     Middle Name<br />    
              <Input type="text" value={this.state.middlename} onChange={this.handleMiddle}
                                     placeholder="Middlename" />
                  <span>{this.state.middleNameError} </span>  
-                 </Label>  <tab></tab>             
+                 </Label>               
                      <Label>
                     Last Name<br />
                                 <Input type="text" value={this.state.lastname} onChange={this.handleLast} placeholder="Lastname" />
@@ -162,7 +162,7 @@ class Register extends React.Component{
                   </Label>
                <Input type="email" value={this.state.email} onChange={this.handleEmail}
                         placeholder="Email"  />
-                <span class="color:red;font-weight:bold">{this.state.emailError} </span>
+                <span className="color:red;font-weight:bold">{this.state.emailError} </span>
                     </FormGroup>
                     <FormGroup >
                     <Label>

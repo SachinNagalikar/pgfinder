@@ -28,6 +28,7 @@ router.post('/', (req, res) => {
         })
 })
 
+//check this route
 router.put('/:id', (req, res) => {
     const id = req.params.id
     const pg = req.body

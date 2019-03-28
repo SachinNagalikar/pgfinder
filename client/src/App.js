@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css'
 import { BrowserRouter, Link, Switch, Route } from 'react-router-dom'
 import {
   Collapse,
@@ -22,10 +23,10 @@ class App extends Component {
       <BrowserRouter> 
         <div class="VmOpGe">
           <Container>    
-            <Navbar color="light" expand="md">
+            <Navbar color="light" expand="md"  >
       <NavbarBrand>pgFinder</NavbarBrand>
               <Col sm={{ size: 'auto', offset: 9 }}>
-       <Link to="/users/register">Register</Link>|
+       <Link to="/users/register" color="danger">Register</Link>|
       <Link to="/users/login">Login</Link>|
       <Link to='/users/help'>Help</Link></Col> 
               </Navbar>

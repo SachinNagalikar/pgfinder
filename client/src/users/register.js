@@ -1,7 +1,6 @@
 
 import React from 'react'
 import { Button, Form, FormGroup, Label, Input} from 'reactstrap'
-
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import '../../src/App.css'
@@ -142,18 +141,18 @@ class Register extends React.Component{
                 <Form onSubmit={this.handleSubmit}>
                   <h2>Register</h2>
                     <Label>
-                     FirstName<br />    
+                     First Name<br />    
                         <Input type="text" value={this.state.firstname} onChange={this.handleFirst} placeholder="Firstname"  /> 
                         <span className="menu navigation-menu" color="danger">{this.state.firstNameError}</span>           
                     </Label> <tab></tab>
                     <Label>
-                    MiddleName<br />    
+                    Middle Name<br />    
              <Input type="text" value={this.state.middlename} onChange={this.handleMiddle}
                                     placeholder="Middlename" />
                  <span>{this.state.middleNameError} </span>  
                  </Label>  <tab></tab>             
                      <Label>
-                    LastName<br />
+                    Last Name<br />
                                 <Input type="text" value={this.state.lastname} onChange={this.handleLast} placeholder="Lastname" />
                  <span className="errorMessage">{this.state.lastNameError} </span>  
                     </Label><br/>

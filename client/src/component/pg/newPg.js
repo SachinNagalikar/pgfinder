@@ -5,9 +5,11 @@ import PgForm from './form'
 
 class PgNew extends React.Component {
     submitHandle = (data) => {
+        console.log('kumar',data)
         axios.post('/pgs', data)
             .then((response) => {
                 const pg = response.data
+                console.log('ra',pg)
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {

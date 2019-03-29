@@ -18,7 +18,7 @@ class PgList extends React.Component {
                 })
             })
             .catch((err) => {
-                console.log(err)
+           //     console.log(err)
             })
     }
     render() {

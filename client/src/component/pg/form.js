@@ -4,6 +4,7 @@ import { Button, Form, FormGroup, Label, Input} from 'reactstrap'
 class PgForm extends React.Component {
     constructor(props) {
         super(props)
+        console.log('props-nischal',props)
         this.state = {
             pgName: props.pgName ? props.pgName : '',
             roomTypes: props.roomTypes ? props.roomTypes : [],
@@ -15,7 +16,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            filename: null
+            filename: props.filename?props.filename:null
         }
     }
 
@@ -28,10 +29,14 @@ class PgForm extends React.Component {
         e.persist()
         var nameType = e.target.name
         var value = e.target.value
+        console.log(value)
         var checked = e.target.checked
+        console.log(nameType)
+        console.log(value)
+        console.log(checked)
         if (checked) {
             this.setState((prevState) => ({
-                nameType: prevState.roomTypes.push(value)
+                nameType: prevState.roomTypes.push(`${value}`)
             }))
         } else {
             this.setState((prevState) => ({
@@ -59,6 +64,7 @@ class PgForm extends React.Component {
         var checked = e.target.checked
         var nameType = e.target.name
         var value = e.target.value
+        console.log(value)
         if (checked) {
             this.setState((prevState) => ({
                 nameType: prevState.amenities.push(value)
@@ -101,7 +107,7 @@ class PgForm extends React.Component {
         this.setState(() => ({ filename }))
     }
 
-    submitHandle = (e) => {
+    pgSubmitHandle = (e) => {
         e.preventDefault()
         const data = new FormData()
         data.append("pgName", this.state.pgName)
@@ -114,10 +120,10 @@ class PgForm extends React.Component {
         data.append("rules", this.state.rules)
         data.append("pgRent", this.state.pgRent)
         data.append("deposit", this.state.deposit)
-        for (const file of this.state.filename) {
+        for (let file of this.state.filename) {
             data.append("image", file)
         }
-
+console.log('sachin',data)
         // const formData = {
         //     pgName: this.state.pgName,
         //     roomTypes: this.state.roomTypes,
@@ -136,7 +142,7 @@ class PgForm extends React.Component {
     render() {
         return (
             <div>
-                <Form onSubmit={this.submitHandle}>
+                <Form onSubmit={this.pgSubmitHandle}>
                     <Label>
                         PG Name<br />
                         <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} />
@@ -224,9 +230,10 @@ class PgForm extends React.Component {
                     <Label>
                         Image:<br />
                         <input type="file" multiple name="image" onChange={this.ImageChange} />
-                        </Label>
-                    <Button value="submit">submit</Button>
+                    </Label><br />
+                    <Input type='submit' value='submit'/>
                 </Form>
+
             </div >
         )
     }

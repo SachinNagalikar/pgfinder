@@ -19,11 +19,16 @@ const pgSchema = new Schema({
         type: Number,
         required: true
     },
-    roomTypes: [
-        type = String
-    ],
-    amenities: [
-        type = String
+    roomTypes:[
+        {
+            type: String
+        }
+    ]
+    ,
+    amenities:[
+        {
+            type: String
+        }
     ],
     email: {
         type: String,

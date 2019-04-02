@@ -33,7 +33,7 @@ class PgEdit extends React.Component {
             .then((response) => {
                 const pg = response.data
                 console.log("rak", pg)
-                // this.props.history.push(`/pg/${pg._id}`)
+                this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {
                 console.log(err)
@@ -53,7 +53,7 @@ class PgEdit extends React.Component {
                         </div>
                     </Navbar>
                 </div >
-                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} filename={this.state.pg.filename} pgSubmitHandle={this.submitHandle} />}
+                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
 
             </div>
         )
@@ -61,3 +61,4 @@ class PgEdit extends React.Component {
 }
 
 export default PgEdit
+//.join(' ').split(',')

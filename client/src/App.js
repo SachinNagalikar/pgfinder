@@ -40,12 +40,21 @@ class App extends Component {
             <Route path='/users/home' component={Home} />
             <Route path="/users/login" component={Login} />
             <Route path='/users/help' component={Help} />
+<<<<<<< HEAD
+            <Route path="/users/register" component={Register} exact={true}/>
+            <Route path="/pg" component={PgList} exact={true}/>
+            <Route path="/pg/new" component={PgNew} exact={true}/>
+            <Route path="/pg/:id" component={PgShow} exact={true}/>
+            <Route path="/pg/edit/:id" component={PgEdit} exact={true}/>
+      
+=======
             <Route path="/users/register" component={Register} exact={true} />
             <Route path="/pg" component={PgList} exact={true} />
             <Route path="/pg/new" component={PgNew} exact={true} />
             <Route path="/pg/:id" component={PgShow} exact={true} />
             <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
 
+>>>>>>> f9afa15c69f2528120f15f6568272e8d8a20e92f
           </Switch>
 
         </div>

@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const { User } = require('../models/user')
 
-//post;user register
+//post:user register
 router.post('/register', (req, res) => {
     const body = req.body
     const user = new User(body)
@@ -36,6 +36,7 @@ router.post('/login', (req, res) => {
             res.status('404').send(err)
         })
 })
+
 
 //user logout
 router.delete('/logout', (req, res) => {

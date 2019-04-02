@@ -5,7 +5,7 @@ import {
   Navbar,
   NavbarBrand,
   Col
-   } from 'reactstrap';
+} from 'reactstrap';
 import Register from './users/register'
 import Login from './users/login'
 
@@ -23,31 +23,40 @@ class App extends Component {
           <div className="container" >
             <div className="row" >
               <div className="col-md-12" >
-              <Navbar color="warning" light expand="md">
-              <NavbarBrand>PG Finder</NavbarBrand>
+                <Navbar color="warning" light expand="md">
+                  <NavbarBrand>PG Finder</NavbarBrand>
                   <Col sm={{ size: 'auto', offset: 7 }} >
-                  <Link to="/users/home">Home</Link>|  
+                    <Link to="/users/home">Home</Link>|
                     <Link to="/pg" >PG's</Link>|
           <Link to="/users/register">Register</Link>|
           <Link to="/users/login">Login</Link>|
-          <Link to="/pg/new">Add PG</Link>|  
-          <Link to="/users/help">Help</Link>|</Col>    
-                </Navbar> 
-                </div>
-                  </div>
+          <Link to="/pg/new">Add PG</Link>|
+          <Link to="/users/help">Help</Link>|</Col>
+                </Navbar>
+              </div>
+            </div>
           </div>
           <Switch>
-            <Route path='/users/home' component={Home}/>
+            <Route path='/users/home' component={Home} />
             <Route path="/users/login" component={Login} />
             <Route path='/users/help' component={Help} />
+<<<<<<< HEAD
             <Route path="/users/register" component={Register} exact={true}/>
             <Route path="/pg" component={PgList} exact={true}/>
             <Route path="/pg/new" component={PgNew} exact={true}/>
             <Route path="/pg/:id" component={PgShow} exact={true}/>
             <Route path="/pg/edit/:id" component={PgEdit} exact={true}/>
       
+=======
+            <Route path="/users/register" component={Register} exact={true} />
+            <Route path="/pg" component={PgList} exact={true} />
+            <Route path="/pg/new" component={PgNew} exact={true} />
+            <Route path="/pg/:id" component={PgShow} exact={true} />
+            <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
+
+>>>>>>> f9afa15c69f2528120f15f6568272e8d8a20e92f
           </Switch>
-         
+
         </div>
       </BrowserRouter>
 

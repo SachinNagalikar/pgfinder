@@ -1,5 +1,5 @@
 const express = require('express')
-
+const multer = require('multer')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
 const { upload } = require('../middleware/imageUploads')
@@ -33,9 +33,9 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.post('/', (req, res) => {
+router.post('/', upload.array('image', 4), (req, res) => {
     const body = req.body
-    console.log('body',body)
+    console.log('body', body)
     const images = []
     req.files.forEach(file => {
         const imageUrl = file.destination
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
 //check this route
 router.put('/:id', (req, res) => {
     const id = req.params.id
-    console.log(id,'i am in put')
+    console.log(id, 'i am in put')
     const pg = req.body
     Pg.findOneAndUpdate(id, pg, function (err, data) {
         if (err) {

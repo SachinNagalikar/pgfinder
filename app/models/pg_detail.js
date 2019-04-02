@@ -9,15 +9,15 @@ const pgSchema = new Schema({
     },
     pgName: {
         type: String,
-        required: true
+        //required: true
     },
     pgRent: {
         type: Number,
-        required: true
+        //required: true
     },
     deposit: {
         type: Number,
-        required: true
+        //required: true
     },
     roomTypes: [
         {
@@ -52,14 +52,14 @@ const pgSchema = new Schema({
     },
     address: {
         type: String,
-        required: true
+        //required: true
     },
-    image: [
-        {
-            type: String,
-            //required: true
-        }
-    ],
+    // image: [
+    //     {
+    //         type: String,
+    //         //required: true
+    //     }
+    // ],
     foods: {
         type: String
     },
@@ -68,16 +68,16 @@ const pgSchema = new Schema({
     },
     description: {
         type: String,
-        required: true
+        //required: true
     },
     rules: {
         type: String,
-        required: true
+        //required: true
     },
-    // user: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'User'
-    // },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     createdAt: {
         type: Date,
         default: Date.now

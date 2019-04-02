@@ -108,11 +108,7 @@ class Register extends React.Component {
         console.log(formData)
         axios.post('/users/login', formData)
             .then((response) => {
-                const { token
-                } = response.data
-
-                localStorage.setItem('token', token)
-                this.props.history.push('/users/login')
+               
 
             })
             .catch((err) => {

@@ -15,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-          //  filename: props.filename ? props.filename : null
+            // filename: props.filename ? props.filename : null
         }
     }
 
@@ -101,10 +101,10 @@ class PgForm extends React.Component {
         this.setState(() => ({ deposit }))
     }
 
-    ImageChange = (e) => {
-        const filename = e.target.files
-        this.setState(() => ({ filename }))
-    }
+    // ImageChange = (e) => {
+    //     const filename = e.target.files
+    //     this.setState(() => ({ filename }))
+    // }
 
     pgSubmitHandle = (e) => {
         
@@ -123,7 +123,6 @@ class PgForm extends React.Component {
         // for (let file of this.state.filename) {
         //     data.append("image", file)
         // }
-        // console.log('sachin', data)
         const formData = {
             pgName: this.state.pgName,
             roomTypes: this.state.roomTypes,
@@ -135,11 +134,8 @@ class PgForm extends React.Component {
             rules: this.state.rules,
             pgRent: this.state.pgRent,
             deposit: this.state.deposit
-            //image: this.state.image
         }
-        console.log(formData)
         this.props.pgSubmitHandle(formData)
-
     }
     render() {
         return (

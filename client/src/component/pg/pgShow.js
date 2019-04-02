@@ -38,20 +38,19 @@ class PgShow extends React.Component {
     }
 
     render() {
-
         return (
             <div>
                 <div className="container" >
                     <Navbar color="light" expand="md">
                         <div className="row">
-                        <h2>{this.state.pg.pgName}</h2>
-                            <div className="col-md-2" >
-                            
-                           <h5>{this.state.pg.amenities} -{this.state.pg.pgTypes} </h5>
-                           </div><br />
+                            {/* <div className="col-md-2" ></div> */}
+                            <p>{this.state.pg.pgName}</p><br />
+                            <p>{this.state.pg.amenities} -{this.state.pg.pgTypes} </p>
+                            <br />
                             {/* {this.state.isLoaded && this.state.pg.image.map((img, i) => {
                                 return < img key={i + 1} src={img} alt="empty" />
-                            })}<br /> */}
+                            })}
+                            <br /> */}
                             <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>  |<Button><Link to="/pg">back</Link></Button><br />
                             <Button onClick={this.handleDelete}>delete</Button>
                         </div>

@@ -2,7 +2,6 @@ import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import { Navbar } from 'reactstrap'
-import Home from '../../users/home'
 class PgList extends React.Component {
     constructor(props) {
         super(props)

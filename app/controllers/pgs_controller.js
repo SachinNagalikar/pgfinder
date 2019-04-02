@@ -33,17 +33,28 @@ router.get('/:id', (req, res) => {
         })
 })
 
-router.post('/',  (req, res) => {
+// router.post('/', upload.array('image', 4), (req, res) => {
+//     const body = req.body
+//     console.log('body', body)
+//     const images = []
+//     req.files.forEach(file => {
+//         const imageUrl = file.destination
+//         const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
+//         images.push(link)
+//     })
+//     // console.log(images)
+//     body.image = images
+//     const pg = new Pg(body)
+//     pg.save()
+//         .then((pg) => {
+//             res.send(pg)
+//         })
+//         .catch((err) => {
+//             res.send(err)
+//         })
+// })
+router.post('/', (req, res) => {
     const body = req.body
-    console.log('body', body)
-    // const images = []
-    // req.files.forEach(file => {
-    //     const imageUrl = file.destination
-    //     const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
-    //     images.push(link)
-    // })
-     // console.log(images)
-    // body.image = images
     const pg = new Pg(body)
     pg.save()
         .then((pg) => {
@@ -54,18 +65,10 @@ router.post('/',  (req, res) => {
         })
 })
 
-//check this route
 router.put('/:id', (req, res) => {
     const id = req.params.id
-    console.log(id, 'i am in put')
-    const pg = req.body
-    Pg.findOneAndUpdate(id, pg, function (err, data) {
-        if (err) {
-            console.log(err)
-        } else {
-            res.send(data)
-        }
-    })
+    const body = req.body
+    Pg.findOneAndUpdate({ _id: id }, { $set: body }, { new: true })
         .then((pg) => {
             res.send(pg)
         })

@@ -1,8 +1,7 @@
 import React from 'react'
 import axios from 'axios'
 import { Redirect } from 'react-router-dom'
-import { Button, Form, Label, Input,Navbar,FormText} from 'reactstrap'
-
+import { Button, Form, Label, Input,Navbar} from 'reactstrap'
 import '../../src/App.css'
 
 class Login extends React.Component{
@@ -102,14 +101,13 @@ super(props)
                 <Label>
                     Password<br />
                   <Input type="password" value={this.state.password} onChange={this.passwordChange} placeholder="Password" /> 
-                    <span style={{ color: 'red' }}>{this.state.passwordError}</span>
-              
+                    <span style={{ color: 'red' }}>{this.state.passwordError}</span> 
                      </Label>
                                 <br />
                 <Button type="submit" value="submit" color="primary">submit</Button>
                             </Form>
-                        </div>
-                </Navbar>                
+                     </div>
+                    </Navbar>                
                 </div>
             </div>
         )

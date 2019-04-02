@@ -1,6 +1,6 @@
 
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup,FormText, Label, Input,Navbar } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 import '../../src/App.css'
@@ -136,6 +136,8 @@ class Register extends React.Component {
         return (
             <div >
                 <div className="container" >
+                <Navbar color="light" light expand="md">
+
                     <div className="row">
                         <div className="col-md-2" ></div>
                         <Form onSubmit={this.handleSubmit}>
@@ -143,18 +145,18 @@ class Register extends React.Component {
                             <Label>
                                 First Name<br />
                                 <Input type="text" value={this.state.firstname} onChange={this.handleFirst} placeholder="Firstname" />
-                                <span color="danger" className="menu navigation-menu" color="danger">{this.state.firstNameError}</span>
+                                <FormText color="danger" >{this.state.firstNameError}</FormText>
                             </Label>
                             <Label>
                                 Middle Name<br />
                                 <Input type="text" value={this.state.middlename} onChange={this.handleMiddle}
                                     placeholder="Middlename" />
-                                <span>{this.state.middleNameError} </span>
+                                <FormText color="danger" >{this.state.middleNameError} </FormText>
                             </Label>
                             <Label>
                                 Last Name<br />
                                 <Input type="text" value={this.state.lastname} onChange={this.handleLast} placeholder="Lastname" />
-                 <span className="danger">{this.state.lastNameError} </span>  
+                 <FormText color="danger">{this.state.lastNameError} </FormText>  
                     </Label><br/>
                     <FormGroup >
                     <Label>
@@ -162,7 +164,7 @@ class Register extends React.Component {
                   </Label>
                   <Input type="email" value={this.state.email} onChange={this.handleEmail}
                                     placeholder="Email" />
-                                <span className="color:red;font-weight:bold">{this.state.emailError} </span>
+                                <FormText color="danger" >{this.state.emailError} </FormText>
                             </FormGroup>
                             <FormGroup >
                                 <Label>
@@ -170,18 +172,19 @@ class Register extends React.Component {
                                     <Input type="password" value={this.state.password} onChange={this.handlePassword}
                                         placeholder="Password" />
                                 </Label><br />
-                                <span>{this.state.passwordError}</span>
+                                <FormText color="danger" >{this.state.passwordError}</FormText>
                             </FormGroup>
                             <FormGroup >
                                 <Label>
                                     Mobile<br />
                                     <Input type="text" value={this.state.mobile} onChange={this.handleMobile} placeholder="Mobile" />
                                 </Label><br />
-                                <span>{this.state.mobileError}</span>
+                                <FormText color="danger" >{this.state.mobileError}</FormText>
                             </FormGroup>
                             <Button type="submit" value="submit" color="primary">submit</Button>
                         </Form>
-                    </div>
+                        </div>
+                        </Navbar>
                 </div>
 
             </div>

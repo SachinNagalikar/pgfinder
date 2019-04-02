@@ -1,10 +1,11 @@
 import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
-import {} from 'reactstrap'
+import { Navbar } from 'reactstrap'
+import Home from '../../users/home'
 class PgList extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             pgs: []
         }
@@ -18,24 +19,27 @@ class PgList extends React.Component {
                 })
             })
             .catch((err) => {
-           //     console.log(err)
+            console.log(err)
             })
-    }
+    }    
     render() {
         return (
             <div>
                   <div className="container" >
-            <div className="row">
-                        <div className="col-md-2"></div>
-                        <h2>Listing PG's - {this.state.pgs.length}</h2>
-                <ul>
+                    <Navbar color="light"  expand="md">
+                        <div className="col-md-1"></div>
+                        <h2>Listing PG's - {this.state.pgs.length}</h2><br/>
+
+                        <h5>
+                            
                     {this.state.pgs.map((pg) => {
                         return <li key={pg._id}><Link to={`/pg/${pg._id}`}>{pg.pgName}</Link> - {pg.description}</li>
                     })}
-                </ul>
+                            </h5>
+                            </Navbar>
                     </div>
                 </div>         
-            </div>
+      
         )
     }
 }

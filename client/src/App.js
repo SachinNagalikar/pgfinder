@@ -4,7 +4,7 @@ import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
 import {
   Navbar,
   NavbarBrand,
-  Col,Row
+  Col
    } from 'reactstrap';
 import Register from './users/register'
 import Login from './users/login'
@@ -14,18 +14,21 @@ import PgList from './component/pg/listPg'
 import PgNew from './component/pg/newPg'
 import PgEdit from './component/pg/editPg'
 import Help from './users/help';
-import AddPG from  './component/pg/newPg'
+import AddPG from './component/pg/newPg'
+import Home from './users/home'
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
         <div>
-          <div className="container" stripped>
+          <div className="container" >
             <div className="row" >
               <div className="col-md-12" >
-              <Navbar color="light" light expand="md">
+              <Navbar color="warning" light expand="md">
               <NavbarBrand>PG Finder</NavbarBrand>
-        <Col  sm={{ size: 'auto', offset: 8 }} > <Link to="/pg" >PG's</Link>|
+                  <Col sm={{ size: 'auto', offset: 7 }} >
+                  <Link to="/users/home">Home</Link>|  
+                    <Link to="/pg" >PG's</Link>|
           <Link to="/users/register">Register</Link>|
           <Link to="/users/login">Login</Link>|
           <Link to="/pg/new">Add PG</Link>|  
@@ -35,6 +38,7 @@ class App extends Component {
                   </div>
           </div>
           <Switch>
+            <Route path='/users/home' component={Home}/>
             <Route path="/users/login" component={Login} />
             <Route path='/users/help' component={Help} />
             <Route path='./component/pg/newPg' component={AddPG}/>

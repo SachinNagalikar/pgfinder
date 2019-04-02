@@ -1,10 +1,9 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input} from 'reactstrap'
+import { Button, Form, FormGroup, Label, Input,Col,Row,Navbar} from 'reactstrap'
 
 class PgForm extends React.Component {
     constructor(props) {
         super(props)
-        console.log('props-nischal',props)
         this.state = {
             pgName: props.pgName ? props.pgName : '',
             roomTypes: props.roomTypes ? props.roomTypes : [],
@@ -16,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            filename: props.filename?props.filename:null
+            filename: props.filename ? props.filename : null
         }
     }
 
@@ -31,12 +30,12 @@ class PgForm extends React.Component {
         var value = e.target.value
         console.log(value)
         var checked = e.target.checked
-        console.log(nameType)
-        console.log(value)
-        console.log(checked)
+        // console.log(nameType)
+        // console.log(value)
+        // console.log(checked)
         if (checked) {
             this.setState((prevState) => ({
-                nameType: prevState.roomTypes.push(`${value}`)
+                nameType: prevState.roomTypes.push(value)
             }))
         } else {
             this.setState((prevState) => ({
@@ -64,7 +63,7 @@ class PgForm extends React.Component {
         var checked = e.target.checked
         var nameType = e.target.name
         var value = e.target.value
-        console.log(value)
+        //console.log(value)
         if (checked) {
             this.setState((prevState) => ({
                 nameType: prevState.amenities.push(value)
@@ -103,140 +102,150 @@ class PgForm extends React.Component {
     }
 
     ImageChange = (e) => {
-        const filename = e.target.files
-        this.setState(() => ({ filename }))
-    }
+            const filename = e.target.files
+            this.setState(() => ({ filename }))
+        }
 
     pgSubmitHandle = (e) => {
-        e.preventDefault()
-        const data = new FormData()
-        data.append("pgName", this.state.pgName)
-        data.append("roomTypes", this.state.roomTypes)
-        data.append("pgTypes", this.state.pgTypes)
-        data.append("foods", this.state.foods)
-        data.append("amenities", this.state.amenities)
-        data.append("address", this.state.address)
-        data.append("description", this.state.description)
-        data.append("rules", this.state.rules)
-        data.append("pgRent", this.state.pgRent)
-        data.append("deposit", this.state.deposit)
-        for (let file of this.state.filename) {
-            data.append("image", file)
-        }
-console.log('sachin',data)
-        // const formData = {
-        //     pgName: this.state.pgName,
-        //     roomTypes: this.state.roomTypes,
-        //     pgTypes: this.state.pgTypes,
-        //     foods: this.state.foods,
-        //     amenities: this.state.amenities,
-        //     address: this.state.address,
-        //     description: this.state.description,
-        //     rules: this.state.rules,
-        //     pgRent: this.state.pgRent,
-        //     deposit: this.state.deposit,
-        //     image: this.state.image
-        // }
+            console.log(e.target.value)
+            e.preventDefault()
+            const data = new FormData()
+            data.append("pgName", this.state.pgName)
+            data.append("roomTypes", this.state.roomTypes)
+            data.append("pgTypes", this.state.pgTypes)
+            data.append("foods", this.state.foods)
+            data.append("amenities", this.state.amenities)
+            data.append("address", this.state.address)
+            data.append("description", this.state.description)
+            data.append("rules", this.state.rules)
+            data.append("pgRent", this.state.pgRent)
+            data.append("deposit", this.state.deposit)
+            for (let file of this.state.filename) {
+                data.append("image", file)
+            }
+        console.log('sachin', data)
         this.props.pgSubmitHandle(data)
-    }
-    render() {
-        return (
-            <div>
-                <Form onSubmit={this.pgSubmitHandle}>
-                    <Label>
-                        PG Name<br />
-                        <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} />
-                    </Label><br />
-                        <Label>
-                        Address<br/>
-                        <input type="text" value={this.state.address} onChange={this.addressChange} />
-                    </Label>
-                    <Label>
-                        Description<br />
-                        <input type="text" value={this.state.description} onChange={this.descriptionChange} />
-                    </Label>
-                    <Label>
-                        PG Rules:<br />
-                        <input type="text" value={this.state.rules} onChange={this.rulesChange} />
-                    </Label>
-                    <Label>
-                        Rent:<br />
-                        <input type="number" value={this.state.pgRent} onChange={this.rentChange} />
-                    </Label>
-                    <Label>
-                        Deposit:<br />
-                        <input type="number" value={this.state.deposit} onChange={this.depositChange} />
-                    </Label><br/>
-                    
-                    <Label>
-                      <h5> PG Type</h5> 
-                    </Label><br/>
-                    <Label>
-                        <input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
+            // const formData = {
+            //     pgName: this.state.pgName,
+            //     roomTypes: this.state.roomTypes,
+            //     pgTypes: this.state.pgTypes,
+            //     foods: this.state.foods,
+            //     amenities: this.state.amenities,
+            //     address: this.state.address,
+            //     description: this.state.description,
+            //     rules: this.state.rules,
+            //     pgRent: this.state.pgRent,
+            //     deposit: this.state.deposit
+            //     //image: this.state.image
+            // }
+        }
+        render() {
+            return (
+                <div>
+                    <div className="container" >
+                        <Navbar color="light" light expand="md">
+                            <div className="row">
+                                <Form onSubmit={this.pgSubmitHandle}>
+                                        <Label>
+                                            PG Name<br />
+                                            <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" />
+                                        </Label><br />
+                                        <Label>
+                                            Address<br />
+                                            <Input type="textarea" value={this.state.address} onChange={this.addressChange}
+                                                placeholder="Address" />
+                                        </Label><br />
+                                        <Label>
+                                            Description<br />
+                                            <Input type="textarea" value={this.state.description} onChange={this.descriptionChange} placeholder="Description" />
+                                        </Label><br />
+                                        <Label>
+                                            PG Rules:<br />
+                                            <Input type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" />
+                                        </Label><br />
+                                        <Label>
+                                            Rent:<br />
+                                            <Input type="number" value={this.state.pgRent} onChange={this.rentChange}
+                                                placeholder="Rent" />
+                                        </Label><br />
+                                        <Label>
+                                            Deposit:<br />
+                                            <Input type="number" value={this.state.deposit} onChange={this.depositChange}
+                                                placeholder="Deposit" />
+                                        </Label><br />
+                                   
+                                        <Label>
+                                            <h5> PG Type</h5>
+                                        </Label><br />
+                                        <Label>
+                                            <input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
                         </Label>
-                    <Label>
-                        <input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
+                                        <Label>
+                                            <input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
                         </Label><br />
-                    <Label>
-                        Food
-                        </Label><br/>
-                    <Label>
-                        <input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
+                                        <Label>
+                                            <h5>Food</h5>
+                                        </Label><br />
+                                        <Label>
+                                            <input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
                         </Label>
-                    <Label>
-                        <input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
+                                        <Label>
+                                            <input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
+                        </Label><br />
+                                        <Label>
+                                            <h5>Room Type</h5>
+                                        </Label><br />
+                                        <Label>
+                                            <Input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
+                    </Label><br />
+                                        <Label>
+                                            <Input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
+                        </Label><br />
+                                        <Label>
+                                            <Input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
+                        </Label><br />
+                                        <Label>
+                                            <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
                         </Label><br />
 
-                    <Label>
-                       <h5>Room Type</h5> 
+                                        <Label>
+                                            <h5>Amenities</h5>
+                                        </Label><br />
+                                        <Label>
+                                            <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
-                        </Label><br/>
-                    <Label>
-                        <input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
-                        </Label><br/>
-                    <Label>
-                        <input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
-                        </Label><br/>
-                    <Label>
-                        <input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
-                        </Label><br />
-
-                    <Label>
-                       <h5>Amenities</h5> 
+                                        <Label>
+                                            <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
+                                        <Label>
+                                            <Input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
+                                        <Label>
+                                            <Input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
+                                        <Label>
+                                            <Input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
+                                        <Label>
+                                            <Input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
+                                        <Label>
+                                            <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
                     </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
-                    </Label><br />
-                    <Label>
-                        <input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
-                    </Label><br />
-                    <Label>
-                        Image:<br />
-                        <input type="file" multiple name="image" onChange={this.ImageChange} />
-                    </Label><br />
-                    <Input type='submit' value='submit'/>
-                </Form>
-
-            </div >
-        )
+                                    
+                                    <Label>
+                                        Image:<br />
+                                        <Input type="file" multiple name="image" onChange={this.ImageChange} />
+                                    </Label><br />
+                                    <Input type='submit' value='submit' />
+                                </Form>
+                            </div>
+                        </Navbar>
+                    </div>
+                </div>
+            )
+        }
     }
-}
+
 
 export default PgForm

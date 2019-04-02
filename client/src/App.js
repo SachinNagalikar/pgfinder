@@ -14,7 +14,6 @@ import PgList from './component/pg/listPg'
 import PgNew from './component/pg/newPg'
 import PgEdit from './component/pg/editPg'
 import Help from './users/help';
-import AddPG from './component/pg/newPg'
 import Home from './users/home'
 class App extends Component {
   render() {
@@ -41,7 +40,6 @@ class App extends Component {
             <Route path='/users/home' component={Home}/>
             <Route path="/users/login" component={Login} />
             <Route path='/users/help' component={Help} />
-            <Route path='./component/pg/newPg' component={AddPG}/>
             <Route path="/users/register" component={Register} exact={true}/>
             <Route path="/pg" component={PgList} exact={true}/>
             <Route path="/pg/new" component={PgNew} exact={true}/>

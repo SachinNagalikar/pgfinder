@@ -1,12 +1,12 @@
 import React from "react"
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
-
+import {Navbar,Button} from 'reactstrap'
 class PgShow extends React.Component {
     constructor() {
         super()
         this.state = {
-            pg: [],
+            pg: {},
             isLoaded: false
         }
     }
@@ -41,14 +41,20 @@ class PgShow extends React.Component {
 
         return (
             <div>
-                <h2>{this.state.pg.pgName}</h2>
-                <p>{this.state.pg.amenities} -{this.state.pg.pgTypes} </p>
+                  <div className="container" >
+                <Navbar color="light"  expand="md">
+                    <div className="row">
+                        <div className="col-md-2" ></div>
+                            <h2>{this.state.pg.pgName}</h2>
+                <h5>{this.state.pg.amenities} -{this.state.pg.pgTypes} </h5><br/>
                 {this.state.isLoaded && this.state.pg.image.map((img, i) => {
                     return < img key={i + 1} src={img} alt="empty" />
                 })}<br />
-                <Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link>  |  <Link to="/pg">back</Link><br /><br />
-                <button onClick={this.handleDelete}>delete</button>
-
+              <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>  |<Button><Link to="/pg">back</Link></Button><br />
+                <Button onClick={this.handleDelete}>delete</Button>
+                        </div>
+                    </Navbar>  
+               </div>     
             </div>
         )
     }

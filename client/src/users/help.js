@@ -1,18 +1,18 @@
 import React from 'react'
-
+import {Navbar} from 'reactstrap'
 class Help extends React.Component{
     render() {
         return (
             <div>
                    <div className="container" >
-                        <div className="row">
-                        <div className="col-md-6" >
+                    <Navbar color="light"  expand="md">
+                        <div className="col-md-8" >
                         <h2>welcome to pgfinder</h2>
                         <h2> the help line number is :-1234567890</h2>
-                        </div>
+                            </div>
+                            </Navbar>
                     </div>
-                </div>
-            </div>
+                </div> 
         )
     }    
 }

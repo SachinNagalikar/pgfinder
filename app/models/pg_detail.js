@@ -23,7 +23,8 @@ const pgSchema = new Schema({
         {
             type: String
         }
-    ],
+    ]
+    ,
     amenities: [
         {
             type: String

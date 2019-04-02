@@ -26,26 +26,25 @@ class App extends Component {
                 <Navbar color="warning" light expand="md">
                   <NavbarBrand>PG Finder</NavbarBrand>
                   <Col sm={{ size: 'auto', offset: 7 }} >
-                    <Link to="/users/home">Home</Link>|
+                    <Link to="/">Home</Link>|
                     <Link to="/pg" >PG's</Link>|
           <Link to="/users/register">Register</Link>|
           <Link to="/users/login">Login</Link>|
           <Link to="/pg/new">Add PG</Link>|
-          <Link to="/users/help">Help</Link>|</Col>
+          <Link to="/help">Help</Link>|</Col>
                 </Navbar>
               </div>
             </div>
           </div>
           <Switch>
-            <Route path='/users/home' component={Home} />
-            <Route path="/users/login" component={Login} />
-            <Route path='/users/help' component={Help} />
+            <Route path='/' component={Home} exact={true} />
             <Route path="/users/register" component={Register} exact={true} />
+            <Route path="/users/login" component={Login} exact={true} />
+            <Route path='/help' component={Help} exact={true} />
             <Route path="/pg" component={PgList} exact={true} />
             <Route path="/pg/new" component={PgNew} exact={true} />
             <Route path="/pg/:id" component={PgShow} exact={true} />
             <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
-
           </Switch>
 
         </div>

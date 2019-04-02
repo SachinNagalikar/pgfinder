@@ -4,7 +4,7 @@ import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
 import {
   Navbar,
   NavbarBrand
-   } from 'reactstrap';
+} from 'reactstrap';
 import Register from './users/register'
 import Login from './users/login'
 
@@ -20,27 +20,27 @@ class App extends Component {
         <div>
           <div className="container" >
             <div className="row">
-            <Navbar className='light' expand="md">
-              <NavbarBrand>PG Finder</NavbarBrand>
-            <div className="col-md-2" ></div>
-          <Link to="/pg" >PG's</Link> |
+              <Navbar className='light' expand="md">
+                <NavbarBrand>PG Finder</NavbarBrand>
+                <div className="col-md-2" ></div>
+                <Link to="/pg" >PG's</Link> |
           <Link to="/users/register">Register</Link>|
           <Link to="/users/login">Login</Link>|
-          <Link to="/users/help">Help</Link>|     
-                  </Navbar> 
-                  </div>
+          <Link to="/users/help">Help</Link>|
+                  </Navbar>
+            </div>
           </div>
           <Switch>
             <Route path="/users/login" component={Login} />
-            <Route path='/users/help' component={Help}/>
-            <Route path="/users/register" component={Register} exact={true}/>
-            <Route path="/pg" component={PgList} exact={true}/>
-            <Route path="/pg/new" component={PgNew} exact={true}/>
-            <Route path="/pg/:id" component={PgShow} exact={true}/>
-            <Route path="/pg/edit/:id" component={PgEdit} exact={true}/>
-      
+            <Route path='/users/help' component={Help} />
+            <Route path="/users/register" component={Register} exact={true} />
+            <Route path="/pg" component={PgList} exact={true} />
+            <Route path="/pg/new" component={PgNew} exact={true} />
+            <Route path="/pg/:id" component={PgShow} exact={true} />
+            <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
+
           </Switch>
-         
+
         </div>
       </BrowserRouter>
 

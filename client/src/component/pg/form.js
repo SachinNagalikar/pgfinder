@@ -1,5 +1,4 @@
 import React from 'react'
-import { fork } from 'child_process';
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -103,19 +102,19 @@ class PgForm extends React.Component {
 
     submitHandle = (e) => {
         e.preventDefault()
-        const data = new FormData()
-        data.append("pgName", this.state.pgName)
-        data.append("roomTypes", this.state.roomTypes)
-        data.append("pgTypes", this.state.pgTypes)
-        data.append("foods", this.state.foods)
-        data.append("amenities", this.state.amenities)
-        data.append("address", this.state.address)
-        data.append("description", this.state.description)
-        data.append("rules", this.state.rules)
-        data.append("pgRent", this.state.pgRent)
-        data.append("deposit", this.state.deposit)
+        const formData = new FormData()
+        formData.append("pgName", this.state.pgName)
+        formData.append("roomTypes", this.state.roomTypes)
+        formData.append("pgTypes", this.state.pgTypes)
+        formData.append("foods", this.state.foods)
+        formData.append("amenities", this.state.amenities)
+        formData.append("address", this.state.address)
+        formData.append("description", this.state.description)
+        formData.append("rules", this.state.rules)
+        formData.append("pgRent", this.state.pgRent)
+        formData.append("deposit", this.state.deposit)
         for (const file of this.state.filename) {
-            data.append("image", file)
+            formData.append("image", file)
         }
 
         // const formData = {
@@ -129,9 +128,10 @@ class PgForm extends React.Component {
         //     rules: this.state.rules,
         //     pgRent: this.state.pgRent,
         //     deposit: this.state.deposit,
-        //     image: this.state.image
+        //     // image: this.state.image
         // }
-        this.props.pgSubmitHandle(data)
+        console.log(formData)
+        this.props.pgSubmitHandle(formData)
     }
 
     render() {

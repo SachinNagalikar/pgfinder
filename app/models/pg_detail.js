@@ -20,10 +20,14 @@ const pgSchema = new Schema({
         required: true
     },
     roomTypes: [
-        type = String
+        {
+            type: String
+        }
     ],
     amenities: [
-        type = String
+        {
+            type: String
+        }
     ],
     email: {
         type: String,

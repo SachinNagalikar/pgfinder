@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom'
 import PgForm from './form'
 
 class PgNew extends React.Component {
-    submitHandle = (data) => {
-        axios.post('/pgs', data)
+    submitHandle = (formData) => {
+        console.log('ra', formData)
+        axios.post('/pgs', formData)
             .then((response) => {
                 const pg = response.data
                 this.props.history.push(`/pg/${pg._id}`)

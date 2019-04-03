@@ -21,15 +21,11 @@ class PgNew extends React.Component {
     render() {
         return (
             <div>
-                <div className="container" >
+                <div className="col" >
+                    {/* <h2>Add PG</h2> */}
+                    <Button> <Link to="/pg">back</Link></Button>
+                            <PgForm pgSubmitHandle={this.submitHandle}  />
 
-                    <Navbar color="light" expand="md">
-                        <div className="col-md-8" >
-                            {/* <h2>Add PG</h2> */}
-                            <PgForm pgSubmitHandle={this.submitHandle} />
-                            <Button> <Link to="/pg">back</Link></Button>
-                        </div>
-                    </Navbar>
                 </div>
             </div>
         )

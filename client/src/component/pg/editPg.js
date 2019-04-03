@@ -33,7 +33,7 @@ class PgEdit extends React.Component {
             .then((response) => {
                 const pg = response.data
                 console.log("rak", pg)
-                this.props.history.push(`/pg/${pg._id}`)
+                // this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {
                 console.log(err)
@@ -45,20 +45,15 @@ class PgEdit extends React.Component {
         console.log(this.state.pg.pgName)
         return (
 
-            <div>
-                <div className="container" >
-                    <Navbar color="light" expand="md">
-                        <div className="col-md-5">
-                            <h2>edit PG</h2>
-                        </div>
-                    </Navbar>
-                </div >
+            <div className="wrapper">
+                <div className="form-wrapper" >
+                <h1 className='edit'>edit PG</h1>
+                
                 {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
-
+                </div >
             </div>
         )
     }
 }
 
 export default PgEdit
-//.join(' ').split(',')

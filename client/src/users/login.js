@@ -51,13 +51,10 @@ class Login extends React.Component {
             return <Redirect to="/pg" />
         }
         return (
-            <div>
-                <div className="container" >
-                    <Navbar color="light" expand="md">
-                        <div className="row">
-                            <div className="col-md-5" ></div>
+            <div className="loginwrapper">
+                <div className="form-wrapper" >
+                <h2>login</h2>
                             <Form onSubmit={this.handleSubmit}>
-                                <h2>login</h2>
                                 <Label>
                                     Email<br />
                                     <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
@@ -71,9 +68,8 @@ class Login extends React.Component {
                                 <Button type="submit" value="submit" color="primary">submit</Button>
                             </Form>
                         </div>
-                    </Navbar>
                 </div>
-            </div>
+            
         )
     }
 }

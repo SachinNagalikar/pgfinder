@@ -24,8 +24,8 @@ class PgList extends React.Component {
     }    
     render() {
         return (
-            <div>
-                <div className="container" >
+            <div className="wrapper">
+                <div className="col" >
                 <h2>Listing PG's - {this.state.pgs.length}</h2><br/>
                     {this.state.pgs.map((pg) => {
                         return (<div key={pg._id}>

@@ -139,10 +139,9 @@ class PgForm extends React.Component {
     }
     render() {
         return (
-            <div>
-                <div className="container" >
-                    <Navbar color="light" light expand="md">
-                        <div className="row">
+            <div className="wrapper">
+                <div className="form-wrapper" >
+                    
                             <Form onSubmit={this.pgSubmitHandle}>
                                 <Label>
                                     PG Name<br />
@@ -238,9 +237,7 @@ class PgForm extends React.Component {
                                 <Input type='submit' value='submit' />
                             </Form>
                         </div>
-                    </Navbar>
-                </div>
-            </div>
+                    </div> 
         )
     }
 }

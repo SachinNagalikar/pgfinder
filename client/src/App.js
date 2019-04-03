@@ -20,7 +20,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div>
-          <div className="container" >
+          
             <div className="row" >
               <div className="col-md-12" >
                 <Navbar color="warning" light expand="md">
@@ -35,7 +35,7 @@ class App extends Component {
                 </Navbar>
               </div>
             </div>
-          </div>
+         
           <Switch>
             <Route path='/' component={Home} exact={true} />
             <Route path="/users/register" component={Register} exact={true} />
@@ -47,7 +47,7 @@ class App extends Component {
             <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
           </Switch>
 
-        </div>
+          </div>
       </BrowserRouter>
 
     );

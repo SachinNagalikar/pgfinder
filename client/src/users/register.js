@@ -129,14 +129,10 @@ class Register extends React.Component {
             return <Redirect to='/users/login' />
         }
         return (
-            <div >
-                <div className="container" >
-                    <Navbar color="light" light expand="md">
-
-                        <div className="row">
-                            <div className="col-md-2" ></div>
+            <div className="loginwrapper">
+                <div className="form-wrapper" >
+                <h2>Register</h2>
                             <Form onSubmit={this.handleSubmit}>
-                                <h2>Register</h2>
                                 <Label>
                                     First Name<br />
                                     <Input type="text" value={this.state.firstName} onChange={this.handleFirst} placeholder="firstName" />
@@ -179,10 +175,7 @@ class Register extends React.Component {
                                 <Button type="submit" value="submit" color="primary">submit</Button>
                             </Form>
                         </div>
-                    </Navbar>
-                </div>
-
-            </div>
+                    </div>
         )
     }
 }

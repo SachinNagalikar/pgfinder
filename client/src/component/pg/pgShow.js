@@ -40,8 +40,8 @@ class PgShow extends React.Component {
 
     render() {
         return (
-            <div>
-                 <div className="container">
+            <div className="wrapper">
+                 <div className='form-wrapper'>
       <Card>
         <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" />
         <CardBody>
@@ -54,8 +54,7 @@ class PgShow extends React.Component {
                             <Button onClick={this.handleDelete}>delete</Button> 
         </CardBody>
       </Card>
-    </div>
-                
+    </div>     
             </div>
         )
     }

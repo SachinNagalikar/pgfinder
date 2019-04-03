@@ -1,7 +1,8 @@
 import React from "react"
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
-import { Navbar, Button,Col } from 'reactstrap'
+import { Navbar, Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap'
 class PgShow extends React.Component {
     constructor() {
         super()
@@ -40,22 +41,21 @@ class PgShow extends React.Component {
     render() {
         return (
             <div>
-                <div className="container" >
-                    <Navbar color="light" expand="md">
-                        <div className="row">
-                            {/* <div className="col-md-2" ></div> */}
-                            <p>{this.state.pg.pgName}</p><br />
-                            <p>{this.state.pg.amenities} -{this.state.pg.pgTypes} </p>
-                            <br />
-                            {/* {this.state.isLoaded && this.state.pg.image.map((img, i) => {
-                                return < img key={i + 1} src={img} alt="empty" />
-                            })}
-                            <br /> */}
-                            <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>  |<Button><Link to="/pg">back</Link></Button><br />
-                            <Button onClick={this.handleDelete}>delete</Button>
-                        </div>
-                    </Navbar>
-                </div>
+                 <div className="container">
+      <Card>
+        <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" />
+        <CardBody>
+                            <CardTitle>{`pgName:-${this.state.pg.pgName}`}</CardTitle>
+                            <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
+                            <CardText>{`pgTypes:-${this.state.pg.pgTypes}`}</CardText>
+                            <CardText>{`Address:-${this.state.pg.address}`}</CardText>
+                            <iframe width="500" height="300" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} />
+          <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
+                            <Button onClick={this.handleDelete}>delete</Button> 
+        </CardBody>
+      </Card>
+    </div>
+                
             </div>
         )
     }

@@ -9,7 +9,7 @@ const User = () => {
                     <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item active">
-                    <Link className="nav-link " href="/pg">PG'S<span className="sr-only">(current)</span></Link>
+                    <Link className="nav-link " to="/pg">PG'S<span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item active">
                     <Link className="nav-link" to="/pg/new">Add PG<span className="sr-only">(current)</span></Link>

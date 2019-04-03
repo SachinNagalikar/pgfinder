@@ -155,10 +155,10 @@ class Register extends React.Component {
                                 </Label><br />
                                 <FormGroup >
                                     <Label>
-                                        Email
-                  </Label>
-                                    <Input type="email" value={this.state.email} onChange={this.handleEmail}
-                                        placeholder="Email" />
+                                        Email<br />
+                                        <Input type="email" value={this.state.email} onChange={this.handleEmail}
+                                            placeholder="Email" />
+                                    </Label>
                                     <FormText color="danger" >{this.state.emailError} </FormText>
                                 </FormGroup>
                                 <FormGroup >

@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const { User } = require('../models/user')
+const { authenticate } = require('../middleware/authenticate')
 
 //post:user register
 router.post('/register', (req, res) => {
@@ -12,7 +13,6 @@ router.post('/register', (req, res) => {
                 user,
                 notice: 'successfully registered'
             })
-            console.log(user);
         })
         .catch((err) => {
             res.send(err)
@@ -25,7 +25,6 @@ router.post('/login', (req, res) => {
     console.log(body)
     User.findByEmailAndPassword(body.email, body.password)
         .then((user) => {
-            console.log(user);
             return user.generateToken()
         })
         .then((token) => {
@@ -38,9 +37,8 @@ router.post('/login', (req, res) => {
         })
 })
 
-
 //user logout
-router.delete('/logout', (req, res) => {
+router.delete('/logout', authenticate, (req, res) => {
     const tokenData = req.token
     const user = req.user
     var newTokenData = user.tokens.filter(x => x.token != tokenData)

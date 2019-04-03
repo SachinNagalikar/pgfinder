@@ -1,6 +1,8 @@
 import React from 'react'
 import axios from '../component/config/axios'
-import { Button, Form, Label, Input, Navbar } from 'reactstrap'
+import { connect } from 'react-redux'
+import { setUser } from '../component/redux/actions/user'
+import { Button, Form, Label, Input, FormText } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import '../../src/App.css'
 
@@ -10,7 +12,9 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            redirectList: false
+            redirectList: false,
+            emailError: '',
+            passwordError: ''
         }
     }
 
@@ -22,59 +26,87 @@ class Login extends React.Component {
         const password = e.target.value
         this.setState(() => ({ password }))
     }
+    validate = () => {
+        let isError = false;
+        const errors = {
+
+            emailError: '',
+            passwordError: '',
+        }
+
+
+        if (this.state.email.indexOf("@") === -1) {
+            isError = true;
+            errors.emailError = "Requires valid email"
+        }
+
+        if (this.state.password.length < 5) {
+            isError = true;
+            errors.passwordError = "Requires password";
+        }
+        this.setState({
+            ...this.state,
+            ...errors
+        })
+        return isError
+    }
     handleSubmit = (e) => {
         e.preventDefault()
-        const formData = {
-            email: this.state.email,
-            password: this.state.password,
+        const err = this.validate()
+        if (!err) {
+            const formData = {
+                email: this.state.email,
+                password: this.state.password,
 
+            }
+            axios.post('/users/login', formData)
+                .then((response) => {
+                    const { token } = response.data
+                    localStorage.setItem('token', token)
+                    this.props.dispatch(setUser(token))
+                    this.setState(() => ({
+                        email: '',
+                        password: '',
+                        redirectList: true
+                    }))
+                })
+                .catch((err) => {
+                    console.log(err.response.data)
+                })
         }
-        axios.post('/users/login', formData)
-            .then((response) => {
-                console.log(response.data)
-                const { token } = response.data
-                console.log(token)
-                localStorage.setItem('token', token)
-                this.setState(() => ({
-                    email: '',
-                    password: '',
-                    redirectList: true
-                }))
-            })
-            .catch((err) => {
-                console.log(err.response.data)
-            })
     }
+
 
     render() {
         if (this.state.redirectList) {
             return <Redirect to="/pg" />
         }
         return (
-            <div>
-                <div className="container" >
-                    <Navbar color="light" expand="md">
-                        <div className="row">
-                            <div className="col-md-5" ></div>
-                            <Form onSubmit={this.handleSubmit}>
-                                <h2>login</h2>
-                                <Label>
-                                    Email<br />
-                                    <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
-                                </Label>
-                                <br />
-                                <Label>
-                                    Password<br />
-                                    <Input type="password" value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
-                                </Label>
-                                <br />
-                                <Button type="submit" value="submit" color="primary">submit</Button>
-                            </Form>
-                        </div>
-                    </Navbar>
+            <div className="loginwrapper">
+                <div className="form-wrapper" >
+                    <div className="row">
+                        <div className="col-md-5" ></div>
+                        <Form onSubmit={this.handleSubmit}>
+                            <h2>login</h2>
+                            <Label>
+                                Email<br />
+                                <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
+                            </Label><br />
+                            <FormText color="danger">{this.state.emailError}</FormText>
+                            <br />
+                            <Label>
+                                Password<br />
+                                <Input type="password" value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
+                            </Label><br />
+                            <FormText color="danger">{this.state.passwordError}</FormText> <br />
+                            <br />
+                            <Button type="submit" value="submit" color="primary">submit</Button>
+                        </Form>
+                    </div>
                 </div>
             </div>
         )
     }
 }
-export default Login
+
+export default connect()(Login)

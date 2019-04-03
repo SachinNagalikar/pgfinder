@@ -58,7 +58,6 @@ const userSchema = new Schema({
 
 userSchema.pre('save', function (next) {
     if (this.isNew) {
-        console.log(this)
         bcryptjs.genSalt(10).then((salt) => {
             bcryptjs.hash(this.password, salt)
                 .then((hashedPassword) => {
@@ -97,16 +96,16 @@ userSchema.statics.findByEmailAndPassword = function (email, password) {
 userSchema.methods.generateToken = function () {
     const user = this
     const tokenData = {
-        userId: user._id
+        userId: user._id,
+        role: user.role,
+        firstName: user.firstName
     }
-
     const token = jwt.sign(tokenData, 'sachin123')
     user.tokens.push({
         token
     })
     return user.save().then((user) => {
         return token
-
     }).catch((err) => {
         return err
     })

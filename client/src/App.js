@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
-import { Link, Route, BrowserRouter, Switch } from 'react-router-dom'
-import {
-  Navbar,
-  NavbarBrand,
-  Col
-} from 'reactstrap';
+import { Route, BrowserRouter, Switch } from 'react-router-dom'
+
 import Register from './users/register'
 import Login from './users/login'
 import Logout from './users/logout'
@@ -16,28 +12,16 @@ import PgNew from './component/pg/newPg'
 import PgEdit from './component/pg/editPg'
 import Help from './users/help';
 import Home from './users/home'
+import Navbar from './component/home/navbar'
+
 class App extends Component {
   render() {
     return (
       <BrowserRouter>
+
         <div>
-          <div className="container" >
-            <div className="row" >
-              <div className="col-md-12" >
-                <Navbar color="warning" light expand="md">
-                  <NavbarBrand>PG Finder</NavbarBrand>
-                  <Col sm={{ size: 'auto', offset: 7 }} >
-                    <Link to="/">Home</Link>|
-                    <Link to="/pg" >PG's</Link>|
-                    <Link to="/users/register">Register</Link>|
-                    <Link to="/users/login">Login</Link>|
-                    <Link to="/pg/new">Add PG</Link>|
-                    <Link to="/help">Help</Link>|
-                  <Link to="/users/logout">Logout</Link></Col>
-                </Navbar>
-              </div>
-            </div>
-          </div>
+          <Navbar />
+
           <Switch>
             <Route path='/' component={Home} exact={true} />
             <Route path="/users/register" component={Register} exact={true} />
@@ -50,8 +34,8 @@ class App extends Component {
             <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
           </Switch>
 
-        </div>
-      </BrowserRouter>
+        </div >
+      </BrowserRouter >
 
     );
   }

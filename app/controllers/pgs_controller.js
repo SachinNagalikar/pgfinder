@@ -2,9 +2,10 @@ const express = require('express')
 const multer = require('multer')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
-const { upload } = require('../middleware/imageUploads')
+// const { upload } = require('../middleware/imageUploads')
+const { authenticate } = require('../middleware/authenticate')
 
-router.get('/', (req, res) => {
+router.get('/', authenticate, (req, res) => {
     Pg.find()
         .then((pg) => {
             if (pg) {
@@ -18,9 +19,12 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', authenticate, (req, res) => {
     const id = req.params.id
-    Pg.findById(id)
+    Pg.findOne({
+        user: req.user._id,
+        _id: id
+    })
         .then((pg) => {
             if (pg) {
                 res.send(pg)
@@ -53,9 +57,10 @@ router.get('/:id', (req, res) => {
 //             res.send(err)
 //         })
 // })
-router.post('/', (req, res) => {
+router.post('/', authenticate, (req, res) => {
     const body = req.body
     const pg = new Pg(body)
+    pg.user = req.user._id
     pg.save()
         .then((pg) => {
             res.send(pg)
@@ -65,10 +70,10 @@ router.post('/', (req, res) => {
         })
 })
 
-router.put('/:id', (req, res) => {
+router.put('/:id', authenticate, (req, res) => {
     const id = req.params.id
     const body = req.body
-    Pg.findOneAndUpdate({ _id: id }, { $set: body }, { new: true })
+    Pg.findOneAndUpdate({ _id: id, user: req.user._id }, { $set: body }, { new: true })
         .then((pg) => {
             res.send(pg)
         })
@@ -77,9 +82,12 @@ router.put('/:id', (req, res) => {
         })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', authenticate, (req, res) => {
     const id = req.params.id
-    Pg.findByIdAndDelete(id)
+    Pg.findByIdAndDelete({
+        _id: id,
+        user: req.user._id
+    })
         .then((pg) => {
             res.send(pg)
         })

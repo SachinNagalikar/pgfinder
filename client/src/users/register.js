@@ -129,8 +129,8 @@ class Register extends React.Component {
             return <Redirect to='/users/login' />
         }
         return (
-            <div >
-                <div className="container" >
+            <div className="loginwrapper">
+                <div className="form-wrapper" >
                     <Navbar color="light" light expand="md">
 
                         <div className="row">

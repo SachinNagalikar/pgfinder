@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from '../component/config/axios'
+import { connect } from 'react-redux'
+import { removeUser } from '../component/redux/actions/user'
 
 class Logout extends React.Component {
     constructor(props) {
@@ -10,10 +12,11 @@ class Logout extends React.Component {
     }
 
     componentDidMount() {
-        console.log('compon logout')
-        axios.delete('/users/logout')
+        console.log('logout')
+        axios.delete('/users/logout', { headers: { 'x-auth': localStorage.getItem('token') } })
             .then((response) => {
                 console.log(response)
+                this.props.dispatch(removeUser({}))
                 localStorage.removeItem('token')
                 this.props.history.push('/users/login')
             })
@@ -29,4 +32,4 @@ class Logout extends React.Component {
     }
 }
 
-export default Logout
+export default connect()(Logout)

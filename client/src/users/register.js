@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, FormText, Label, Input, Navbar } from 'reactstrap'
+import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import axios from '../component/config/axios'
 import '../../src/App.css'

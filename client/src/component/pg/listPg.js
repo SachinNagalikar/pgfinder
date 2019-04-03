@@ -1,8 +1,8 @@
 import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
-import { Navbar } from 'reactstrap'
-import Home from '../../users/home'
+import { Navbar, Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button } from 'reactstrap'
 class PgList extends React.Component {
     constructor(props) {
         super(props)
@@ -25,19 +25,26 @@ class PgList extends React.Component {
     render() {
         return (
             <div>
-                  <div className="container" >
-                    <Navbar color="light"  expand="md">
-                        <div className="col-md-1"></div>
-                        <h2>Listing PG's - {this.state.pgs.length}</h2><br/>
-
-                        <h5>
-                            
+                <div className="container" >
+                <h2>Listing PG's - {this.state.pgs.length}</h2><br/>
                     {this.state.pgs.map((pg) => {
-                        return <li key={pg._id}><Link to={`/pg/${pg._id}`}>{pg.pgName}</Link> - {pg.description}</li>
+                        return (<div key={pg._id}>
+                        <Card>
+                          <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" alt="Card image cap" />
+                          <CardBody>
+                                    <CardTitle>{`pgName:-${pg.pgName}`}</CardTitle>
+                                    <CardSubtitle>{`pgType:-${pg.pgTypes}`}</CardSubtitle>
+                                    <CardText>{`description:-${pg.description}`}</CardText>
+                                    <CardSubtitle>{`Address:-${pg.address}`}</CardSubtitle>
+                                   
+                            <Button color="success"><Link to={`/pg/${pg._id}`} >Details</Link> </Button>
+                          </CardBody>
+                        </Card>
+                        </div>)
                     })}
-                            </h5>
-                            </Navbar>
-                    </div>
+                            
+                 
+                   </div>
                 </div>         
       
         )
@@ -45,3 +52,7 @@ class PgList extends React.Component {
 }
 
 export default PgList
+{/* <li key={pg._id}><Link to={`/pg/${pg._id}`}>{pg.pgName}</Link> - {pg.description}</li> */}
+
+
+

@@ -14,7 +14,7 @@ class PgNew extends React.Component {
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {
-                console.log(err)
+               console.log(err)
             })
     }
 

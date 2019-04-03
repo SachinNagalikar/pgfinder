@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, Label, Input, Col, Row, Navbar } from 'reactstrap'
+import {  Form, FormGroup, Label, Input, Col, Row, Navbar } from 'reactstrap'
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -107,7 +107,7 @@ class PgForm extends React.Component {
     // }
 
     pgSubmitHandle = (e) => {
-        console.log(e.target.value)
+        
         e.preventDefault()
         // const data = new FormData()
         // data.append("pgName", this.state.pgName)
@@ -123,7 +123,6 @@ class PgForm extends React.Component {
         // for (let file of this.state.filename) {
         //     data.append("image", file)
         // }
-
         const formData = {
             pgName: this.state.pgName,
             roomTypes: this.state.roomTypes,

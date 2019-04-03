@@ -6,7 +6,7 @@ const { Schema } = mongoose
 const userSchema = new Schema({
     firstName: {
         type: String,
-        minlength:3,
+        minlength: 3,
         required: true
     },
     middleName: {
@@ -19,7 +19,7 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        unique:true,
+        unique: true,
         required: true,
         validate: {
             validator: function (value) {
@@ -32,19 +32,19 @@ const userSchema = new Schema({
     },
     mobile: {
         type: Number,
-        maxlength:10,
+        maxlength: 10,
         required: true
     },
     password: {
         type: String,
         minlength: 3,
-        maxlength:128,
+        maxlength: 128,
         required: true
     },
     role: {
         type: String,
         enum: ['admin', 'user'],
-        default:'user',
+        default: 'user',
         required: true
     },
     tokens: [
@@ -64,7 +64,7 @@ userSchema.pre('save', function (next) {
                 .then((hashedPassword) => {
                     this.password = hashedPassword
                     next()
-            })
+                })
         })
     } else {
         next()
@@ -80,19 +80,19 @@ userSchema.statics.findByEmailAndPassword = function (email, password) {
             if (user) {
                 return bcryptjs.compare(password, user.password).then((result) => {
                     if (result) {
-                    return Promise.resolve(user)
+                        return Promise.resolve(user)
                     } else {
                         return Promise.reject
-                        ('invalid password or email')
-                }
-            })
+                            ('invalid password or email')
+                    }
+                })
             } else {
                 return Promise.reject('invalid email or password')
-        }
+            }
         })
         .catch((err) => {
-        return Promise.reject(err)
-    })
+            return Promise.reject(err)
+        })
 }
 userSchema.methods.generateToken = function () {
     const user = this
@@ -116,27 +116,22 @@ userSchema.statics.findByToken = function (token) {
     const User = this
     let tokenData
     try {
-        tokenData=jwt.verify(token,'sachin123')
+        tokenData = jwt.verify(token, 'sachin123')
     } catch (err) {
         return Promise.reject(err)
     }
     return User.findOne({
         _id: tokenData.userId,
-        'tokens.token':token
+        'tokens.token': token
     })
         .then((user) => {
             console.log('insideFindByToken')
-            return new Promise((resolve, reject) => {
-            resolve(user)
-        })
+            return Promise.resolve(user)
         })
         .catch((err) => {
             console.log('insideFindByCatch')
-            return new Promise((resolve, reject) => {
-                reject(err)
-            })
+            return Promise.reject(user)
         })
-    
 }
 const User = mongoose.model('User', userSchema)
 

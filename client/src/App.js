@@ -8,6 +8,7 @@ import {
 } from 'reactstrap';
 import Register from './users/register'
 import Login from './users/login'
+import Logout from './users/logout'
 
 import PgShow from './component/pg/pgShow'
 import PgList from './component/pg/listPg'
@@ -28,10 +29,11 @@ class App extends Component {
                   <Col sm={{ size: 'auto', offset: 7 }} >
                     <Link to="/">Home</Link>|
                     <Link to="/pg" >PG's</Link>|
-          <Link to="/users/register">Register</Link>|
-          <Link to="/users/login">Login</Link>|
-          <Link to="/pg/new">Add PG</Link>|
-          <Link to="/help">Help</Link>|</Col>
+                    <Link to="/users/register">Register</Link>|
+                    <Link to="/users/login">Login</Link>|
+                    <Link to="/pg/new">Add PG</Link>|
+                    <Link to="/help">Help</Link>|
+                  <Link to="/users/logout">Logout</Link></Col>
                 </Navbar>
               </div>
             </div>
@@ -40,6 +42,7 @@ class App extends Component {
             <Route path='/' component={Home} exact={true} />
             <Route path="/users/register" component={Register} exact={true} />
             <Route path="/users/login" component={Login} exact={true} />
+            <Route path="/users/logout" component={Logout} exact={true} />
             <Route path='/help' component={Help} exact={true} />
             <Route path="/pg" component={PgList} exact={true} />
             <Route path="/pg/new" component={PgNew} exact={true} />

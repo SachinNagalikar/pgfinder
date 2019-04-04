@@ -131,6 +131,7 @@ class Register extends React.Component {
         return (
             <div className="loginwrapper">
                 <div className="form-wrapper" >
+                    <h2>Register</h2>
                             <Form onSubmit={this.handleSubmit}>
                                 <Label>
                                     First Name<br />

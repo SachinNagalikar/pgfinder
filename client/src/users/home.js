@@ -24,15 +24,15 @@ class Home extends React.Component {
     render() {
         console.log(this.state)
         return (
-            <div>
-                <div className="container">
-                    <div className="col-md-5">
+            <div className='homewrapper'>
+                <div className="form-wrapper">
+                  
                         Location<br />
                         <Input type="text" name="text" onChange={this.handleName} /><br />
                         <Button color="primary" onClick={this.getLocation}>Location</Button> <br />
+
+                        <iframe title="myFrame" width="500" height="300" src={`https://maps.google.com/maps?q=${this.state.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe>
                     </div>
-                    <iframe title="myFrame" width="500" height="300" src={`https://maps.google.com/maps?q=${this.state.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe>
-                </div>
             </div>
         )
     }

@@ -24,10 +24,11 @@ class PgNew extends React.Component {
 
     render() {
         return (
-            <div >
+            <div className="container" >
                 <h2>Add PG</h2>
                 <PgForm pgSubmitHandle={this.submitHandle} />
                 <Button> <Link to="/pg">back</Link></Button>
+
             </div>
         )
     }

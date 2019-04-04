@@ -91,8 +91,6 @@ class Login extends React.Component {
         return (
             <div className="loginwrapper">
                 <div className="form-wrapper" >
-                    <div className="row">
-                        <div className="col-md-5" ></div>
                         <Form onSubmit={this.handleSubmit}>
                             <h2>login</h2>
                             <Label>
@@ -112,7 +110,7 @@ class Login extends React.Component {
                         </Form>
                     </div>
                 </div>
-            </div>
+            
         )
     }
 }

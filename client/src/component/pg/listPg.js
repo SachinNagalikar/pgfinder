@@ -33,9 +33,9 @@ class PgList extends React.Component {
         return (
             <div className="wrapper">
                 <div className="col" >
-                    <h2>Listing PG's - {this.state.pgs.length}</h2><br />
+                    <h2 className='edit'>Listing PG's - {this.state.pgs.length}</h2><br />
                     {this.state.pgs.map((pg) => {
-                        return (<div key={pg._id}>
+                        return (<div key={pg._id} >
                             <Card>
                                 <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" alt="Card image cap" />
                                 <CardBody>
@@ -52,7 +52,6 @@ class PgList extends React.Component {
                 </div>
                 <FilterPg />
             </div>
-
         )
     }
 }

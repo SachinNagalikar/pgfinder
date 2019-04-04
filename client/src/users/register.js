@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, FormText, Label, Input, Navbar } from 'reactstrap'
+import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import axios from '../component/config/axios'
 import '../../src/App.css'
@@ -136,12 +136,8 @@ class Register extends React.Component {
         return (
             <div className="loginwrapper">
                 <div className="form-wrapper" >
-                    <Navbar color="light" light expand="md">
-
-                        <div className="row">
-                            <div className="col-md-2" ></div>
+                    <h2>Register</h2>
                             <Form onSubmit={this.handleSubmit}>
-                                <h2>Register</h2>
                                 <Label>
                                     First Name<br />
                                     <Input type="text" value={this.state.firstName} onChange={this.handleFirst} placeholder="firstName" />
@@ -185,10 +181,7 @@ class Register extends React.Component {
                                 <Button type="submit" value="submit" color="primary">submit</Button>
                             </Form>
                         </div>
-                    </Navbar>
-                </div>
-
-            </div>
+                    </div>
         )
     }
 }

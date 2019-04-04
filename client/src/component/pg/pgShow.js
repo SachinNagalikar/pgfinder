@@ -50,7 +50,7 @@ class PgShow extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="color">
                 <div className="container">
                     <Card>
                         <CardImg top width="100%" />
@@ -59,7 +59,7 @@ class PgShow extends React.Component {
                             <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
                             <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
                             <CardText>{`Address:-${this.state.pg.address}`}</CardText>
-                            <iframe title={this.state.pg._id} width="500" height="300" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe>
+                            <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br/>
                             <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
                         </CardBody>

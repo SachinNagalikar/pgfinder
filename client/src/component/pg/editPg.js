@@ -54,4 +54,3 @@ class PgEdit extends React.Component {
 }
 
 export default PgEdit
-//.join(' ').split(',')

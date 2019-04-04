@@ -28,7 +28,6 @@ class PgForm extends React.Component {
         e.persist()
         var nameType = e.target.name
         var value = e.target.value
-        console.log(value)
         var checked = e.target.checked
         if (checked) {
             this.setState((prevState) => ({
@@ -70,7 +69,6 @@ class PgForm extends React.Component {
                 nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
             }))
         }
-
     }
 
     addressChange = (e) => {

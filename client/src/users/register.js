@@ -18,6 +18,7 @@ class Register extends React.Component {
             emailError: '',
             passwordError: '',
             mobileError: '',
+            hidden: true,
             redirectList: false
         }
 
@@ -50,6 +51,10 @@ class Register extends React.Component {
     handleMobile = (e) => {
         const mobile = e.target.value
         this.setState(() => ({ mobile }))
+    }
+
+    toggleShow = () => {
+        this.setState({ hidden: !this.state.hidden })
     }
 
     validate = () => {
@@ -164,8 +169,9 @@ class Register extends React.Component {
                                 <FormGroup >
                                     <Label>
                                         Password<br />
-                                        <Input type="password" value={this.state.password} onChange={this.handlePassword}
+                                        <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.handlePassword}
                                             placeholder="Password" />
+                                        <Button onClick={this.toggleShow}>Show/Hide</Button>
                                     </Label><br />
                                     <FormText color="danger" >{this.state.passwordError}</FormText>
                                 </FormGroup>

@@ -5,6 +5,7 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
 } from 'reactstrap'
+import FilterPg from './filter'
 class PgList extends React.Component {
     constructor(props) {
         super(props)
@@ -38,8 +39,8 @@ class PgList extends React.Component {
                             <Card>
                                 <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" alt="Card image cap" />
                                 <CardBody>
-                                    <CardTitle>{`pgName:-${pg.pgName}`}</CardTitle>
-                                    <CardSubtitle>{`pgType:-${pg.pgTypes}`}</CardSubtitle>
+                                    <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
+                                    <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>
                                     <CardText>{`description:-${pg.description}`}</CardText>
                                     <CardSubtitle>{`Address:-${pg.address}`}</CardSubtitle>
 
@@ -48,9 +49,8 @@ class PgList extends React.Component {
                             </Card>
                         </div>)
                     })}
-
-
                 </div>
+                <FilterPg />
             </div>
 
         )

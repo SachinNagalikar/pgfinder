@@ -129,7 +129,7 @@ userSchema.statics.findByToken = function (token) {
         })
         .catch((err) => {
             console.log('insideFindByCatch')
-            return Promise.reject(user)
+            return Promise.reject(err)
         })
 }
 const User = mongoose.model('User', userSchema)

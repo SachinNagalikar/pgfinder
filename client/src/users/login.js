@@ -14,7 +14,8 @@ class Login extends React.Component {
             password: '',
             redirectList: false,
             emailError: '',
-            passwordError: ''
+            passwordError: '',
+            hidden: true
         }
     }
 
@@ -22,10 +23,16 @@ class Login extends React.Component {
         const email = e.target.value
         this.setState(() => ({ email }))
     }
+
     passwordChange = (e) => {
         const password = e.target.value
         this.setState(() => ({ password }))
     }
+
+    toggleShow = () => {
+        this.setState({ hidden: !this.state.hidden })
+    }
+
     validate = () => {
         let isError = false;
         const errors = {
@@ -94,7 +101,8 @@ class Login extends React.Component {
                             <br />
                             <Label>
                                 Password<br />
-                                <Input type="password" value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
+                                <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
+                                <Button onClick={this.toggleShow}>Show/Hide</Button>
                             </Label><br />
                             <FormText color="danger">{this.state.passwordError}</FormText> <br />
                             <br />

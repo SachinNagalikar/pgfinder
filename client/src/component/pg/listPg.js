@@ -1,8 +1,11 @@
 import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
-import Home from '../../users/home'
-import {Card, CardImg, CardText, CardBody,CardTitle, CardSubtitle, Button,Col,Row} from 'reactstrap'
+import {
+    Card, CardImg, CardText, CardBody,
+    CardTitle, CardSubtitle, Button,Row,Col
+} from 'reactstrap'
+import FilterPg from './filter'
 class PgList extends React.Component {
     constructor(props) {
         super(props)
@@ -38,8 +41,8 @@ class PgList extends React.Component {
                                 <Card>
                                 <CardImg src='' alt="Card image cap" />
                                 <CardBody>
-                                    <CardTitle>{`pgName:-${pg.pgName}`}</CardTitle>
-                                    <CardSubtitle>{`pgType:-${pg.pgTypes}`}</CardSubtitle>
+                                    <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
+                                    <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>
                                     <CardText>{`description:-${pg.description}`}</CardText>
                                     <CardSubtitle>{`Address:-${pg.address}`}</CardSubtitle>
                             <Button outline color="primary"><Link to={`/pg/${pg._id}`} >Details</Link> </Button>
@@ -48,10 +51,10 @@ class PgList extends React.Component {
                                 </Col>
                             </Row>
                         </div>)
-                    })
-                    }
+                    })}
                 </div>
-             </div>
+                <FilterPg />
+            </div>
         )
     }
 }

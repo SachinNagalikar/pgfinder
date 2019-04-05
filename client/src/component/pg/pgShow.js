@@ -58,9 +58,9 @@ class PgShow extends React.Component {
                     <Card>
                         <CardImg top title={this.state.pg._id} src={``}/>
                         <CardBody>
-                            <CardTitle>{`pgName:-${this.state.pg.pgName}`}</CardTitle>
+                            <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
                             <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
-                            <CardText>{`pgTypes:-${this.state.pg.pgTypes}`}</CardText>
+                            <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
                             <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                             <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br/>
                             <Button outline><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button outline><Link to="/pg">back</Link></Button>|

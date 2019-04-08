@@ -52,14 +52,18 @@ class PgShow extends React.Component {
         return (
             <div className="color">
                 <div className="container">
+
                     <Card>
-                        <CardImg top width="100%" />
+                        {this.state.isLoaded && this.state.pg.image.map((img) => {
+                            return <img src={img} />
+                        })}
+                        {/* <CardImg top width="100%" src={this.state.pg.image[1]} /> */}
                         <CardBody>
                             <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
                             <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
                             <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
                             <CardText>{`Address:-${this.state.pg.address}`}</CardText>
-                            <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br/>
+                            <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
                             <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
                         </CardBody>

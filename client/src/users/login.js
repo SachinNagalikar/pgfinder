@@ -41,7 +41,6 @@ class Login extends React.Component {
             passwordError: '',
         }
 
-
         if (this.state.email.indexOf("@") === -1) {
             isError = true;
             errors.emailError = "Requires valid email"
@@ -57,6 +56,7 @@ class Login extends React.Component {
         })
         return isError
     }
+
     handleSubmit = (e) => {
         e.preventDefault()
         const err = this.validate()
@@ -91,26 +91,26 @@ class Login extends React.Component {
         return (
             <div className="loginwrapper">
                 <div className="form-wrapper" >
-                        <Form onSubmit={this.handleSubmit}>
-                            <h2>login</h2>
-                            <Label>
-                                Email<br />
-                                <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
-                            </Label><br />
-                            <FormText color="danger">{this.state.emailError}</FormText>
-                            <br />
-                            <Label>
-                                Password<br />
-                                <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
-                                <Button onClick={this.toggleShow}>Show/Hide</Button>
-                            </Label><br />
-                            <FormText color="danger">{this.state.passwordError}</FormText> <br />
-                            <br />
-                            <Button type="submit" value="submit" color="primary">submit</Button>
-                        </Form>
-                    </div>
+                    <Form onSubmit={this.handleSubmit}>
+                        <h2>login</h2>
+                        <Label>
+                            Email<br />
+                            <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
+                        </Label><br />
+                        <FormText color="danger">{this.state.emailError}</FormText>
+                        <br />
+                        <Label>
+                            Password<br />
+                            <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
+                            <Button onClick={this.toggleShow}>Show/Hide</Button>
+                        </Label><br />
+                        <FormText color="danger">{this.state.passwordError}</FormText> <br />
+                        <br />
+                        <Button type="submit" value="submit" color="primary">submit</Button>
+                    </Form>
                 </div>
-            
+            </div>
+
         )
     }
 }

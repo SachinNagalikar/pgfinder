@@ -15,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            // filename: props.filename ? props.filename : null
+            filename: ''
         }
     }
 
@@ -96,41 +96,40 @@ class PgForm extends React.Component {
         this.setState(() => ({ deposit }))
     }
 
-    // ImageChange = (e) => {
-    //     const filename = e.target.files
-    //     this.setState(() => ({ filename }))
-    // }
+    imageChange = (e) => {
+        const filename = e.target.files
+        this.setState(() => ({ filename }))
+    }
 
     pgSubmitHandle = (e) => {
-
         e.preventDefault()
-        // const data = new FormData()
-        // data.append("pgName", this.state.pgName)
-        // data.append("roomTypes", this.state.roomTypes)
-        // data.append("pgTypes", this.state.pgTypes)
-        // data.append("foods", this.state.foods)
-        // data.append("amenities", this.state.amenities)
-        // data.append("address", this.state.address)
-        // data.append("description", this.state.description)
-        // data.append("rules", this.state.rules)
-        // data.append("pgRent", this.state.pgRent)
-        // data.append("deposit", this.state.deposit)
-        // for (let file of this.state.filename) {
-        //     data.append("image", file)
-        // }
-        const formData = {
-            pgName: this.state.pgName,
-            roomTypes: this.state.roomTypes,
-            pgTypes: this.state.pgTypes,
-            foods: this.state.foods,
-            amenities: this.state.amenities,
-            address: this.state.address,
-            description: this.state.description,
-            rules: this.state.rules,
-            pgRent: this.state.pgRent,
-            deposit: this.state.deposit
+        const data = new FormData()
+        data.append("pgName", this.state.pgName)
+        data.append("roomTypes", this.state.roomTypes)
+        data.append("pgTypes", this.state.pgTypes)
+        data.append("foods", this.state.foods)
+        data.append("amenities", this.state.amenities)
+        data.append("address", this.state.address)
+        data.append("description", this.state.description)
+        data.append("rules", this.state.rules)
+        data.append("pgRent", this.state.pgRent)
+        data.append("deposit", this.state.deposit)
+        for (let file of this.state.filename) {
+            data.append("image", file)
         }
-        this.props.pgSubmitHandle(formData)
+        // const formData = {
+        //     pgName: this.state.pgName,
+        //     roomTypes: this.state.roomTypes,
+        //     pgTypes: this.state.pgTypes,
+        //     foods: this.state.foods,
+        //     amenities: this.state.amenities,
+        //     address: this.state.address,
+        //     description: this.state.description,
+        //     rules: this.state.rules,
+        //     pgRent: this.state.pgRent,
+        //     deposit: this.state.deposit
+        // }
+        this.props.pgSubmitHandle(data)
     }
     render() {
         return (
@@ -223,10 +222,10 @@ class PgForm extends React.Component {
                         <Label>
                             <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
                     </Label><br />
-                        {/* <Label>
-                                    Image:<br />
-                                    <Input type="file" multiple name="image" onChange={this.ImageChange} />
-                                </Label><br /> */}
+                        <Label>
+                            Image:<br />
+                            <Input type="file" multiple name="image" onChange={this.imageChange} />
+                        </Label><br />
                         <Input type='submit' value='submit' />
                     </Form>
                 </div >
@@ -234,6 +233,5 @@ class PgForm extends React.Component {
         )
     }
 }
-
 
 export default PgForm

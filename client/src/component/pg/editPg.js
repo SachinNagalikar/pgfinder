@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../config/axios';
 import PgForm from './form'
+import { Link } from 'react-router-dom'
 
 class PgEdit extends React.Component {
     constructor() {
@@ -47,7 +48,8 @@ class PgEdit extends React.Component {
         return (
             <div className="wrapper">
                 <h2 className='edit'> edit PG</h2>
-                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
+                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities.join('').split(',')} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes.join('').split(',')} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
+                <Link to="/pg">back</Link>
             </div>
         )
     }

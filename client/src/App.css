@@ -21,6 +21,9 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+.color{
+ background-color:rgb(73, 69, 69)
+}
 .wrapper {
   height: 200vh;
   width: 100%;

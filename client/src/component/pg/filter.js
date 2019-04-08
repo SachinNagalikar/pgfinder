@@ -1,47 +1,58 @@
 import React from 'react'
 
 class FilterPg extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
-            pg: {}
+            filteredPg:[]
         }
     }
 
     pgTypeChange = (e) => {
-        e.persist()
-        this.setState(() => ({
-            [e.target.name]: e.target.value
-        }))
+        console.log(e.target.value)
+        const pgs = this.props.pgdata
+        const pgfilter=pgs.filter(pg=> pg.pgTypes===e.target.value)
+        this.props.updatepg(pgfilter)
     }
 
     roomTypeChange = (e) => {
-        e.persist()
+        console.log(e.target.value)
+        const pgs = this.props.pgdata
         var nameType = e.target.name
-        var value = e.target.value
+        const value = e.target.value
         var checked = e.target.checked
-        if (checked) {
-            this.setState((prevState) => ({
-                nameType: prevState.roomTypes.push(value)
-            }))
-        } else {
-            this.setState((prevState) => ({
-                nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
-            }))
+         const pgfilter = pgs.filter(pg => pg.roomTypes.includes(value))
+        // if(checked){
+        //     this.setState((pgdata) => {
+        //         nameType:pgdata.roomTypes.push(value)
+        //     })
+             this.props.updatepg(pgfilter)
+        // }
+        // var nameType = e.target.name
+        // var value = e.target.value
+        // var checked = e.target.checked
+        // if (checked) {
+        //     this.setState((prevState) => ({
+        //         nameType: prevState.roomTypes.push(value)
+        //     }))
+        // } else {
+        //     this.setState((prevState) => ({
+        //         nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
+        //     }))
+        // }
+    }
+
+    submitHandle = (e) => {
+        e.preventdefault()
+        const formData = {
+            pgTypes: this.state.pgTypes,
+            roomTypes: this.state.roomTypes
         }
     }
 
-    // submitHandle = (e) => {
-    //     e.preventdefault()
-    //     const formData = {
-    //         pgTypes: this.state.pgTypes,
-    //         roomTypes: this.state.roomTypes
-    //     }
-    // }
-
     render() {
         return (
-            <div>
+            <div className="form-wrapper">
                 <form onSubmit={this.submitHandle}>
                     <label>
                         <h5>PG Type</h5><br />
@@ -57,13 +68,13 @@ class FilterPg extends React.Component {
                     </label>
                     <label>
                         <input type="checkbox" Value="One And Sharing" name="roomTypes" onChange={this.roomTypeChange} /> One And Sharing
-                    </label>
+                    </label><br/>
                     <label>
                         <input type="checkbox" value="Two And Sharing" name="roomTypes" onChange={this.roomTypeChange} /> Two And Sharing
                     </label><br />
                     <label>
                         <input type="checkbox" value="Three And Sharing" name="roomTypes" onChange={this.roomTypeChange} /> Three And Sharing
-                    </label>
+                    </label><br/>
                     <label>
                         <input type="checkbox" value="four And Sharing" name="roomTypes" onChange={this.roomTypeChange} /> Four And Sharing
                     </label>

@@ -2,7 +2,7 @@ const express = require('express')
 const multer = require('multer')
 const router = express.Router()
 const { Pg } = require('../models/pg_detail')
-// const { upload } = require('../middleware/imageUploads')
+ const { upload } = require('../middleware/imageUploads')
 const { authenticate } = require('../middleware/authenticate')
 
 router.get('/', authenticate, (req, res) => {
@@ -37,26 +37,26 @@ router.get('/:id', authenticate, (req, res) => {
         })
 })
 
-// router.post('/', upload.array('image', 4), (req, res) => {
-//     const body = req.body
-//     console.log('body', body)
-//     const images = []
-//     req.files.forEach(file => {
-//         const imageUrl = file.destination
-//         const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
-//         images.push(link)
-//     })
-//     // console.log(images)
-//     body.image = images
-//     const pg = new Pg(body)
-//     pg.save()
-//         .then((pg) => {
-//             res.send(pg)
-//         })
-//         .catch((err) => {
-//             res.send(err)
-//         })
-// })
+router.post('/', upload.array('image', 4), (req, res) => {
+    const body = req.body
+    console.log('body', body)
+    const images = []
+    req.files.forEach(file => {
+        const imageUrl = file.destination
+        const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
+        images.push(link)
+    })
+    // console.log(images)
+    body.image = images
+    const pg = new Pg(body)
+    pg.save()
+        .then((pg) => {
+            res.send(pg)
+        })
+        .catch((err) => {
+            res.send(err)
+        })
+})
 router.post('/', authenticate, (req, res) => {
     const body = req.body
     const pg = new Pg(body)

@@ -10,7 +10,9 @@ class PgList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            pgs: []
+            pgs: [],
+            pgdata:[]
+
         }
     }
     componentDidMount() {
@@ -22,19 +24,25 @@ class PgList extends React.Component {
             .then((response) => {
                 const pgs = response.data
                 this.setState({
-                    pgs
+                    pgs,
+                    pgdata:response.data
                 })
             })
             .catch((err) => {
                 console.log(err)
             })
     }
+
+    updatepg = (data) => {
+        this.setState({ pgdata:data})
+    }
     render() {
         return (
             <div className="color">
                 <div className="container">
-                    <h2 className="list">Listing PG's - {this.state.pgs.length}</h2><br />
-                    {this.state.pgs.map((pg) => {
+                <FilterPg pgdata={this.state.pgs} updatepg={this.updatepg}/>
+                    <h2 className="list">Listing PG's - {this.state.pgdata.length}</h2><br />
+                    {this.state.pgdata.map((pg) => {
                         return (<div key={pg._id} >
                             <Row>
                                 <Col xs="6">
@@ -53,7 +61,7 @@ class PgList extends React.Component {
                         </div>)
                     })}
                 </div>
-                <FilterPg />
+             
             </div>
         )
     }

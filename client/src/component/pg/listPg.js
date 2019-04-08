@@ -3,7 +3,7 @@ import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import {
     Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap'
 import FilterPg from './filter'
 class PgList extends React.Component {
@@ -83,32 +83,39 @@ class PgList extends React.Component {
     }
     render() {
         return (
-            <div className="color">
-                <div className="conatiner" >
-                    <h2 className='edit'>Listing PG's - {this.state.pgs.length}</h2><br />
-                    {this.state.pgs.map((pg) => {
-                        return (<div key={pg._id} >
-                            <Card>
-                                <CardImg top width="100%" src="https://www.justdial.com/photos/seasons-womens-pg-and-hostel-madhapur-hyderabad-paying-guest-accommodation-for-women-c4x70-pc-45991500-sco-28eqymyyieq" alt="Card image cap" />
-                                <CardBody>
-                                    <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
-                                    <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>
-                                    <CardText>{`description:-${pg.description}`}</CardText>
-                                    <CardSubtitle>{`Address:-${pg.address}`}</CardSubtitle>
-
-                                    <Button color="success"><Link to={`/pg/${pg._id}`} >Details</Link> </Button>
-                                </CardBody>
-                            </Card>
-                        </div>)
-                    })}
+            <div className>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-md-4">
+                            <h2 className="form">filter</h2>
+                            <FilterPg onFilterChange={this.onFilterChange.bind(this)}
+                                reset={this.reset.bind(this)} />
+                        </div>
+                        <div className="col-md-8">
+                            <h2 className="form-wrapper">Listing PG's - {this.state.pgs.length}</h2>
+                            {this.state.pgs.map((pg) => {
+                                return (<div className="form-wrapper" >
+                                    <Row>
+                                        <Col>
+                                            <Card>
+                                                <CardImg src='' alt="Card image cap" />
+                                                <CardBody>
+                                                    <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
+                                                    <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>
+                                                    <CardText>{`description:-${pg.description}`}</CardText>
+                                                    <CardSubtitle>{`Address:-${pg.address}`}</CardSubtitle>
+                                                    <Button outline color="primary"><Link to={`/pg/${pg._id}`} >Details</Link> </Button>
+                                                </CardBody>
+                                            </Card>
+                                        </Col>
+                                    </Row>
+                                </div>)
+                            })}
+                        </div>
+                    </div>
                 </div>
-                <FilterPg onFilterChange={this.onFilterChange.bind(this)}
-                    reset={this.reset.bind(this)}
-
-                />
             </div>
         )
     }
 }
-
 export default PgList

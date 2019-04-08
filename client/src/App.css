@@ -51,6 +51,7 @@
   align-items: center;
   background-color:rgb(73, 69, 69);
 }
+
 .listwrapper {
   height: 120vh;
   width:100%;
@@ -71,12 +72,30 @@
 }
 .color{
   background-color:rgb(73, 69, 69);
-  height: 120vh;
+  
 
 }
 
 .form-wrapper {
   width: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px #555;
+  background-color: #ffffff;
+}
+.add{
+  width: 800px;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 40px;
+  border-radius: 10px;
+  box-shadow: 0px 10px 50px #555;
+  background-color: #ffffff;
+}
+.form {
+  width: 300px;
   display: flex;
   flex-direction: column;
   padding: 20px 40px;

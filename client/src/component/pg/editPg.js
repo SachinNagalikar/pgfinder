@@ -45,8 +45,8 @@ class PgEdit extends React.Component {
 
     render() {
         return (
-            <div className="wrapper">
-                <h2 className='edit'> edit PG</h2>
+            <div className="container">
+                <h2 className='add'> edit PG</h2>
                 {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} filename={this.state.pg.filename}  pgSubmitHandle={this.submitHandle} />}
             </div>
         )

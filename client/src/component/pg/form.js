@@ -134,9 +134,11 @@ class PgForm extends React.Component {
     }
     render() {
         return (
-            <div className="wrapper">
-                <div className="form-wrapper" >
-                    <Form onSubmit={this.pgSubmitHandle}>
+            <div className="container">
+                <div className="add" >
+                        <Form onSubmit={this.pgSubmitHandle}>
+                        <div className="row">
+                    <div className="col-md-6">
                         <Label>
                             PG Name<br />
                             <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" />
@@ -164,7 +166,8 @@ class PgForm extends React.Component {
                             <Input type="number" value={this.state.deposit} onChange={this.depositChange}
                                 placeholder="Deposit" />
                         </Label><br />
-
+                            </div>
+                            <div className="col-md-6">
                         <Label>
                             <h5> PG Type</h5>
                         </Label><br />
@@ -227,9 +230,12 @@ class PgForm extends React.Component {
                                     Image:<br />
                                     <Input type="file" multiple name="image" onChange={this.ImageChange} />
                                 </Label><br />
-                        <Input type='submit' value='submit' />
-                    </Form>
-                </div >
+                                <Input type='submit' value='submit' />
+                                </div>
+                        </div>
+               
+                        </Form>
+                        </div >    
             </div >
         )
     }

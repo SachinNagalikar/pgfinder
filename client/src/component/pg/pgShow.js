@@ -54,7 +54,7 @@ class PgShow extends React.Component {
 
     render() {
         const { photoIndex, isOpen } = this.state;
-        console.log('pgshow', this.state)
+        // console.log('pgshow', this.state)
         return (
             <div>
                 <div className="row">
@@ -72,10 +72,7 @@ class PgShow extends React.Component {
                                 <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                                 <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
                                 <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
-                            <Button onClick={this.handleDelete}>delete</Button>|
-                            <Button type="button" onClick={() => this.setState({ isOpen: true })}>
-                                    more images
-        </Button>
+                            <Button onClick={this.handleDelete}>delete</Button>
                             </CardBody>
                         </Card>
                         {isOpen && (

@@ -15,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            filename: props.filename ? props.filename:''
+            filename: props.filename ? props.filename : ''
         }
     }
 
@@ -103,7 +103,7 @@ class PgForm extends React.Component {
 
     pgSubmitHandle = (e) => {
         e.preventDefault()
-        
+
         const data = new FormData()
         data.append("pgName", this.state.pgName)
         data.append("roomTypes", this.state.roomTypes)
@@ -134,7 +134,6 @@ class PgForm extends React.Component {
         this.props.pgSubmitHandle(data)
     }
     render() {
-        console.log('pgform',this.state.amenities)
         return (
             <div className="container">
                 <div className="add" >
@@ -175,63 +174,68 @@ class PgForm extends React.Component {
                                 </Label><br />
                                 <Label>
                                     <input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
-                        </Label>
+                                </Label>
                                 <Label>
                                     <input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
-                        </Label><br />
+                                </Label><br />
                                 <Label>
                                     <h5>Food</h5>
                                 </Label><br />
                                 <Label>
                                     <input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
-                        </Label>
+                                </Label>
                                 <Label>
                                     <input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
-                        </Label><br />
+                                </Label><br />
+                                <Label>
+                                    <input type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" /> Both
+                                </Label><br />
                                 <Label>
                                     <h5>Room Type</h5>
                                 </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
-                        </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
-                        </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
-                        </Label><br />
+                                </Label><br />
 
                                 <Label>
                                     <h5>Amenities</h5>
                                 </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
-                    </Label><br />
+                                </Label><br />
                                 <Label>
                                     <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
-                    </Label><br />
-                                <Label>
-                                    Image:<br />
-                                    <Input type="file" multiple name="image" onChange={this.imageChange} />
                                 </Label><br />
+                                {this.props.filename &&
+                                    <Label>
+                                        Image:<br />
+                                        <Input type="file" multiple name="image" onChange={this.imageChange} />
+                                    </Label>
+                                }<br />
                                 <Input type='submit' value='submit' />
                             </div>
                         </div>

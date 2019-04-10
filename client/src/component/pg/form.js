@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Label, Input } from 'reactstrap'
+import { Form, Label, Input, FormGroup, Button, Container, Row, Col } from 'reactstrap'
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -103,7 +103,6 @@ class PgForm extends React.Component {
 
     pgSubmitHandle = (e) => {
         e.preventDefault()
-
         const data = new FormData()
         data.append("pgName", this.state.pgName)
         data.append("roomTypes", this.state.roomTypes)
@@ -133,6 +132,7 @@ class PgForm extends React.Component {
         // }
         this.props.pgSubmitHandle(data)
     }
+
     render() {
         return (
             <div className="container">
@@ -140,105 +140,164 @@ class PgForm extends React.Component {
                     <Form onSubmit={this.pgSubmitHandle}>
                         <div className="row">
                             <div className="col-md-6">
-                                <Label>
-                                    PG Name<br />
-                                    <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" />
-                                </Label><br />
-                                <Label>
-                                    Address<br />
-                                    <Input type="textarea" value={this.state.address} onChange={this.addressChange}
-                                        placeholder="Address" />
-                                </Label><br />
-                                <Label>
-                                    Description<br />
-                                    <Input type="textarea" value={this.state.description} onChange={this.descriptionChange} placeholder="Description" />
-                                </Label><br />
-                                <Label>
-                                    PG Rules:<br />
-                                    <Input type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" />
-                                </Label><br />
-                                <Label>
-                                    Rent:<br />
-                                    <Input type="number" value={this.state.pgRent} onChange={this.rentChange}
-                                        placeholder="Rent" />
-                                </Label><br />
-                                <Label>
-                                    Deposit:<br />
-                                    <Input type="number" value={this.state.deposit} onChange={this.depositChange}
-                                        placeholder="Deposit" />
-                                </Label><br />
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>PG Name</h5></Label>
+                                        <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" />
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>Address</h5></Label>
+                                        <Input type="textarea" value={this.state.address} onChange={this.addressChange}
+                                            placeholder="Address" />
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>Description</h5></Label>
+                                        <Input type="textarea" value={this.state.description} onChange={this.descriptionChange} placeholder="Description" />
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>PG Rules</h5></Label>
+                                        <Input type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" />
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>Rent</h5></Label>
+                                        <Input type="number" value={this.state.pgRent} onChange={this.rentChange}
+                                            placeholder="Rent" />
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Label><h5>Deposit</h5></Label>
+                                        <Input type="number" value={this.state.deposit} onChange={this.depositChange}
+                                            placeholder="Deposit" />
+                                    </Label>
+                                </FormGroup>
                             </div>
                             <div className="col-md-6">
-                                <Label>
-                                    <h5> PG Type</h5>
-                                </Label><br />
-                                <Label>
-                                    <input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
-                                </Label>
-                                <Label>
-                                    <input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
-                                </Label><br />
-                                <Label>
-                                    <h5>Food</h5>
-                                </Label><br />
-                                <Label>
-                                    <input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
-                                </Label>
-                                <Label>
-                                    <input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
-                                </Label><br />
-                                <Label>
-                                    <input type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" /> Both
-                                </Label><br />
-                                <Label>
-                                    <h5>Room Type</h5>
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
-                                </Label><br />
-
-                                <Label>
-                                    <h5>Amenities</h5>
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
-                                </Label><br />
-                                <Label>
-                                    <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
-                                </Label><br />
-                                {this.props.filename &&
+                                <FormGroup>
                                     <Label>
-                                        Image:<br />
-                                        <Input type="file" multiple name="image" onChange={this.imageChange} />
+                                        <h5> PG Type</h5>
                                     </Label>
-                                }<br />
-                                <Input type='submit' value='submit' />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <h5>Food</h5>
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" /> Both
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <h5>Room Type</h5>
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <h5>Amenities</h5>
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label>
+                                        <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
+                                    </Label>
+                                </FormGroup>
+                                <FormGroup>
+                                    {this.props.filename &&
+                                        <Label>
+                                            Image:<br />
+                                            <Input type="file" multiple name="image" onChange={this.imageChange} />
+                                        </Label>
+                                    }
+                                </FormGroup>
                             </div>
                         </div>
+                        <Container>
+                            <Row>
+                                <Col sm="12" md={{ size: 6, offset: 4 }}>
+                                    <Button>submit</Button>
+                                </Col>
+                            </Row>
+                        </Container>
                     </Form>
                 </div >
             </div >

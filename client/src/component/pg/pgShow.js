@@ -1,16 +1,20 @@
 import React from "react"
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
 } from 'reactstrap'
 class PgShow extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state = {
             pg: {},
-            isLoaded: false
+            isLoaded: false,
+            photoIndex: 0,
+            isOpen: false
         }
     }
 
@@ -49,16 +53,19 @@ class PgShow extends React.Component {
     }
 
     render() {
+        const { photoIndex, isOpen } = this.state;
+        console.log('pgshow',this.state)
         return (
             <div>
                 <div className="row">
-                    <div className="col">
-
-                        <Card>
+                    <div className="col-md-6">
+                        <div>
                             {this.state.isLoaded && this.state.pg.image.map((img) => {
-                                return <img src={img} />
-                            })}
-                            {/* <CardImg top width="100%" src={this.state.pg.image[1]} /> */}
+                        console.log(img)
+                                return (<CardImg width="200" height="150"  src={img} onClick={() => this.setState({ isOpen: true })} /> )
+                            })}</div>
+                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
+                        <Card>
                             <CardBody>
                                 <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
                                 <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
@@ -66,9 +73,30 @@ class PgShow extends React.Component {
                                 <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                                 <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
                                 <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
-                            <Button onClick={this.handleDelete}>delete</Button>
+                            <Button onClick={this.handleDelete}>delete</Button>|
+                            <Button type="button" onClick={() => this.setState({ isOpen: true })}>
+          more images
+        </Button>
                             </CardBody>
                         </Card>
+                        {isOpen && (
+          <Lightbox
+            mainSrc={this.state.pg.image[photoIndex]}
+            nextSrc={this.state.pg.image[(photoIndex + 1) % this.state.pg.image.length]}
+            prevSrc={this.state.pg.image[(photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length,
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + 1) % this.state.pg.image.length,
+              })
+            }
+          />
+        )}
                     </div>
                 </div>
             </div>

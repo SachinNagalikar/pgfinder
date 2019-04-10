@@ -15,7 +15,7 @@ class PgForm extends React.Component {
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            filename: ''
+            filename: props.filename ? props.filename:''
         }
     }
 
@@ -103,6 +103,7 @@ class PgForm extends React.Component {
 
     pgSubmitHandle = (e) => {
         e.preventDefault()
+        
         const data = new FormData()
         data.append("pgName", this.state.pgName)
         data.append("roomTypes", this.state.roomTypes)
@@ -117,6 +118,7 @@ class PgForm extends React.Component {
         for (let file of this.state.filename) {
             data.append("image", file)
         }
+        console.log(data)
         // const formData = {
         //     pgName: this.state.pgName,
         //     roomTypes: this.state.roomTypes,
@@ -132,6 +134,7 @@ class PgForm extends React.Component {
         this.props.pgSubmitHandle(data)
     }
     render() {
+        console.log('pgform',this.state.amenities)
         return (
             <div className="container">
                 <div className="add" >

@@ -11,7 +11,8 @@ class PgList extends React.Component {
         super(props)
         this.state = {
             pgs: [],
-            actualPgs: []
+            actualPgs: [],
+            isLoaded:false
         }
     }
 
@@ -70,7 +71,7 @@ class PgList extends React.Component {
                 const pgs = response.data
 
                 this.setState({
-                    pgs: pgs, actualPgs: pgs
+                    pgs: pgs, actualPgs: pgs,isLoaded:true
                 })
             })
             .catch((err) => {
@@ -98,7 +99,7 @@ class PgList extends React.Component {
                                     <Row>
                                         <Col>
                                             <Card>
-                                                <CardImg src='' alt="Card image cap" />
+                                        <CardImg width="300" height="150"  src={pg.image[0]} /> 
                                                 <CardBody>
                                                     <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
                                                     <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>

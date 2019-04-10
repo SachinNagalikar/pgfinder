@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
+import {pgShow  } from "./pgShow";
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
@@ -12,7 +13,7 @@ class PgList extends React.Component {
         this.state = {
             pgs: [],
             actualPgs: [],
-            isLoaded:false
+            isLoaded: false
         }
     }
 
@@ -88,18 +89,18 @@ class PgList extends React.Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <h2 className="form">filter</h2>
+                            <h2 className="form" >filter</h2>
                             <FilterPg onFilterChange={this.onFilterChange.bind(this)}
                                 reset={this.reset.bind(this)} />
                         </div>
                         <div className="col-md-8">
-                            <h2 className="form-wrapper">Listing PG's - {this.state.pgs.length}</h2>
+                            <h2 className="list">Listing PG's - {this.state.pgs.length}</h2>
                             {this.state.pgs.map((pg) => {
                                 return (<div className="form-wrapper" >
                                     <Row>
                                         <Col>
                                             <Card>
-                                        <CardImg width="300" height="150"  src={pg.image[0]} /> 
+                                        <CardImg width="300" height="150"  src={pg.image[0]} onClick={() => this.setState({ isOpen: true })} /> 
                                                 <CardBody>
                                                     <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
                                                     <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>

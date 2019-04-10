@@ -59,12 +59,8 @@ class PgShow extends React.Component {
             <div>
                 <div className="row">
                     <div className="col-md-6">
-                        <div>
-                            {this.state.isLoaded && this.state.pg.image.map((img) => {
-                        console.log(img)
-                                return (<CardImg width="200" height="150"  src={img} onClick={() => this.setState({ isOpen: true })} /> )
-                            })}</div>
-                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
+                        
+                            {this.state.isLoaded &&  <CardImg width="200" height="150"  src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} /> }
                         <Card>
                             <CardBody>
                                 <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
@@ -75,8 +71,8 @@ class PgShow extends React.Component {
                                 <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>|
                             <Button type="button" onClick={() => this.setState({ isOpen: true })}>
-          more images
-        </Button>
+                           more images
+                             </Button>
                             </CardBody>
                         </Card>
                         {isOpen && (

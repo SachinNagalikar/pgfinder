@@ -169,7 +169,7 @@ class PgForm extends React.Component {
                                         placeholder="Deposit" />
                                 </Label><br />
                             </div>
-                            <div className="col-md-6">
+                            <div >
                                 <Label>
                                     <h5> PG Type</h5>
                                 </Label><br />

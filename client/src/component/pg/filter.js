@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button} from 'reactstrap'
+import {Button,Card} from 'reactstrap'
 class FilterPg extends React.Component {
     constructor() {
         super()
@@ -57,8 +57,10 @@ class FilterPg extends React.Component {
 
     render() {
         return (
+               
             <div className="form">
                 <form>
+             
                     <label>
                         <h5>PG Type</h5>
                     </label><br />
@@ -83,9 +85,11 @@ class FilterPg extends React.Component {
                     <label>
                         <input type="checkbox" id="fourSharing" checked={this.state.roomTypes.fourSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} /> Four And Sharing
                     </label><br/>
-                    <Button type="button" onClick={this.reset.bind(this)}>Reset</Button>
+                        <Button type="button" onClick={this.reset.bind(this)}>Reset</Button>
+                       
                 </form>
-            </div>
+                </div>
+              
         )
     }
 }

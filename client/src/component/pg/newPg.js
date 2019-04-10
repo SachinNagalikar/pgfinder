@@ -2,7 +2,7 @@ import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import PgForm from './form'
-import { Button } from 'reactstrap'
+import { Button,Toast,ToastBody,Toastheader } from 'reactstrap'
 
 class PgNew extends React.Component {
     submitHandle = (data) => {
@@ -25,9 +25,9 @@ class PgNew extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                    <h2 className="add">Add PG</h2>
-                <PgForm pgSubmitHandle={this.submitHandle} />
-                 <Link to="/pg">back</Link>
+                            <h2 className="add" style={{textAlign:"center"}}>Add PG</h2>
+                                <PgForm pgSubmitHandle={this.submitHandle} />
+                            <Link to="/pg">back</Link>
                     </div>
                 </div>
             

@@ -135,20 +135,20 @@ class Register extends React.Component {
         }
         return (
             <div className="loginwrapper">
-                <div className="form-wrapper" >
+                <div className="register" >
                     <h2>Register</h2>
                             <Form onSubmit={this.handleSubmit}>
                                 <Label>
                                     First Name<br />
                                     <Input type="text" value={this.state.firstName} onChange={this.handleFirst} placeholder="firstName" />
                                     <FormText color="danger" >{this.state.firstNameError}</FormText>
-                                </Label>
+                                </Label><br/>
                                 <Label>
                                     Middle Name<br />
                                     <Input type="text" value={this.state.middleName} onChange={this.handleMiddle}
                                         placeholder="middleName" />
                                     <FormText color="danger" >{this.state.middleNameError} </FormText>
-                                </Label>
+                                </Label><br/>
                                 <Label>
                                     Last Name<br />
                                     <Input type="text" value={this.state.lastName} onChange={this.handleLast} placeholder="lastName" />

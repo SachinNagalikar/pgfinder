@@ -54,16 +54,15 @@ class PgShow extends React.Component {
 
     render() {
         const { photoIndex, isOpen } = this.state;
-        console.log('pgshow',this.state)
+        console.log('pgshow', this.state)
         return (
             <div>
                 <div className="row">
                     <div className="col-md-6">
                         <div>
-                            {this.state.isLoaded && this.state.pg.image.map((img) => {
-                        console.log(img)
-                                return (<CardImg width="200" height="150"  src={img} onClick={() => this.setState({ isOpen: true })} /> )
-                            })}</div>
+                            {this.state.isLoaded &&
+                                <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
+                            }</div>
                         {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
                         <Card>
                             <CardBody>
@@ -75,28 +74,28 @@ class PgShow extends React.Component {
                                 <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>|
                             <Button type="button" onClick={() => this.setState({ isOpen: true })}>
-          more images
+                                    more images
         </Button>
                             </CardBody>
                         </Card>
                         {isOpen && (
-          <Lightbox
-            mainSrc={this.state.pg.image[photoIndex]}
-            nextSrc={this.state.pg.image[(photoIndex + 1) % this.state.pg.image.length]}
-            prevSrc={this.state.pg.image[(photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
-            onMovePrevRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length,
-              })
-            }
-            onMoveNextRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + 1) % this.state.pg.image.length,
-              })
-            }
-          />
-        )}
+                            <Lightbox
+                                mainSrc={this.state.pg.image[photoIndex]}
+                                nextSrc={this.state.pg.image[(photoIndex + 1) % this.state.pg.image.length]}
+                                prevSrc={this.state.pg.image[(photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length]}
+                                onCloseRequest={() => this.setState({ isOpen: false })}
+                                onMovePrevRequest={() =>
+                                    this.setState({
+                                        photoIndex: (photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length,
+                                    })
+                                }
+                                onMoveNextRequest={() =>
+                                    this.setState({
+                                        photoIndex: (photoIndex + 1) % this.state.pg.image.length,
+                                    })
+                                }
+                            />
+                        )}
                     </div>
                 </div>
             </div>

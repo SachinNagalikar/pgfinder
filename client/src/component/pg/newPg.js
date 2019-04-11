@@ -5,7 +5,11 @@ import PgForm from './form'
 import { Button,Toast,ToastBody,Toastheader } from 'reactstrap'
 
 class PgNew extends React.Component {
-    submitHandle = (data) => {
+    constructor() {
+        super()
+        this.submitHandle = this.submitHandle.bind(this)
+    }
+    submitHandle(data) {
         axios.post('/pgs', data, {
             headers: {
                 'x-auth': localStorage.getItem('token')

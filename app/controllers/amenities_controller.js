@@ -1,17 +1,12 @@
 const express = require('express')
-const multer = require('multer')
 const router = express.Router()
 const { Amenities } = require('../models/amenities')
 const { authenticate } = require('../middleware/authenticate')
 
 router.get('/', authenticate, (req, res) => {
     Amenities.find()
-        .then((data) => {
-            if (data) {
-                res.send(data)
-            } else {
-                res.send({ notice: "There is no amenities" })
-            }
+        .then((amenitie) => {
+            res.send(amenitie)
         })
         .catch((err) => {
             res.send(err)
@@ -24,26 +19,21 @@ router.get('/:id', authenticate, (req, res) => {
         user: req.user._id,
         _id: id
     })
-        .then((data) => {
-            if (data) {
-                res.send(data)
-            } else {
-                res.send({ notice: "there is no amenity" })
-            }
+        .then((amenitie) => {
+            res.send(amenitie)
         })
         .catch((err) => {
             res.send(err)
         })
 })
 
-
 router.post('/', authenticate, (req, res) => {
     const body = req.body
-    const amenities = new Amenities(body)
-    amenities.user = req.user._id
-    amenities.save()
-        .then((data) => {
-            res.send(data)
+    const amenitie = new Amenities(body)
+    amenitie.user = req.user._id
+    amenitie.save()
+        .then((amenitie) => {
+            res.send(amenitie)
         })
         .catch((err) => {
             res.send(err)
@@ -53,9 +43,9 @@ router.post('/', authenticate, (req, res) => {
 router.put('/:id', authenticate, (req, res) => {
     const id = req.params.id
     const body = req.body
-    Amenities.findOneAndUpdate({ _id: id, user: req.user._id }, { $set: body }, { new: true })
-        .then((data) => {
-            res.send(data)
+    Amenities.findOneAndUpdate({ user: req.user._id, _id: id }, { $set: body }, { new: true })
+        .then((amenitie) => {
+            res.send(amenitie)
         })
         .catch((err) => {
             res.send(err)
@@ -64,15 +54,15 @@ router.put('/:id', authenticate, (req, res) => {
 
 router.delete('/:id', authenticate, (req, res) => {
     const id = req.params.id
-    Amenities.findByIdAndDelete({
+    Amenities.findOneAndDelete({
         _id: id,
         user: req.user._id
     })
-        .then((data) => {
-            res.send(data)
+        .then((amenitie) => {
+            res.send(amenitie)
         })
         .catch((err) => {
-            res.send(err)
+            res.send(amenitie)
         })
 })
 

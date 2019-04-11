@@ -18,7 +18,8 @@ app.get('/', (req, res) => {
 
 app.use('/pgs', pgsRouter)
 app.use('/users', usersRouter)
-app.use('/amenities',amenitiesRouter)
+app.use('/amenities', amenitiesRouter)
+
 app.listen(port, () => {
     console.log('listening to port', port)
 })

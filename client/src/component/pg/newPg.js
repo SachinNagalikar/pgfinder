@@ -25,12 +25,12 @@ class PgNew extends React.Component {
             <div className="container">
                 <div className="row">
                     <div className="col-md-6">
-                            <h2 className="add" style={{textAlign:"center"}}>Add PG</h2>
-                                <PgForm pgSubmitHandle={this.submitHandle} />
-                            <Link to="/pg">back</Link>
+                        <h2 className="newpg" style={{ textAlign: 'center' }}>Add PG</h2>
+                        <PgForm pgSubmitHandle={this.submitHandle} />
+                        <Link to="/pg">back</Link>
                     </div>
                 </div>
-            
+
 
             </div>
         )

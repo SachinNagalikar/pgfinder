@@ -2,7 +2,7 @@ import React from 'react'
 import axios from '../component/config/axios'
 import { connect } from 'react-redux'
 import { setUser } from '../component/redux/actions/user'
-import { Button, Form, Label, Input, FormText } from 'reactstrap'
+import { Button, Form, Label, Input, FormText, FormGroup,Col,Row } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import '../../src/App.css'
 
@@ -89,29 +89,35 @@ class Login extends React.Component {
             return <Redirect to="/pg" />
         }
         return (
-            
-            <div className="loginwrapper">
+            <div>
+            <div className="container">
+                <Row>
+                    <Col sm={{ size: 10, order: 2, offset: 3 }}>
                 <div className="form-wrapper" >
                     <Form onSubmit={this.handleSubmit}>
-                        <h2>login</h2>
-                        <Label>
-                            Email<br />
-                            <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
-                        </Label><br />
-                        <FormText color="danger">{this.state.emailError}</FormText>
-                        <br />
-                        <Label>
-                            Password<br />
-                            <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
-                            <Button onClick={this.toggleShow}>Show/Hide</Button>
-                        </Label><br />
-                        <FormText color="danger">{this.state.passwordError}</FormText> <br />
-                        <br />
-                        <Button type="submit" value="submit" color="primary">submit</Button>
+                        <h2 style={{ textAlign: 'center' }}>login</h2>
+                        <Col sm={{ size: 10, order: 2, offset: 3 }}> <FormGroup>
+                            <Label>
+                                <Label>Email</Label>
+                                <Input type="email" name="email" value={this.state.email} onChange={this.emailChange} placeholder="Email" />
+                                <FormText color="danger">{this.state.emailError}</FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>
+                                <Label>Password</Label>
+                                <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} placeholder="Password" />
+                                <FormText color="danger">{this.state.passwordError}</FormText>
+                                <Button onClick={this.toggleShow}>Show/Hide</Button>
+                            </Label>
+                        </FormGroup>
+                        <Button type="submit" value="submit" color="primary">submit</Button></Col>
                     </Form>
+                        </div >
+                    </Col>
+                    </Row>
                 </div>
-            </div>
-
+                </div>
         )
     }
 }

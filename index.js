@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('./config/database')
 const cors = require('cors')
-
+const {amenitiesRouter} = require('./app/controllers/amenities_controller')
 const { pgsRouter } = require('./app/controllers/pgs_controller')
 const { usersRouter } = require('./app/controllers/users_controllers')
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 app.use('/pgs', pgsRouter)
 app.use('/users', usersRouter)
-
+app.use('/amenities',amenitiesRouter)
 app.listen(port, () => {
     console.log('listening to port', port)
 })

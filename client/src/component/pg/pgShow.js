@@ -54,13 +54,16 @@ class PgShow extends React.Component {
 
     render() {
         const { photoIndex, isOpen } = this.state;
-        console.log('pgshow',this.state)
+        // console.log('pgshow', this.state)
         return (
             <div>
                 <div className="row">
                     <div className="col-md-6">
-                        
-                            {this.state.isLoaded &&  <CardImg width="200" height="150"  src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} /> }
+                        <div>
+                            {this.state.isLoaded &&
+                                <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
+                            }</div>
+                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
                         <Card>
                             <CardBody>
                                 <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
@@ -69,30 +72,27 @@ class PgShow extends React.Component {
                                 <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                                 <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
                                 <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
-                            <Button onClick={this.handleDelete}>delete</Button>|
-                            <Button type="button" onClick={() => this.setState({ isOpen: true })}>
-                           more images
-                             </Button>
+                            <Button onClick={this.handleDelete}>delete</Button>
                             </CardBody>
                         </Card>
                         {isOpen && (
-          <Lightbox
-            mainSrc={this.state.pg.image[photoIndex]}
-            nextSrc={this.state.pg.image[(photoIndex + 1) % this.state.pg.image.length]}
-            prevSrc={this.state.pg.image[(photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
-            onMovePrevRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length,
-              })
-            }
-            onMoveNextRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + 1) % this.state.pg.image.length,
-              })
-            }
-          />
-        )}
+                            <Lightbox
+                                mainSrc={this.state.pg.image[photoIndex]}
+                                nextSrc={this.state.pg.image[(photoIndex + 1) % this.state.pg.image.length]}
+                                prevSrc={this.state.pg.image[(photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length]}
+                                onCloseRequest={() => this.setState({ isOpen: false })}
+                                onMovePrevRequest={() =>
+                                    this.setState({
+                                        photoIndex: (photoIndex + this.state.pg.image.length - 1) % this.state.pg.image.length,
+                                    })
+                                }
+                                onMoveNextRequest={() =>
+                                    this.setState({
+                                        photoIndex: (photoIndex + 1) % this.state.pg.image.length,
+                                    })
+                                }
+                            />
+                        )}
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, FormGroup, FormText, Label, Input } from 'reactstrap'
+import { Button, Form, FormGroup, FormText, Label, Input ,Col,Row} from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import axios from '../component/config/axios'
 import '../../src/App.css'
@@ -134,53 +134,64 @@ class Register extends React.Component {
             return <Redirect to='/users/login' />
         }
         return (
-            <div className="loginwrapper">
-                <div className="register" >
-                    <h2>Register</h2>
-                            <Form onSubmit={this.handleSubmit}>
-                                <Label>
-                                    First Name<br />
-                                    <Input type="text" value={this.state.firstName} onChange={this.handleFirst} placeholder="firstName" />
-                                    <FormText color="danger" >{this.state.firstNameError}</FormText>
-                                </Label><br/>
-                                <Label>
-                                    Middle Name<br />
-                                    <Input type="text" value={this.state.middleName} onChange={this.handleMiddle}
-                                        placeholder="middleName" />
-                                    <FormText color="danger" >{this.state.middleNameError} </FormText>
-                                </Label><br/>
-                                <Label>
-                                    Last Name<br />
-                                    <Input type="text" value={this.state.lastName} onChange={this.handleLast} placeholder="lastName" />
-                                    <FormText color="danger">{this.state.lastNameError} </FormText>
-                                </Label><br />
-                                <FormGroup >
-                                    <Label>
-                                        Email<br />
-                                        <Input type="email" value={this.state.email} onChange={this.handleEmail}
-                                            placeholder="Email" />
-                                    </Label>
-                                    <FormText color="danger" >{this.state.emailError} </FormText>
-                                </FormGroup>
-                                <FormGroup >
-                                    <Label>
-                                        Password<br />
-                                        <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.handlePassword}
-                                            placeholder="Password" />
-                                        <Button onClick={this.toggleShow}>Show/Hide</Button>
-                                    </Label><br />
-                                    <FormText color="danger" >{this.state.passwordError}</FormText>
-                                </FormGroup>
-                                <FormGroup >
-                                    <Label>
-                                        Mobile<br />
-                                        <Input type="text" value={this.state.mobile} onChange={this.handleMobile} placeholder="Mobile" />
-                                    </Label><br />
-                                    <FormText color="danger" >{this.state.mobileError}</FormText>
-                                </FormGroup>
-                                <Button type="submit" value="submit" color="primary">submit</Button>
-                            </Form>
-                        </div>
+            <div className="container" >
+                <Row>
+                    <Col sm={{ size: 12, order: 2, offset: 3 }}>
+                <div className="register">
+                    <h2 style={{ textAlign: 'center' }}>Register</h2>
+                    <Form onSubmit={this.handleSubmit}>
+                        <Col sm={{ size: 12, order: 2, offset: 3 }}><FormGroup>
+                            <Label>
+                                <Label for="firstname">First Name</Label>
+                                <Input type="text" value={this.state.firstName} onChange={this.handleFirst} placeholder="firstName" />
+                                <FormText color="danger" >{this.state.firstNameError}</FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>
+                                <Label>Middle Name</Label>
+                                <Input type="text" value={this.state.middleName} onChange={this.handleMiddle}
+                                    placeholder="middleName" />
+                                <FormText color="danger" >{this.state.middleNameError} </FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup>
+                            <Label>
+                                <Label>Last Name</Label>
+                                <Input type="text" value={this.state.lastName} onChange={this.handleLast} placeholder="lastName" />
+                                <FormText color="danger">{this.state.lastNameError} </FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup >
+                            <Label>
+                                <Label>Email</Label>
+                                <Input type="email" value={this.state.email} name="email" id="email" onChange={this.handleEmail}
+                                    placeholder="Email" />
+                                <FormText color="danger" >{this.state.emailError} </FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup >
+                            <Label>
+                                <Label>Mobile</Label>
+                                <Input type="text" value={this.state.mobile} onChange={this.handleMobile} placeholder="Mobile" />
+                                <FormText color="danger" >{this.state.mobileError}</FormText>
+                            </Label>
+                        </FormGroup>
+                        <FormGroup >
+                            <Label>
+                                <Label>Password</Label>
+                                <Input type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.handlePassword}
+                                    placeholder="Password" />
+                                <FormText color="danger" >{this.state.passwordError}</FormText>
+                                <Button onClick={this.toggleShow}>Show/Hide</Button>
+                            </Label>
+                        </FormGroup>
+                        <Button type="submit" value="submit" color="primary">submit</Button></Col>
+                    </Form>
+                </div>
+              
+                    </Col>  
+                    </Row>
                     </div>
         )
     }

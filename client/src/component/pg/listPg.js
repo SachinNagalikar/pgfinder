@@ -6,14 +6,19 @@ import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap'
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'
 import FilterPg from './filter'
+
 class PgList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             pgs: [],
             actualPgs: [],
-            isLoaded: false
+            isLoaded: false,
+            isOpen: false,
+            photoIndex: 0
         }
     }
 
@@ -72,7 +77,7 @@ class PgList extends React.Component {
                 const pgs = response.data
 
                 this.setState({
-                    pgs: pgs, actualPgs: pgs,isLoaded:true
+                    pgs: pgs, actualPgs: pgs, isLoaded: true
                 })
             })
             .catch((err) => {
@@ -84,23 +89,26 @@ class PgList extends React.Component {
         this.setState({ pgs: pg })
     }
     render() {
+        const { photoIndex, isOpen } = this.state;
         return (
             <div className>
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
-                            <h2 className="form" >filter</h2>
+                            <h2 className="form">Filter</h2>
                             <FilterPg onFilterChange={this.onFilterChange.bind(this)}
                                 reset={this.reset.bind(this)} />
                         </div>
                         <div className="col-md-8">
-                            <h2 className="list">Listing PG's - {this.state.pgs.length}</h2>
+                            <h2 className>Listing PG's - {this.state.pgs.length}</h2>
+                            
                             {this.state.pgs.map((pg) => {
                                 return (<div className="form-wrapper" >
                                     <Row>
                                         <Col>
                                             <Card>
-                                        <CardImg width="300" height="150"  src={pg.image[0]} onClick={() => this.setState({ isOpen: true })} /> 
+                                                {/* <CardImg width="300" height="150" src={pg.image[0]} /> */}
+                                                <CardImg width="200" height="150" src={pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
                                                 <CardBody>
                                                     <CardTitle>{`PG Name:-${pg.pgName}`}</CardTitle>
                                                     <CardSubtitle>{`PG Type:-${pg.pgTypes}`}</CardSubtitle>
@@ -109,13 +117,33 @@ class PgList extends React.Component {
                                                     <Button outline color="primary"><Link to={`/pg/${pg._id}`} >Details</Link> </Button>
                                                 </CardBody>
                                             </Card>
+                                            {isOpen && (
+                                                <Lightbox
+                                                    mainSrc={pg.image[photoIndex]}
+                                                    nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
+                                                    prevSrc={pg.image[(photoIndex + pg.image.length - 1) % pg.image.length]}
+                                                    onCloseRequest={() => this.setState({ isOpen: false })}
+                                                    onMovePrevRequest={() =>
+                                                        this.setState({
+                                                            photoIndex: (photoIndex + pg.image.length - 1) % pg.image.length,
+                                                        })
+                                                    }
+                                                    onMoveNextRequest={() =>
+                                                        this.setState({
+                                                            photoIndex: (photoIndex + 1) % pg.image.length,
+                                                        })
+                                                    }
+                                                />
+                                            )}
                                         </Col>
                                     </Row>
+                                  
                                 </div>)
+                                  
                             })}
+                                </div>
                         </div>
                     </div>
-                </div>
             </div>
         )
     }

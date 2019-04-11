@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Label, Input, FormGroup, Button, Container, Row, Col } from 'reactstrap'
+import axios from '../config/axios';
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -10,6 +11,7 @@ class PgForm extends React.Component {
             pgTypes: props.pgTypes ? props.pgTypes : '',
             foods: props.foods ? props.foods : '',
             amenities: props.amenities ? props.amenities : [],
+            amenitiesData: [],
             address: props.address ? props.address : '',
             description: props.description ? props.description : '',
             rules: props.rules ? props.rules : '',
@@ -17,6 +19,22 @@ class PgForm extends React.Component {
             deposit: props.deposit ? props.deposit : '',
             filename: props.filename ? props.filename : ''
         }
+    }
+
+    componentDidMount() {
+        axios.get('/amenities', {
+            headers: {
+                'x-auth': localStorage.getItem('token')
+            }
+        })
+            .then((response) => {
+                const amenitiesData = response.data
+                console.log('kumar', amenitiesData)
+                this.setState(() => ({ amenitiesData }))
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     pgNameChange = (e) => {
@@ -244,14 +262,18 @@ class PgForm extends React.Component {
                                 <FormGroup>
                                     <Label>
                                         <h5>Amenities</h5>
+                                        {this.state.amenitiesData.map(amenities => {
+                                            return <Input type="checkbox" key={amenities._id} onChange={this.amenitiesChange} name="amenities">{amenities.name}</Input>
+                                        })}
                                     </Label>
                                 </FormGroup>
-                                <FormGroup>
-                                    <Label>
-                                        <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> Wifi
-                                    </Label>
-                                </FormGroup>
-                                <FormGroup>
+                                {/* <FormGroup>
+                                    <Label> */}
+
+                                {/* <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" /> */}
+                                {/* </Label>
+                                </FormGroup> */}
+                                {/* <FormGroup>
                                     <Label>
                                         <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
                                     </Label>
@@ -280,14 +302,14 @@ class PgForm extends React.Component {
                                     <Label>
                                         <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
                                     </Label>
-                                </FormGroup>
+                                </FormGroup> */}
                                 <FormGroup>
-                                    {this.props.filename &&
-                                        <Label>
-                                            Image:<br />
-                                            <Input type="file" multiple name="image" onChange={this.imageChange} />
-                                        </Label>
-                                    }
+                                    {/* {this.props.filename && */}
+                                    <Label>
+                                        Image:<br />
+                                        <Input type="file" multiple name="image" onChange={this.imageChange} />
+                                    </Label>
+                                    {/* } */}
                                 </FormGroup>
                             </div>
                         </div>

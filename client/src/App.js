@@ -13,6 +13,7 @@ import PgEdit from './component/pg/editPg'
 import Help from './users/help';
 import Home from './users/home'
 import Navbar from './component/home/navbar'
+import AmenitiesForm from './component/amenites/amenitiesForm'
 
 class App extends Component {
   render() {
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path="/pg/new" component={PgNew} exact={true} />
             <Route path="/pg/:id" component={PgShow} exact={true} />
             <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
+            <Route path="/amenities" component={AmenitiesForm} exact={true} />
           </Switch>
 
         </div >

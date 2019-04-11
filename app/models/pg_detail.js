@@ -3,10 +3,6 @@ const validator = require('validator')
 
 const { Schema } = mongoose
 const pgSchema = new Schema({
-    name: {
-        type: String,
-        //required: true
-    },
     pgName: {
         type: String,
         //required: true
@@ -23,33 +19,14 @@ const pgSchema = new Schema({
         {
             type: String
         }
-    ]
-    ,
+    ],
     amenities: [
         {
-            type: String
+            type: Schema.Types.ObjectId,
+            ref: 'Amenities'
+            // type: String
         }
     ],
-    email: {
-        type: String,
-        //required: true,
-        validate: {
-            validator: function (value) {
-                if (validator.isEmpty(value)) {
-                    return true
-                }
-                return validator.isEmail(value)
-            },
-            message: function () {
-                return 'invalid email format'
-            }
-        }
-    },
-    mobile: {
-        type: String,
-        minlength: 10,
-        //required: true
-    },
     address: {
         type: String,
         //required: true

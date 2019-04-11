@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Label, Input, FormGroup, Button, Container, Row, Col } from 'reactstrap'
 import axios from '../config/axios';
+import Select from 'react-select'
 
 class PgForm extends React.Component {
     constructor(props) {
@@ -11,13 +12,14 @@ class PgForm extends React.Component {
             pgTypes: props.pgTypes ? props.pgTypes : '',
             foods: props.foods ? props.foods : '',
             amenities: props.amenities ? props.amenities : [],
-            amenitiesData: [],
+            amenitie: false,
             address: props.address ? props.address : '',
             description: props.description ? props.description : '',
             rules: props.rules ? props.rules : '',
             pgRent: props.pgRent ? props.pgRent : '',
             deposit: props.deposit ? props.deposit : '',
-            filename: props.filename ? props.filename : ''
+            filename: props.filename ? props.filename : '',
+            selectedOption: null
         }
     }
 
@@ -28,9 +30,8 @@ class PgForm extends React.Component {
             }
         })
             .then((response) => {
-                const amenitiesData = response.data
-                console.log('kumar', amenitiesData)
-                this.setState(() => ({ amenitiesData }))
+                const amenities = response.data
+                this.setState(() => ({ amenities, amenitie: true }))
             })
             .catch((err) => {
                 console.log(err)
@@ -72,21 +73,25 @@ class PgForm extends React.Component {
         }))
     }
 
+    // amenitiesChange = (e) => {
+    //     e.persist()
+    //     var checked = e.target.checked
+    //     var nameType = e.target.name
+    //     var value = e.target.value
+    //     //console.log(value)
+    //     if (checked) {
+    //         this.setState((prevState) => ({
+    //             nameType: prevState.amenities.push(value)
+    //         }))
+    //     } else {
+    //         this.setState((prevState) => ({
+    //             nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
+    //         }))
+    //     }
+    // }
     amenitiesChange = (e) => {
-        e.persist()
-        var checked = e.target.checked
-        var nameType = e.target.name
-        var value = e.target.value
-        //console.log(value)
-        if (checked) {
-            this.setState((prevState) => ({
-                nameType: prevState.amenities.push(value)
-            }))
-        } else {
-            this.setState((prevState) => ({
-                nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
-            }))
-        }
+        const amenities = e.target.value
+        this.setState({ amenities })
     }
 
     addressChange = (e) => {
@@ -152,6 +157,8 @@ class PgForm extends React.Component {
     }
 
     render() {
+
+        const { amenities } = this.state
         return (
             <div className="container">
                 <div className="add" >
@@ -259,14 +266,40 @@ class PgForm extends React.Component {
                                         <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
                                     </Label>
                                 </FormGroup>
-                                <FormGroup>
+                                {/* <FormGroup>
                                     <Label>
                                         <h5>Amenities</h5>
                                         {this.state.amenitiesData.map(amenities => {
-                                            return <Input type="checkbox" key={amenities._id} onChange={this.amenitiesChange} name="amenities">{amenities.name}</Input>
+                                            return <><Input type="checkbox" key={amenities._id} value={amenities} onChange={this.amenitiesChange} name="amenities" />{amenities.name}<br /></>
                                         })}
                                     </Label>
-                                </FormGroup>
+                                </FormGroup> */}
+                                {this.state.amenitie && (
+                                    // <Select value={amenities} onChange={this.amenitiesChange}
+                                    // option={
+                                    //     this.state.amenities.map(amenitie => {
+
+                                    //         console.log(amenitie.name[0])
+                                    //         return (
+
+                                    //             <option value="select">
+                                    //                 select
+                                    //                 </option>
+
+                                    //         )
+                                    //         // return (<option key={amenitie._id} value={amenitie._id}>{console.log("sac", amenitie.name)}</option>)
+                                    //     })
+                                    // }
+                                    // />
+                                    <select >
+                                        <option value="select" >Select</option>
+                                        {this.state.amenities.map(amenitie => {
+
+                                            return <option value={amenitie.name}>{amenitie.name}</option>
+                                        })}
+                                    </select>
+                                )}
+
                                 {/* <FormGroup>
                                     <Label> */}
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Label, Input, FormGroup, Button, Container, Row, Col } from 'reactstrap'
 import axios from '../config/axios';
-import Select from 'react-select';
+import Select from 'react-select';  
 
 const options = [
     { value: 'chocolate', label: 'Chocolate' },
@@ -285,7 +285,8 @@ class PgForm extends React.Component {
                                     <Select
                                     value={selectedOption}
                                         onChange={this.handleChange}
-                                        options={options} 
+                                    options={options}
+                                    
                                                 />
                                                                                                         
                                 {/* <FormGroup>

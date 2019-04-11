@@ -26,7 +26,6 @@ class PgShow extends React.Component {
             }
         })
             .then((response) => {
-                console.log(response.data)
                 const pg = response.data
                 this.setState(() => ({ pg, isLoaded: true }))
             })

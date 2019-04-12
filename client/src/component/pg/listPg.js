@@ -91,7 +91,7 @@ class PgList extends React.Component {
     render() {
         const { photoIndex, isOpen } = this.state;
         return (
-            <div className>
+            <div >
                 <div className="container">
                     <div className="row">
                         <div className="col-md-4">
@@ -100,10 +100,10 @@ class PgList extends React.Component {
                                 reset={this.reset.bind(this)} />
                         </div>
                         <div className="col-md-8">
-                            <h2 className>Listing PG's - {this.state.pgs.length}</h2>
+                            <h2 >Listing PG's - {this.state.pgs.length}</h2>
                             
                             {this.state.pgs.map((pg) => {
-                                return (<div className="form-wrapper" >
+                                return (<div className="form-wrapper" key={pg._id} >
                                     <Row>
                                         <Col>
                                             <Card>

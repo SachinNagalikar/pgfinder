@@ -38,7 +38,7 @@ class PgForm extends React.Component {
         })
             .then((response) => {
                 const amenitiesData = response.data
-                console.log('kumar', amenitiesData)
+                console.log("amenities",amenitiesData)
                 this.setState(() => ({ amenitiesData }))
             })
             .catch((err) => {
@@ -278,7 +278,6 @@ class PgForm extends React.Component {
                                     <Label>
                                         <h5>Amenities</h5>
                                         {this.state.amenitiesData.map(amenities => {
-                                            return <Input type="checkbox" key={amenities._id} onChange={this.amenitiesChange} name="amenities">{amenities.name}</Input>
                                         })}
                                     </Label>
                                 </FormGroup>

@@ -22,11 +22,13 @@ router.get('/', authenticate, (req, res) => {
 router.get('/:id', authenticate, (req, res) => {
     const id = req.params.id
     Pg.findOne({
-        user: req.user._id,
         _id: id
-    }).populate("amenities")
+    })
+        //.populate("amenities")
         .then((pg) => {
+            console.log("pg",pg)
             if (pg) {
+                
                 res.send(pg)
             } else {
                 res.send({ notice: "there is no pg's" })
@@ -37,32 +39,22 @@ router.get('/:id', authenticate, (req, res) => {
         })
 })
 
-// router.post('/', upload.array('image', 4), authenticate, (req, res) => {
-//     const body = req.body
-//     const images = []
-//     req.files.forEach(file => {
-//         const imageUrl = file.destination
-//         const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
-//         images.push(link)
-//     })
-//     // console.log(images)
-//     body.image = images
-//     const pg = new Pg(body)
-//     pg.user = req.user._id
-//     console.log(pg)
-
-//     // pg.save()
-//     //     .then((pg) => {
-//     //         res.send(pg)
-//     //     })
-//     //     .catch((err) => {
-//     //         res.send(err)
-//     //     })
-// })
-router.post('/', authenticate, (req, res) => {
+router.post('/', upload.array('image', 4), authenticate, (req, res) => {
     const body = req.body
+    console.log(body,'post')
+    const images = []
+    req.files.forEach(file => {
+        const imageUrl = file.destination
+        const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
+        images.push(link)
+    })
+    
+    console.log(images)
+    body.image = images
     const pg = new Pg(body)
     pg.user = req.user._id
+    console.log(pg)
+
     pg.save()
         .then((pg) => {
             res.send(pg)
@@ -71,11 +63,23 @@ router.post('/', authenticate, (req, res) => {
             res.send(err)
         })
 })
+// router.post('/', authenticate, (req, res) => {
+//     const body = req.body
+//     const pg = new Pg(body)
+//     pg.user = req.user._id
+//     pg.save()
+//         .then((pg) => {
+//             res.send(pg)
+//         })
+//         .catch((err) => {
+//             res.send(err)
+//         })
+// })
 
 router.put('/:id', authenticate, (req, res) => {
     const id = req.params.id
     const body = req.body
-    Pg.findOneAndUpdate({ _id: id, user: req.user._id }, { $set: body }, { new: true })
+    Pg.findOneAndUpdate({ _id: id }, { $set: body }, { new: true })
         .then((pg) => {
             res.send(pg)
         })

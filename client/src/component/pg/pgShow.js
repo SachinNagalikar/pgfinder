@@ -3,6 +3,7 @@ import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'
+import {PgEdit} from './editPg'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
@@ -20,12 +21,14 @@ class PgShow extends React.Component {
 
     componentDidMount() {
         const id = this.props.match.params.id
+        console.log('id',id)
         axios.get(`/pgs/${id}`, {
             headers: {
                 'x-auth': localStorage.getItem('token')
             }
         })
             .then((response) => {
+              console.log(response.data)
                 const pg = response.data
                 this.setState(() => ({ pg, isLoaded: true }))
             })
@@ -53,24 +56,23 @@ class PgShow extends React.Component {
 
     render() {
         const { photoIndex, isOpen } = this.state;
-        // console.log('pgshow', this.state)
+     console.log('pgshow', this.props)
         return (
             <div>
                 <div className="row">
-                    <div className="col-md-6">
                         <div>
                             {this.state.isLoaded &&
-                                <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
+                            <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
                             }</div>
                         {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
                         <Card>
                             <CardBody>
                                 <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
-                                <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle>
+                                {/* <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle> */}
                                 <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
                                 <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                                 <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
-                                <Button><Link to={`/pg/edit/${this.state.pg._id}`}>edit</Link></Button>|<Button><Link to="/pg">back</Link></Button>|
+                                |<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
                             </CardBody>
                         </Card>
@@ -94,7 +96,6 @@ class PgShow extends React.Component {
                         )}
                     </div>
                 </div>
-            </div>
         )
     }
 }

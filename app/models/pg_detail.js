@@ -22,8 +22,9 @@ const pgSchema = new Schema({
     ],
     amenities: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'Amenities'
+            type:String
+            // type: Schema.Types.ObjectId,
+            // ref: 'Amenities'
         }
     ],
     address: {
@@ -60,9 +61,9 @@ const pgSchema = new Schema({
     }
 })
 
-pgSchema.post("save", function (next) {
+// pgSchema.post("save", function (next) {
 
-})
+// })
 
 const Pg = mongoose.model('Pg', pgSchema)
 

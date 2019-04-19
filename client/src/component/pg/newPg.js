@@ -2,7 +2,6 @@ import React from 'react'
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import PgForm from './form'
-import { Button,Toast,ToastBody,Toastheader } from 'reactstrap'
 
 class PgNew extends React.Component {
     constructor() {
@@ -10,13 +9,14 @@ class PgNew extends React.Component {
         this.submitHandle = this.submitHandle.bind(this)
     }
     submitHandle(data) {
-        console.log(data)
+        console.log(data, '----newpg')
         axios.post('/pgs', data, {
             headers: {
                 'x-auth': localStorage.getItem('token')
             }
         })
             .then((response) => {
+                console.log("new",response.data)
                 const pg = response.data
                 this.props.history.push(`/pg/${pg._id}`)
             })
@@ -29,15 +29,11 @@ class PgNew extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <div className="col-md-6">
-                        <h2 className="newpg" style={{ textAlign: 'center' }}>Add PG</h2>
+                    <Link to="/pg">back</Link>
                         <PgForm pgSubmitHandle={this.submitHandle} />
-                        <Link to="/pg">back</Link>
                     </div>
                 </div>
 
-
-            </div>
         )
     }
 }

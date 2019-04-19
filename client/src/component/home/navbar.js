@@ -6,11 +6,10 @@ import User from './user'
 
 const Navbar = (props) => {
     const { isAuthenticated, user } = props.user
-
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-warning">
-                <Link className="navbar-brand" to='/'><img src={process.env.PUBLIC_URL + '/icon.png'} height="40px" width="40px" alt="" />{' '}PG FINDER</Link>
+            <nav className="navbar navbar-expand-lg navbar-dark bg-danger ">
+                <Link className="navbar-brand" to='/'>{' '}paying guest</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -22,8 +21,8 @@ const Navbar = (props) => {
                     <div className="form-inline my-2 my-lg-0">
                         {
                             !isAuthenticated ? <>
-                                <Link className="btn btn-primary" to="/users/register" role="button">Register</Link>
-                                <Link className="btn btn-primary" to='/users/login' role="button">Login</Link>
+                                <Link className="btn btn-warning" to="/users/register" role="button">Register</Link>
+                                <Link className="btn btn-warning" to='/users/login' role="button">Login</Link>
 
                             </>
                                 :

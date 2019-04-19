@@ -307,13 +307,10 @@ class PgList extends React.Component {
         
           <div className={classNames(classes.layout, classes.cardGrid)}>
           <Grid container spacing={40}>
-
-              <Grid  container  sm={6} md={4} lg={3} >
+          <Grid item xs={12} md={4}>
           <FilterPg onFilterChange={this.onFilterChange.bind(this)}
                     reset={this.reset.bind(this)} />
                 </Grid>
-           
-
                 {/* <h2 >Listing PG's - {this.state.pgs.length}</h2> */}
                     {this.state.pgs.map((pg) => {
                         return (
@@ -333,6 +330,9 @@ class PgList extends React.Component {
                             </Typography>
                             <Typography>
                                           {`PG Type:-${pg.pgTypes}`}
+                                </Typography>
+                                <Typography>
+                                          {`Room type:-${pg.roomTypes}`}
                                 </Typography>
                                     </CardContent>
                                     <CardActions>

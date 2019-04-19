@@ -3,7 +3,6 @@ import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'
-import {PgEdit} from './editPg'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, CardSubtitle, Button
@@ -60,13 +59,14 @@ class PgShow extends React.Component {
         return (
             <div>
                 <div className="row">
+                       
+                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
+                        <Card>
+                        <CardBody>
                         <div>
                             {this.state.isLoaded &&
                             <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
                             }</div>
-                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
-                        <Card>
-                            <CardBody>
                                 <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
                                 {/* <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle> */}
                                 <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>

@@ -274,6 +274,7 @@ import React from 'react';
 import axios from '../config/axios';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
+import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
@@ -588,6 +589,7 @@ class PgForm extends React.Component {
           <Button  fullWidth type="submit"  variant="contained" color="primary">
             Add pg
           </Button>
+          <Button size="small"  color="primary"><Link to={`/pg`} >back</Link> </Button>  
               </form>
           </Paper>
           <footer className={classes.footer}>

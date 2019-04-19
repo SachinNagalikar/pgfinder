@@ -425,10 +425,7 @@ class Register extends React.Component {
                                type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.handlePassword} />
                       <FormLabel color="danger"  error={true}>{this.state.passwordError}</FormLabel>
                        </FormControl>
-                       <FormControlLabel
-                           control={<Checkbox value="remember" color="primary" />}
-                           label="Remember me"
-                       />
+                      
                        <Button fullWidth variant="contained" color="primary" value="submit"
                            className={classes.submit} onClick={this.handleSubmit}>
                            Register

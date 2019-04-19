@@ -29,7 +29,6 @@ class PgNew extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                    <Link to="/pg">back</Link>
                         <PgForm pgSubmitHandle={this.submitHandle} />
                     </div>
                 </div>

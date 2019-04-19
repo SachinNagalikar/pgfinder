@@ -57,7 +57,7 @@
 
 //     render() {
 //         return (
-               
+
 //             <div className="form">
 //                 <Form>
 //                    
@@ -162,108 +162,108 @@ const styles = theme => ({
   },
 });
 class FilterPg extends React.Component {
-        constructor() {
-            super()
-            this.state = this.resetFilter();
-        }
-    
-        pgTypeChange = (e) => {
-            e.persist();
-            let state = { ...this.state };
-            state.pgTypes.Girls = false;
-            state.pgTypes.Boys = false;
-            state.pgTypes[e.target.id] = e.target.checked;
-    
-            this.setState(() => (state), () => { this.props.onFilterChange(this.state); })
-        }
-    
-        roomTypeChange = (e) => {
-            e.persist();
-            let state = { ...this.state };
-            state.roomTypes[e.target.id].value = e.target.checked;
-            this.setState(() => (state), () => { this.props.onFilterChange(this.state); });
-        }
-    
-        resetFilter() {
-            return {
-                pgTypes: {
-                    Boys: false,
-                    Girls: false
-                },
-                roomTypes: {
-                    singleSharing: {
-                        name: 'One And Sharing',
-                        value: false
-                    },
-                    twoSharing: {
-                        name: 'Two And Sharing',
-                        value: false
-                    },
-                    threeSharing: {
-                        name: 'Three And Sharing',
-                        value: false
-                    },
-                    fourSharing: {
-                        name: 'Four And Sharing',
-                        value: false
-                    }
-                }
-            };
-        }
-    
-        reset(e) {
-            e.preventDefault()
-            this.setState(this.resetFilter(), () => { this.props.reset(this.state) })
-        }
-render(){
-  const { classes } = this.props;
+  constructor() {
+    super()
+    this.state = this.resetFilter();
+  }
 
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Filter
+  pgTypeChange = (e) => {
+    e.persist();
+    let state = { ...this.state };
+    state.pgTypes.Girls = false;
+    state.pgTypes.Boys = false;
+    state.pgTypes[e.target.id] = e.target.checked;
+
+    this.setState(() => (state), () => { this.props.onFilterChange(this.state); })
+  }
+
+  roomTypeChange = (e) => {
+    e.persist();
+    let state = { ...this.state };
+    state.roomTypes[e.target.id].value = e.target.checked;
+    this.setState(() => (state), () => { this.props.onFilterChange(this.state); });
+  }
+
+  resetFilter() {
+    return {
+      pgTypes: {
+        Boys: false,
+        Girls: false
+      },
+      roomTypes: {
+        singleSharing: {
+          name: 'One And Sharing',
+          value: false
+        },
+        twoSharing: {
+          name: 'Two And Sharing',
+          value: false
+        },
+        threeSharing: {
+          name: 'Three And Sharing',
+          value: false
+        },
+        fourSharing: {
+          name: 'Four And Sharing',
+          value: false
+        }
+      }
+    };
+  }
+
+  reset(e) {
+    e.preventDefault()
+    this.setState(this.resetFilter(), () => { this.props.reset(this.state) })
+  }
+  render() {
+    const { classes } = this.props;
+
+    return (
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Filter
         </Typography>
-                         <InputLabel>
-                             <h5>PG Type</h5>
-              </InputLabel>  
-              <FormControlLabel
-                  control={<Radio  type="radio" id="Boys" checked={this.state.pgTypes.Boys} name="pgTypes" onChange={this.pgTypeChange.bind(this)} color="primary" />}
-                    label="Boys"
-                      />
-               <FormControlLabel
-                  control={<Radio type="radio" id="Girls" checked={this.state.pgTypes.Girls} name="pgTypes" onChange={this.pgTypeChange.bind(this)} color="primary" />}
-                  label="Girls"
-                      />                    
-                     <InputLabel>
-                           <h5>Room Type</h5>
-              </InputLabel>
-              <FormControlLabel
-                  control={<Checkbox type="checkbox" id="singleSharing" checked={this.state.roomTypes.singleSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-                  label="One and Sharing"
-                      />                    
-                   <FormControlLabel
-                  control={<Checkbox type="checkbox" id="twoSharing" checked={this.state.roomTypes.twoSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)}color="primary" />}
-                  label="Two and Sharing"
-                      /> 
-                   <FormControlLabel
-                  control={<Checkbox type="checkbox" id="threeSharing" checked={this.state.roomTypes.threeSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)}color="primary" />}
-                  label="Three and Sharing"
-                      /> 
-                 <FormControlLabel
-                  control={<Checkbox type="checkbox" id="fourSharing" checked={this.state.roomTypes.fourSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-                  label="Four and Sharing"
-                      /> 
-                <Button type="button" fullWidth  variant="contained"
+          <InputLabel>
+            <h5>PG Type</h5>
+          </InputLabel>
+          <FormControlLabel
+            control={<Radio type="radio" id="Boys" checked={this.state.pgTypes.Boys} name="pgTypes" onChange={this.pgTypeChange.bind(this)} color="primary" />}
+            label="Boys"
+          />
+          <FormControlLabel
+            control={<Radio type="radio" id="Girls" checked={this.state.pgTypes.Girls} name="pgTypes" onChange={this.pgTypeChange.bind(this)} color="primary" />}
+            label="Girls"
+          />
+          <InputLabel>
+            <h5>Room Type</h5>
+          </InputLabel>
+          <FormControlLabel
+            control={<Checkbox type="checkbox" id="singleSharing" checked={this.state.roomTypes.singleSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
+            label="One and Sharing"
+          />
+          <FormControlLabel
+            control={<Checkbox type="checkbox" id="twoSharing" checked={this.state.roomTypes.twoSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
+            label="Two and Sharing"
+          />
+          <FormControlLabel
+            control={<Checkbox type="checkbox" id="threeSharing" checked={this.state.roomTypes.threeSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
+            label="Three and Sharing"
+          />
+          <FormControlLabel
+            control={<Checkbox type="checkbox" id="fourSharing" checked={this.state.roomTypes.fourSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
+            label="Four and Sharing"
+          />
+          <Button type="button" fullWidth variant="contained"
             color="primary" onClick={this.reset.bind(this)}>Reset</Button>
-      </Paper>
-    </main>
-  );
-}
+        </Paper>
+      </main>
+    );
+  }
 }
 FilterPg.propTypes = {
   classes: PropTypes.object.isRequired,

@@ -13,7 +13,7 @@ import PgEdit from './component/pg/editPg'
 import Help from './users/help';
 import Home from './users/home'
 import Navbar from './component/home/navbar'
-
+import PrivateRoute from '../src/component/home/privateroute'
 class App extends Component {
   render() {
     return (
@@ -22,15 +22,15 @@ class App extends Component {
         <div>
           <Navbar />
           <Switch>
-            <Route path='/' component={Home} exact={true} />
+            <PrivateRoute path='/' component={Home} exact={true} />
             <Route path="/users/register" component={Register} exact={true} />
             <Route path="/users/login" component={Login} exact={true} />
-            <Route path="/users/logout" component={Logout} exact={true} />
-            <Route path='/help' component={Help} exact={true} />
-            <Route path="/pg" component={PgList} exact={true} />
-            <Route path="/pg/new" component={PgNew} exact={true} />
-            <Route path="/pg/:id" component={PgShow} exact={true} />
-            <Route path="/pg/edit/:id" component={PgEdit} exact={true} />
+            <PrivateRoute path="/users/logout" component={Logout} exact={true} />
+            <PrivateRoute path='/help' component={Help} exact={true} />
+            <PrivateRoute path="/pg" component={PgList} exact={true} />
+            <PrivateRoute path="/pg/new" component={PgNew} exact={true} />
+            <PrivateRoute path="/pg/:id" component={PgShow} exact={true} />
+            <PrivateRoute path="/pg/edit/:id" component={PgEdit} exact={true} />
           </Switch>
 
         </div >

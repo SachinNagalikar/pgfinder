@@ -149,16 +149,12 @@ class Login extends React.Component {
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input name="password" id="password" autoComplete="current-password"
-                                type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} />
-                            <FormLabel color="danger" error={true}>{this.state.passwordError}</FormLabel>
-                            <Button onClick={this.toggleShow}>Show/Hide</Button>
+                                type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} />                                        <FormLabel color="danger" error={true}>{this.state.passwordError}</FormLabel>
                         </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me" />
+
                         <Button fullWidth variant="contained" color="primary" value="submit"
                             className={classes.submit} onClick={this.handleSubmit}>
-                            Login
+                            Sign in
          </Button>
                     </form>
                 </Paper>

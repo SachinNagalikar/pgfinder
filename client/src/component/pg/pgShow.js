@@ -2,14 +2,14 @@ import React from "react"
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import Lightbox from 'react-image-lightbox';
-import 'react-image-lightbox/style.css'
+import  FixRating  from '../review/fixReview'
 import Reviews from '../review/review'
-import FixRating from '../review/fixReview'
-
+import 'react-image-lightbox/style.css'
 import {
     Card, CardImg, CardText, CardBody,
     CardTitle, Button
 } from 'reactstrap'
+
 
 class PgShow extends React.Component {
     constructor(props) {
@@ -78,19 +78,31 @@ class PgShow extends React.Component {
         return (
             <div>
                 <div className="row">
-                    <div>
-                        {this.state.isLoaded &&
-                            <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
-                        }</div>
-                    {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
-                    <Card>
+                       
+                        {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
+                        <Card>
                         <CardBody>
-                            <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
-                            {/* <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle> */}
-                            <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
-                            <CardText>{`Address:-${this.state.pg.address}`}</CardText>
+                        <div>
+                            {this.state.isLoaded &&
+                            <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
+                            }</div>
+                                <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
+                                {/* <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle> */}
+                                <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
+                                <CardText>{`Address:-${this.state.pg.address}`}</CardText>
                             <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
-                            |<Button><Link to="/pg">back</Link></Button>|
+                            <label>
+                    PG Rating
+                </label>
+                <FixRating average={this.state.average} />
+                {this.state.isLoaded &&
+                    <span>Total Reviews {this.state.pg.review.length}</span>
+                }
+                <br />
+                {this.state.isLoaded &&
+                    <Reviews id={this.state.pg._id} pg={this.state.pg} calculateRating={this.calculateRating} />
+                }
+                                |<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
                         </CardBody>
                     </Card>
@@ -113,17 +125,7 @@ class PgShow extends React.Component {
                         />
                     )}
                 </div>
-                <label>
-                    PG Rating
-                </label>
-                <FixRating average={this.state.average} />
-                {this.state.isLoaded &&
-                    <span>Total Reviews {this.state.pg.review.length}</span>
-                }
-                <br />
-                {this.state.isLoaded &&
-                    <Reviews id={this.state.pg._id} pg={this.state.pg} calculateRating={this.calculateRating} />
-                }
+               
             </div>
         )
     }

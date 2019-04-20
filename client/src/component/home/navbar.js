@@ -21,7 +21,7 @@ const Navbar = (props) => {
                     <div className="form-inline my-2 my-lg-0">
                         {
                             !isAuthenticated ? <>
-                                <Link className="btn btn-warning" to="/users/register" role="button">Register</Link>
+                                <Link className="btn btn-warning" to="/users/register" role="button">Register</Link>|
                                 <Link className="btn btn-warning" to='/users/login' role="button">Login</Link>
 
                             </>

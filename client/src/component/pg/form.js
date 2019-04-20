@@ -62,13 +62,7 @@ class PgForm extends React.Component {
       pgRent: props.pgRent ? props.pgRent : '',
       deposit: props.deposit ? props.deposit : '',
       filename: '',
-      selectedOption: null
     }
-  }
-
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
   }
 
   pgNameChange = (e) => {
@@ -289,23 +283,14 @@ class PgForm extends React.Component {
             />
 
             <InputLabel>Image
-                      <Input type="file" multiple name="image" onChange={this.imageChange} />
+                      <input type="file" multiple name="image" onChange={this.imageChange} />
             </InputLabel>
-
             <Button fullWidth type="submit" variant="contained" color="primary">
               Add pg
           </Button>
             <Button size="small" color="primary"><Link to={`/pg`} >back</Link> </Button>
           </form>
         </Paper>
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-                </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Something here to give the footer a purpose!
-                </Typography>
-        </footer>
       </main>
     )
   }

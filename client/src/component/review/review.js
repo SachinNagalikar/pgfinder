@@ -50,7 +50,9 @@ class Reviews extends React.Component {
                         changeRating={this.changeRating}
                         starRatedColor="blue"
                         numberOfStars={5}
-                        name='rating'
+                    name='rating'
+                    starDimension="20px"
+                    starSpacing="5px"
                     />
                 }
             </React.Fragment>

@@ -1,15 +1,51 @@
-import React from "react"
+import React from 'react';
+import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import axios from '../config/axios'
 import { Link } from 'react-router-dom'
 import Lightbox from 'react-image-lightbox';
 import FixRating from '../review/fixReview'
 import Reviews from '../review/review'
 import 'react-image-lightbox/style.css'
-import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, Button
-} from 'reactstrap'
-
+import withStyles from '@material-ui/core/styles/withStyles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
+import {CardImg}from 'reactstrap'
+const styles = theme => ({
+  main: {
+    width: 'auto',
+    display: 'block', // Fix IE 11 issue.
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+      width: 400,
+      marginLeft: 'auto',
+      marginRight: 'auto',
+    },
+  },
+  paper: {
+    marginTop: theme.spacing.unit * 8,
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+  },
+  avatar: {
+    margin: theme.spacing.unit,
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing.unit,
+  },
+  submit: {
+    marginTop: theme.spacing.unit * 3,
+  },
+});
 
 class PgShow extends React.Component {
     constructor(props) {
@@ -45,6 +81,7 @@ class PgShow extends React.Component {
         })
             .then((response) => {
                 const pg = response.data
+                console.log(pg)
                 this.setState(() => ({ pg, isLoaded: true }))
                 this.calculateRating(pg)
             })
@@ -71,38 +108,42 @@ class PgShow extends React.Component {
     }
 
     render() {
-        const { photoIndex, isOpen } = this.state;
-        console.log('pgshow', this.state)
-        return (
-            <div>
-                <div className="row">
-
-                    {/* <CardImg width="200" height="150" src={this.state.pg.image}/> */}
-                    <Card>
-                        <CardBody>
-                            <div>
-                                {this.state.isLoaded &&
-                                    <CardImg width="200" height="150" src={this.state.pg.image[0]} onClick={() => this.setState({ isOpen: true })} />
-                                }</div>
-                            <CardTitle>{`PG Name:-${this.state.pg.pgName}`}</CardTitle>
-                            {/* <CardSubtitle>{`Amenities:-${this.state.pg.amenities}`}</CardSubtitle> */}
-                            <CardText>{`PG Type:-${this.state.pg.pgTypes}`}</CardText>
-                            <CardText>{`Address:-${this.state.pg.address}`}</CardText>
+        var { photoIndex, isOpen } = this.state;
+        console.log(this.state)
+        const { classes } = this.props;
+        return ( <main className={classes.main}>
+                <Card className={classes.card}>
+                <CardContent className={classes.cardContent}>
+                        <div>
+                            {this.state.isLoaded &&
+                            <CardImg width="200" height="150"
+                            image={this.state.pg.image[0]}
+                            onClick={() => this.setState({ isOpen: true })}
+                          />
+                        }</div>
+                        <Typography>
+                        {`PG Name:-${this.state.pg.pgName}`}
+                    </Typography>
+                                <Typography>{`Amenities:-${this.state.pg.amenities}`}</Typography>
+                                <Typography>{`PG Type:-${this.state.pg.pgTypes}`}</Typography>
+                                <Typography>{`Address:-${this.state.pg.address}`}</Typography>
                             <iframe title={this.state.pg._id} width="300" height="150" src={`https://maps.google.com/maps?q=${this.state.pg.address}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe><br />
                             <label>
                                 PG Rating
                 </label>
-                            <FixRating average={this.state.average} />
-                            <br /> {this.state.isLoaded &&
-                                <span>Total Reviews {this.state.pg.review.length}</span>
-                            }
-                            <br />
-                            {this.state.isLoaded &&
-                                <Reviews id={this.state.pg._id} pg={this.state.pg} calculateRating={this.calculateRating} />
-                            }<br />
-                            |<Button><Link to="/pg">back</Link></Button>|
+                <FixRating average={this.state.average} />
+               <br/> {this.state.isLoaded &&
+                    <span>Total Reviews {this.state.pg.review.length}</span>
+                }
+                <br />
+                {this.state.isLoaded &&
+                    <Reviews id={this.state.pg._id} pg={this.state.pg} calculateRating={this.calculateRating} />
+                    }<br />
+                    <CardActions>
+                                |<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
-                        </CardBody>
+                            </CardActions>
+                        </CardContent>
                     </Card>
                     {isOpen && (
                         <Lightbox
@@ -120,13 +161,15 @@ class PgShow extends React.Component {
                                     photoIndex: (photoIndex + 1) % this.state.pg.image.length,
                                 })
                             }
-                        />
+                />
+                
                     )}
-                </div>
-
-            </div>
+                </main>
         )
     }
 }
+PgShow.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default PgShow
+export default withStyles(styles)(PgShow);

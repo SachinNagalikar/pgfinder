@@ -22,7 +22,7 @@ const pgSchema = new Schema({
     ],
     amenities: [
         {
-            type:String
+            type: String
             // type: Schema.Types.ObjectId,
             // ref: 'Amenities'
         }
@@ -51,6 +51,16 @@ const pgSchema = new Schema({
         type: String,
         //required: true
     },
+    review: [
+        {
+            rating: {
+                type: Number
+            },
+            user: {
+                type: Schema.Types.ObjectId
+            }
+        }
+    ],
     user: {
         type: Schema.Types.ObjectId,
         ref: 'User'

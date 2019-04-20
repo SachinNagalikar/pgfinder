@@ -101,7 +101,7 @@
 //                         </div>
 //                         <div className="col-md-8">
 //                             <h2 >Listing PG's - {this.state.pgs.length}</h2>
-                            
+
 //                             {this.state.pgs.map((pg) => {
 //                                 return (<div className="form-wrapper" key={pg._id} >
 //                                     <Row>
@@ -137,9 +137,9 @@
 //                                             )}
 //                                         </Col>
 //                                     </Row>
-                                  
+
 //                                 </div>)
-                                  
+
 //                             })}
 //                                 </div>
 //                         </div>
@@ -218,172 +218,172 @@ const styles = theme => ({
 });
 
 class PgList extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            pgs: [],
-            actualPgs: [],
-            isLoaded: false,
-            isOpen: false,
-            photoIndex: 0
-        }
+  constructor(props) {
+    super(props)
+    this.state = {
+      pgs: [],
+      actualPgs: [],
+      isLoaded: false,
+      isOpen: false,
+      photoIndex: 0
     }
-    
-    onFilterChange(change) {
-        let pg = this.filterPGs(change);
-        this.setState({ pgs: pg });
+  }
+
+  onFilterChange(change) {
+    let pg = this.filterPGs(change);
+    this.setState({ pgs: pg });
+  }
+
+  filterPGs(change) {
+    let pg = [...this.state.actualPgs];
+    if (change.pgTypes.Boys) {
+      pg = pg.filter(x => x.pgTypes === "Boys");
     }
-    
-    filterPGs(change) {
-        let pg = [...this.state.actualPgs];
-        if (change.pgTypes.Boys) {
-            pg = pg.filter(x => x.pgTypes === "Boys");
-        }
-        else if (change.pgTypes.Girls) {
-            pg = pg.filter(x => x.pgTypes === "Girls");
-        }
-        let localPg = { singleShare: [], twoSharing: [], threeSharing: [], fourSharing: [] };
-        let hasFilter = false;
-        if (change.roomTypes.singleSharing.value) {
-            localPg.singleShare = pg.filter(x => x.roomTypes.includes(change.roomTypes.singleSharing.name));
-            hasFilter = true;
-        }
-        if (change.roomTypes.twoSharing.value) {
-            localPg.twoSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.twoSharing.name));
-            hasFilter = true;
-        }
-        if (change.roomTypes.threeSharing.value) {
-            localPg.threeSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.threeSharing.name));
-            hasFilter = true;
-        }
-        if (change.roomTypes.fourSharing.value) {
-            localPg.fourSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.fourSharing.name));
-            hasFilter = true;
-        }
-        if (hasFilter) {
-            pg = this.findUnique(localPg.singleShare.concat(localPg.twoSharing).concat(localPg.threeSharing).concat(localPg.fourSharing), d => d._id);
-        }
-        return pg;
+    else if (change.pgTypes.Girls) {
+      pg = pg.filter(x => x.pgTypes === "Girls");
     }
-    
-    findUnique(arr, predicate) {
-        var found = {};
-        arr.forEach(d => {
-            found[predicate(d)] = d;
-        });
-        return Object.keys(found).map(key => found[key]);
+    let localPg = { singleShare: [], twoSharing: [], threeSharing: [], fourSharing: [] };
+    let hasFilter = false;
+    if (change.roomTypes.singleSharing.value) {
+      localPg.singleShare = pg.filter(x => x.roomTypes.includes(change.roomTypes.singleSharing.name));
+      hasFilter = true;
     }
-    
-    componentDidMount() {
-        axios.get('/pgs', {
-            headers: {
-                'x-auth': localStorage.getItem('token')
-            }
+    if (change.roomTypes.twoSharing.value) {
+      localPg.twoSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.twoSharing.name));
+      hasFilter = true;
+    }
+    if (change.roomTypes.threeSharing.value) {
+      localPg.threeSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.threeSharing.name));
+      hasFilter = true;
+    }
+    if (change.roomTypes.fourSharing.value) {
+      localPg.fourSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.fourSharing.name));
+      hasFilter = true;
+    }
+    if (hasFilter) {
+      pg = this.findUnique(localPg.singleShare.concat(localPg.twoSharing).concat(localPg.threeSharing).concat(localPg.fourSharing), d => d._id);
+    }
+    return pg;
+  }
+
+  findUnique(arr, predicate) {
+    var found = {};
+    arr.forEach(d => {
+      found[predicate(d)] = d;
+    });
+    return Object.keys(found).map(key => found[key]);
+  }
+
+  componentDidMount() {
+    axios.get('/pgs', {
+      headers: {
+        'x-auth': localStorage.getItem('token')
+      }
+    })
+      .then((response) => {
+        const pgs = response.data
+
+        this.setState({
+          pgs: pgs, actualPgs: pgs, isLoaded: true
         })
-            .then((response) => {
-                const pgs = response.data
-    
-                this.setState({
-                    pgs: pgs, actualPgs: pgs, isLoaded: true
-                })
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-    reset() {
-        let pg = [...this.state.actualPgs]
-        this.setState({ pgs: pg })
-    }
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+  reset() {
+    let pg = [...this.state.actualPgs]
+    this.setState({ pgs: pg })
+  }
 
 
-    render() {
-        const { classes } =this.props;
-        const { photoIndex, isOpen } = this.state;
+  render() {
+    const { classes } = this.props;
+    const { photoIndex, isOpen } = this.state;
 
-        return (<React.Fragment>
-            
-          <CssBaseline />    
-        
-          <div className={classNames(classes.layout, classes.cardGrid)}>
-          <Grid container spacing={40}>
-          <Grid item xs={12} md={4}>
-          <FilterPg onFilterChange={this.onFilterChange.bind(this)}
-                    reset={this.reset.bind(this)} />
-                </Grid>
-                {/* <h2 >Listing PG's - {this.state.pgs.length}</h2> */}
-                    {this.state.pgs.map((pg) => {
-                        return (
-                            <Grid item key={pg._id} sm={6} md={4} lg={3}  >
-                                <Card className={classes.card}>
-                                    <CardMedia
-                                        className={classes.cardMedia}
-                                        image={pg.image[0]}
-                                        onClick={() => this.setState({ isOpen: true })}
-                                    />
-                                    <CardContent className={classes.cardContent}>
-                                        <Typography gutterBottom component="h2">
-                                    {`PG Name:-${pg.pgName}`}
-                            </Typography>
-                                        <Typography>
-                                          {`PG Address:-${pg.address}`}
-                            </Typography>
-                            <Typography>
-                                          {`PG Type:-${pg.pgTypes}`}
-                                </Typography>
-                                <Typography>
-                                          {`Room type:-${pg.roomTypes}`}
-                                </Typography>
-                                    </CardContent>
-                                    <CardActions>
-              <Button size="small"  color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>
-                              </CardActions>
-                              </Card>
-                              {isOpen && (
-                                 <Lightbox
-                                mainSrc={pg.image[photoIndex]}
-                               nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
-               prevSrc={pg.image[(photoIndex + pg.image.length - 1) % pg.image.length]}
-                onCloseRequest={() => this.setState({ isOpen: false })}
+    return (<React.Fragment>
+
+      <CssBaseline />
+
+      <div className={classNames(classes.layout, classes.cardGrid)}>
+        <Grid container spacing={40}>
+
+          <Grid container sm={6} md={4} lg={3} >
+            <FilterPg onFilterChange={this.onFilterChange.bind(this)}
+              reset={this.reset.bind(this)} />
+          </Grid>
+
+
+          {/* <h2 >Listing PG's - {this.state.pgs.length}</h2> */}
+          {this.state.pgs.map((pg) => {
+            return (
+              <Grid item key={pg._id} sm={6} md={4} lg={3}  >
+                <Card className={classes.card}>
+                  <CardMedia
+                    className={classes.cardMedia}
+                    image={pg.image[0]}
+                    onClick={() => this.setState({ isOpen: true })}
+                  />
+                  <CardContent className={classes.cardContent}>
+                    <Typography gutterBottom component="h2">
+                      {`PG Name:-${pg.pgName}`}
+                    </Typography>
+                    <Typography>
+                      {`PG Address:-${pg.address}`}
+                    </Typography>
+                    <Typography>
+                      {`PG Type:-${pg.pgTypes}`}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small" color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>
+                  </CardActions>
+                </Card>
+                {isOpen && (
+                  <Lightbox
+                    mainSrc={pg.image[photoIndex]}
+                    nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
+                    prevSrc={pg.image[(photoIndex + pg.image.length - 1) % pg.image.length]}
+                    onCloseRequest={() => this.setState({ isOpen: false })}
                     onMovePrevRequest={() =>
-                             this.setState({
-                              photoIndex: (photoIndex + pg.image.length - 1) % pg.image.length,
-                                        })
-                                            }
-                              onMoveNextRequest={() =>
-                                   this.setState({
-                                 photoIndex: (photoIndex + 1) % pg.image.length,
-                                           })
-                                            }
-                                            />
-                                           
-                                            )}   
-                     
-                           </Grid>
-               
-               )
-           })
-                  }
-                           </Grid>
-       
-          </div>
-              {/* Footer */}
-              <footer className={classes.footer}>
-                <Typography variant="h6" align="center" gutterBottom>
-                  Footer
-                </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                  Something here to give the footer a purpose!
-                </Typography>
-                    </footer>
-                
-                </React.Fragment>
-          );
-        }
-    }
+                      this.setState({
+                        photoIndex: (photoIndex + pg.image.length - 1) % pg.image.length,
+                      })
+                    }
+                    onMoveNextRequest={() =>
+                      this.setState({
+                        photoIndex: (photoIndex + 1) % pg.image.length,
+                      })
+                    }
+                  />
 
-      
-    PgList.propTypes = {
-        classes: PropTypes.object.isRequired,
-      };
-    export default withStyles(styles)(PgList);
+                )}
+
+              </Grid>
+
+            )
+          })
+          }
+        </Grid>
+
+      </div>
+      {/* Footer */}
+      <footer className={classes.footer}>
+        <Typography variant="h6" align="center" gutterBottom>
+          Footer
+                </Typography>
+        <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+          Something here to give the footer a purpose!
+                </Typography>
+      </footer>
+
+    </React.Fragment>
+    );
+  }
+}
+
+
+PgList.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+export default withStyles(styles)(PgList);

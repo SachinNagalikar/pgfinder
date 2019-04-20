@@ -20,7 +20,6 @@ class PgEdit extends React.Component {
         })
             .then((response) => {
                 const pg = response.data
-                console.log("raa", pg, 'pg')
                 this.setState(() => ({ pg: response.data, isLoaded: true }))
             })
             .catch((err) => {
@@ -39,7 +38,6 @@ class PgEdit extends React.Component {
             }
         })
             .then((response) => {
-                console.log('response', response.data)
                 const pg = response.data
                 this.props.history.push(`/pg/${pg._id}`)
             })

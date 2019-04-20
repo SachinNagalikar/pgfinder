@@ -9,14 +9,12 @@ class PgNew extends React.Component {
         this.submitHandle = this.submitHandle.bind(this)
     }
     submitHandle(data) {
-        console.log(data, '----newpg')
         axios.post('/pgs', data, {
             headers: {
                 'x-auth': localStorage.getItem('token')
             }
         })
             .then((response) => {
-                console.log("new",response.data)
                 const pg = response.data
                 this.props.history.push(`/pg/${pg._id}`)
             })
@@ -29,9 +27,9 @@ class PgNew extends React.Component {
         return (
             <div className="container">
                 <div className="row">
-                        <PgForm pgSubmitHandle={this.submitHandle} />
-                    </div>
+                    <PgForm pgSubmitHandle={this.submitHandle} />
                 </div>
+            </div>
 
         )
     }

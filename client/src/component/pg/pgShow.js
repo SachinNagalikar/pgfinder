@@ -12,9 +12,8 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Grid from '@material-ui/core/Grid';
 import { CardImg } from 'reactstrap'
+
 const styles = theme => ({
     main: {
         width: 'auto',
@@ -66,7 +65,6 @@ class PgShow extends React.Component {
             pg.review.forEach(item => {
                 total += item.rating
             })
-            console.log("sanjay", total)
             average = total / pg.review.length
             this.setState(() => ({ average, pg }))
         }
@@ -108,7 +106,6 @@ class PgShow extends React.Component {
 
     render() {
         var { photoIndex, isOpen } = this.state;
-        console.log(this.state)
         const { classes } = this.props;
         return (<main className={classes.main}>
             <Card className={classes.card}>

@@ -106,7 +106,6 @@ class Register extends React.Component {
         let isError = false
         const errors = {
             firstNameError: '',
-            middleNameError: '',
             lastNameError: '',
             emailError: '',
             passwordError: '',
@@ -118,10 +117,6 @@ class Register extends React.Component {
         } if (this.state.lastName.length === 0) {
             isError = true
             errors.lastNameError = "lastName not be empty"
-        }
-        if (this.state.middleName.length === 0) {
-            isError = true
-            errors.middleNameError = "middleName not be empty"
         }
         if (this.state.email.indexOf("@") === -1) {
             isError = true
@@ -153,11 +148,9 @@ class Register extends React.Component {
                 email: this.state.email,
                 mobile: this.state.mobile
             }
-            console.log(formData)
             alert("form submitted")
             axios.post('/users/register', formData)
                 .then((response) => {
-                    console.log(response.data)
                     this.setState(() => ({
                         firstName: '',
                         middleName: '',
@@ -198,7 +191,6 @@ class Register extends React.Component {
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="firstname">Middle name</InputLabel>
                             <Input id="middlename" name="middlename" autoComplete="middlename" value={this.state.middleName} onChange={this.handleMiddle} />
-                            <FormLabel color="danger" error={true}>{this.state.middleNameError}</FormLabel>
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="lastname">Last name</InputLabel>

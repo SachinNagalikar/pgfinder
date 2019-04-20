@@ -17,7 +17,6 @@ export default class FixRating extends React.Component {
     }
 
     render() {
-        // aggregateRating = 2.35;
         return (
             <StarRatings
                 rating={this.state.rating}

@@ -5,7 +5,6 @@ function authenticate(req, res, next) {
     if (token) {
         User.findByToken(token)
             .then((user) => {
-                console.log('token', user)
                 req.user = user,
                     req.token = token
                 next()

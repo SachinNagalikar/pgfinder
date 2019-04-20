@@ -56,6 +56,12 @@ const pgSchema = new Schema({
             rating: {
                 type: Number
             },
+            // foodRating: {    
+            //     type: Number
+            // },
+            // locationRating: {
+            //     type: Number
+            // },
             user: {
                 type: Schema.Types.ObjectId
             }

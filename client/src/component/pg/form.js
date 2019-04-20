@@ -1,277 +1,4 @@
-// import React from 'react'
-// import { Form, Label, Input, FormGroup, Button, Container, Row, Col } from 'reactstrap'
-// import axios from '../config/axios';
-// import Select from 'react-select';  
-
-// class PgForm extends React.Component {
-//     constructor(props) {
-//         super(props)
-//         this.state = {
-//             pgName: props.pgName ? props.pgName : '',
-//             roomTypes: props.roomTypes ? props.roomTypes : [],
-//             pgTypes: props.pgTypes ? props.pgTypes : '',
-//             foods: props.foods ? props.foods : '',
-//             amenities: props.amenities ? props.amenities : [],
-//             amenitiesData: [],
-//             address: props.address ? props.address : '',
-//             description: props.description ? props.description : '',
-//             rules: props.rules ? props.rules : '',
-//             pgRent: props.pgRent ? props.pgRent : '',
-//             deposit: props.deposit ? props.deposit : '',
-//             filename: props.filename ? props.filename : '',
-//             selectedOption: null,
-
-//         }
-//     }
-
-//     componentDidMount() {
-//         axios.get('/amenities', {
-//             headers: {
-//                 'x-auth': localStorage.getItem('token')
-//             }
-//         })
-//             .then((response) => {
-//                 const amenitiesData = response.data
-//                 console.log("amenities",amenitiesData)
-//                 this.setState(() => ({ amenitiesData }))
-//             })
-//             .catch((err) => {
-//                 console.log(err)
-//             })
-//     }
-//     handleChange = (selectedOption) => {
-//         this.setState({ selectedOption });
-//         console.log(`Option selected:`, selectedOption);
-//       }
-    
-
-//     pgNameChange = (e) => {
-//         const pgName = e.target.value
-//         this.setState(() => ({ pgName }))
-//     }
-
-//     roomTypeChange = (e) => {
-//         e.persist()
-//         var nameType = e.target.name
-//         var value = e.target.value
-//         var checked = e.target.checked
-//         if (checked) {
-//             this.setState((prevState) => ({
-//                 nameType: prevState.roomTypes.push(value)
-//             }))
-//         } else {
-//             this.setState((prevState) => ({
-//                 nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
-//             }))
-//         }
-//     }
-
-//     pgTypeChange = (e) => {
-//         e.persist()
-//         this.setState(() => ({
-//             [e.target.name]: e.target.value
-//         }))
-//     }
-
-//     foodChange = (e) => {
-//         e.persist()
-//         this.setState(() => ({
-//             [e.target.name]: e.target.value
-//         }))
-//     }
-
-//     amenitiesChange = (e) => {
-//         e.persist()
-//         var checked = e.target.checked
-//         var nameType = e.target.name
-//         var value = e.target.value
-//         //console.log(value)
-//         if (checked) {
-//             this.setState((prevState) => ({
-//                 nameType: prevState.amenities.push(value)
-//             }))
-//         } else {
-//             this.setState((prevState) => ({
-//                 nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
-//             }))
-//         }
-//     }
-
-//     addressChange = (e) => {
-//         const address = e.target.value
-//         this.setState(() => ({ address }))
-//     }
-
-//     descriptionChange = (e) => {
-//         const description = e.target.value
-//         this.setState(() => ({ description }))
-//     }
-
-//     rulesChange = (e) => {
-//         const rules = e.target.value
-//         this.setState(() => ({ rules }))
-//     }
-
-//     rentChange = (e) => {
-//         const pgRent = e.target.value
-//         this.setState(() => ({ pgRent }))
-//     }
-
-//     depositChange = (e) => {
-//         const deposit = e.target.value
-//         this.setState(() => ({ deposit }))
-//     }
-
-//     imageChange = (e) => {
-//         const filename = e.target.files
-//         this.setState(() => ({ filename }))
-//     }
-
-//     pgSubmitHandle = (e) => {
-//         e.preventDefault()
-//         const data = new FormData()
-//         data.append("pgName", this.state.pgName)
-//         data.append("roomTypes", this.state.roomTypes)
-//         data.append("pgTypes", this.state.pgTypes)
-//         data.append("foods", this.state.foods)
-//         data.append("amenities", this.state.amenities)
-//         data.append("address", this.state.address)
-//         data.append("description", this.state.description)
-//         data.append("rules", this.state.rules)
-//         data.append("pgRent", this.state.pgRent)
-//         data.append("deposit", this.state.deposit)
-//         for (let file of this.state.filename) {
-//             data.append("image", file)
-//         }
-//         console.log(data)
-//         // const formData = {
-//         //     pgName: this.state.pgName,
-//         //     roomTypes: this.state.roomTypes,
-//         //     pgTypes: this.state.pgTypes,
-//         //     foods: this.state.foods,
-//         //     amenities: this.state.amenities,
-//         //     address: this.state.address,
-//         //     description: this.state.description,
-//         //     rules: this.state.rules,
-//         //     pgRent: this.state.pgRent,
-//         //     deposit: this.state.deposit
-//         // }
-//         this.props.pgSubmitHandle(data)
-//     }
-
-//     render() {
-//         const { selectedOption } = this.state;
-//         return (
-//             <div className="container">
-//                 <div className="add" >
-//                     <Form onSubmit={this.pgSubmitHandle}>
-//                         <div className="row">
-//                             <div className="col-md-6">
-//                                     <Label>
-//                                         <Label><h5>PG Name</h5></Label>
-//                                         <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" />
-//                                     </Label>
-//                                     <Label>
-//                                         <Label><h5>Address</h5></Label>
-//                                         <Input type="textarea" value={this.state.address} onChange={this.addressChange}
-//                                             placeholder="Address" />
-//                                     </Label>
-//                                     <Label>
-//                                         <Label><h5>Description</h5></Label>
-//                                         <Input type="textarea" value={this.state.description} onChange={this.descriptionChange} placeholder="Description" />
-//                                     </Label>
-//                                     <Label>
-//                                         <Label><h5>PG Rules</h5></Label>
-//                                         <Input type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" />
-//                                     </Label>
-//                                     <Label>
-//                                         <Label><h5>Rent</h5></Label>
-//                                         <Input type="number" value={this.state.pgRent} onChange={this.rentChange}
-//                                             placeholder="Rent" />
-//                                     </Label>
-//                                     <Label>
-//                                         <Label><h5>Deposit</h5></Label>
-//                                         <Input type="number" value={this.state.deposit} onChange={this.depositChange}
-//                                             placeholder="Deposit" />
-//                                     </Label>
-//                             </div>
-//                             <div className="col-md-6">
-//                                     <Label>
-//                                         <h5> PG Type</h5>
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" /> Boys
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" />  Girls
-//                                     </Label>
-//                                     <Label>
-//                                         <h5>Food</h5>
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" />  Veg
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" /> Non-Veg
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" /> Both
-//                                     </Label>
-//                                     <Label>
-//                                         <h5>Room Type</h5>
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> One And Sharing
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Two And Sharing
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Three And Sharing
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" /> Four And Sharing
-//                                     </Label>
-//                                 <h2>amenities</h2>
-//                                     <Label> 
-//                                  <Input type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" />Wifi 
-//                                 </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" /> Laundery
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" /> Mess
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" /> T.V
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" /> Refrigerator
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" /> Lift
-//                                     </Label>
-//                                     <Label>
-//                                         <Input type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" /> Room Cleaning
-//                                     </Label>
-//                                 {this.props.filename &&
-//                                     <Label>
-//                                         Image:<br />
-//                                         <Input type="file" multiple name="image" onChange={this.imageChange} />
-//                                     </Label>}
-//                         </div>
-//                         </div>
-//                          <Button>submit</Button>
-//                     </Form>
-//                 </div>
-//             </div >
-//         )
-//     }
-// }
-
-// export default PgForm
 import React from 'react';
-import axios from '../config/axios';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -280,7 +7,6 @@ import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio'
-import {Redirect} from 'react-router-dom'
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -320,287 +46,262 @@ const styles = theme => ({
   },
 });
 
-
 class PgForm extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            pgName: props.pgName ? props.pgName : '',
-            roomTypes: props.roomTypes ? props.roomTypes : [],
-            pgTypes: props.pgTypes ? props.pgTypes : '',
-            foods: props.foods ? props.foods : '',
-            amenities: props.amenities ? props.amenities : [],
-            // amenitiesData: [],
-            address: props.address ? props.address : '',
-            description: props.description ? props.description : '',
-            rules: props.rules ? props.rules : '',
-            pgRent: props.pgRent ? props.pgRent : '',
-            deposit: props.deposit ? props.deposit : '',
-            filename: '',
-            selectedOption: null,
-
-      }
+  constructor(props) {
+    super(props)
+    this.state = {
+      pgName: props.pgName ? props.pgName : '',
+      roomTypes: props.roomTypes ? props.roomTypes : [],
+      pgTypes: props.pgTypes ? props.pgTypes : '',
+      foods: props.foods ? props.foods : '',
+      amenities: props.amenities ? props.amenities : [],
+      address: props.address ? props.address : '',
+      description: props.description ? props.description : '',
+      rules: props.rules ? props.rules : '',
+      pgRent: props.pgRent ? props.pgRent : '',
+      deposit: props.deposit ? props.deposit : '',
+      filename: ''
     }
+  }
 
-    componentDidMount() {
-        axios.get('/amenities', {
-            headers: {
-                'x-auth': localStorage.getItem('token')
-            }
-        })
-            .then((response) => {
-                const amenitiesData = response.data
-                console.log("amenities",amenitiesData)
-                this.setState(() => ({ amenitiesData }))
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
-    handleChange = (selectedOption) => {
-        this.setState({ selectedOption });
-        console.log(`Option selected:`, selectedOption);
-      }
-    
+  pgNameChange = (e) => {
+    const pgName = e.target.value
+    this.setState({ pgName: pgName })
+  }
 
-    pgNameChange = (e) => {
-        const pgName = e.target.value
-        this.setState({ pgName:pgName })
+  roomTypeChange = (e) => {
+    e.persist()
+    var nameType = e.target.name
+    var value = e.target.value
+    var checked = e.target.checked
+    if (checked) {
+      this.setState((prevState) => ({
+        nameType: prevState.roomTypes.push(value)
+      }))
+    } else {
+      this.setState((prevState) => ({
+        nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
+      }))
     }
+  }
 
-    roomTypeChange = (e) => {
-        e.persist()
-        // var nameType = e.target.name
-        var value = e.target.value
-        var checked = e.target.checked
-        if (checked) {
-            this.setState((prevState) => ({
-                nameType: prevState.roomTypes.push(value)
-            }))
-        } else {
-            this.setState((prevState) => ({
-                nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
-            }))
-        }
-    }
+  pgTypeChange = (e) => {
+    e.persist()
+    this.setState(() => ({
+      [e.target.name]: e.target.value
+    }))
+  }
 
-    pgTypeChange = (e) => {
-        e.persist()
-        this.setState(() => ({
-            [e.target.name]: e.target.value
-        }))
-    }
+  foodChange = (e) => {
+    e.persist()
+    this.setState(() => ({
+      [e.target.name]: e.target.value
+    }))
+  }
 
-    foodChange = (e) => {
-        e.persist()
-        this.setState(() => ({
-            [e.target.name]: e.target.value
-        }))
+  amenitiesChange = (e) => {
+    e.persist()
+    var checked = e.target.checked
+    var nameType = e.target.name
+    var value = e.target.value
+    //console.log(value)
+    if (checked) {
+      this.setState((prevState) => ({
+        nameType: prevState.amenities.push(value)
+      }))
+    } else {
+      this.setState((prevState) => ({
+        nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
+      }))
     }
+  }
 
-    amenitiesChange = (e) => {
-        e.persist()
-        var checked = e.target.checked
-        var nameType = e.target.name
-        var value = e.target.value
-        //console.log(value)
-        if (checked) {
-            this.setState((prevState) => ({
-                nameType: prevState.amenities.push(value)
-            }))
-        } else {
-            this.setState((prevState) => ({
-                nameType: prevState.amenities.splice(prevState.amenities.indexOf(value), 1)
-            }))
-        }
-    }
+  addressChange = (e) => {
+    const address = e.target.value
+    this.setState(() => ({ address }))
+  }
 
-    addressChange = (e) => {
-        const address = e.target.value
-        this.setState(() => ({ address }))
-    }
+  descriptionChange = (e) => {
+    const description = e.target.value
+    this.setState(() => ({ description }))
+  }
 
-    descriptionChange = (e) => {
-        const description = e.target.value
-        this.setState(() => ({ description }))
-    }
+  rulesChange = (e) => {
+    const rules = e.target.value
+    this.setState(() => ({ rules }))
+  }
 
-    rulesChange = (e) => {
-        const rules = e.target.value
-        this.setState(() => ({ rules }))
-    }
+  rentChange = (e) => {
+    const pgRent = e.target.value
+    this.setState(() => ({ pgRent }))
+  }
 
-    rentChange = (e) => {
-        const pgRent = e.target.value
-        this.setState(() => ({ pgRent }))
-    }
+  depositChange = (e) => {
+    const deposit = e.target.value
+    this.setState(() => ({ deposit }))
+  }
 
-    depositChange = (e) => {
-        const deposit = e.target.value
-        this.setState(() => ({ deposit }))
-    }
-
-    imageChange = (e) => {
-        const filename = e.target.files
-        this.setState(() => ({ filename }))
-    }
+  imageChange = (e) => {
+    const filename = e.target.files
+    this.setState(() => ({ filename }))
+  }
 
   pgSubmitHandle = (e) => {
     console.log(e)
     e.preventDefault()
-    let {pgName,roomTypes,pgTypes,foods,amenities,address,description,rules,pgRent,deposit} = this.state
-        const data = new FormData()
-        data.append("pgName", pgName)
-        data.append("roomTypes", roomTypes)
-        data.append("pgTypes", pgTypes)
-        data.append("foods", foods)
-        data.append("amenities", amenities)
-        data.append("address", address)
-        data.append("description", description)
-        data.append("rules", rules)
-        data.append("pgRent", pgRent)
-        data.append("deposit", deposit)
-        for (let file of this.state.filename) {
-            data.append("image", file)
+    let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
+    const data = new FormData()
+    data.append("pgName", pgName)
+    data.append("roomTypes", roomTypes)
+    data.append("pgTypes", pgTypes)
+    data.append("foods", foods)
+    data.append("amenities", amenities)
+    data.append("address", address)
+    data.append("description", description)
+    data.append("rules", rules)
+    data.append("pgRent", pgRent)
+    data.append("deposit", deposit)
+    for (let file of this.state.filename) {
+      data.append("image", file)
     }
-    console.log([pgName,roomTypes,pgTypes,foods,amenities,address,description,rules,pgRent,deposit])
-    
-        console.log("data",this.state)
-        this.props.pgSubmitHandle(data)
-    }
+    console.log([pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit])
 
-    render() {
-      const { selectedOption } = this.state;
-      console.log('form',this.state)
-      const { classes } = this.props;
-  return (
-    <main className={classes.main}>
-      <CssBaseline />
-      <Paper className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Add pgDetails
+    console.log("data", this.state)
+    this.props.pgSubmitHandle(data)
+  }
+
+  render() {
+    const { selectedOption } = this.state;
+    console.log('form', this.state)
+    const { classes } = this.props;
+    return (
+      <main className={classes.main}>
+        <CssBaseline />
+        <Paper className={classes.paper}>
+          <Avatar className={classes.avatar}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <Typography component="h1" variant="h5">
+            Add pgDetails
         </Typography>
-        <form className={classes.form} onSubmit={this.pgSubmitHandle}>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="pgName">pgName</InputLabel>
-            <Input  type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" autoComplete="pgName" autoFocus />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="Address">Address</InputLabel>
-            <Input name="Address" type="textarea" value={this.state.address} onChange={this.addressChange}
-                 placeholder="Address" autoComplete="Address" />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="Description">Description</InputLabel>
-            <Input name="Description" type="textarea"value={this.state.description} onChange={this.descriptionChange} placeholder="Description" autoComplete="Description" />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="Pgrules">Pg rules</InputLabel>
-            <Input name="Pgrules" type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" autoComplete="Pgrules" />
-          </FormControl>
-          <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="Rent">Rent</InputLabel>
-            <Input name="Rent" type="textarea" value={this.state.pgRent} onChange={this.rentChange}
-                      placeholder="Rent" autoComplete="Rent" />
-                  </FormControl>
-                  <FormControl margin="normal" required fullWidth>
-            <InputLabel htmlFor="Deposit">Deposit</InputLabel>
-            <Input name="Deposit"type="number" value={this.state.deposit} onChange={this.depositChange}
-                     placeholder="Deposit"  autoComplete="Deposit" />
-                  </FormControl>
-                  <InputLabel>pgTypes</InputLabel><br/>
-          <FormControlLabel
-            control={<Radio  type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes"color="primary" />}
-            label="Boys"
-                  />
-                   <FormControlLabel
-            control={<Radio  type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes"color="primary" />}
-            label="Girls"
-                  /><br/>
-                <InputLabel>Food</InputLabel><br/>
-          <FormControlLabel
-            control={<Radio  type="radio"value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods"color="primary" />}
-            label="Veg"
-                  />
-                   <FormControlLabel
-            control={<Radio  type="radio"  value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" color="primary" />}
-            label="Non-veg"
-                  />  
-                    <FormControlLabel
-            control={<Radio  type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" color="primary" />}
-            label="Both"
-                  /> <br/>
+          <form className={classes.form} onSubmit={this.pgSubmitHandle}>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="pgName">pgName</InputLabel>
+              <Input type="text" value={this.state.pgName} onChange={this.pgNameChange} placeholder="PG Name" autoComplete="pgName" autoFocus />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="Address">Address</InputLabel>
+              <Input name="Address" type="textarea" value={this.state.address} onChange={this.addressChange}
+                placeholder="Address" autoComplete="Address" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="Description">Description</InputLabel>
+              <Input name="Description" type="textarea" value={this.state.description} onChange={this.descriptionChange} placeholder="Description" autoComplete="Description" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="Pgrules">Pg rules</InputLabel>
+              <Input name="Pgrules" type="textarea" value={this.state.rules} onChange={this.rulesChange} placeholder="PG Rules" autoComplete="Pgrules" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="Rent">Rent</InputLabel>
+              <Input name="Rent" type="textarea" value={this.state.pgRent} onChange={this.rentChange}
+                placeholder="Rent" autoComplete="Rent" />
+            </FormControl>
+            <FormControl margin="normal" required fullWidth>
+              <InputLabel htmlFor="Deposit">Deposit</InputLabel>
+              <Input name="Deposit" type="number" value={this.state.deposit} onChange={this.depositChange}
+                placeholder="Deposit" autoComplete="Deposit" />
+            </FormControl>
+            <InputLabel>pgTypes</InputLabel><br />
+            <FormControlLabel
+              control={<Radio type="radio" value="Boys" checked={this.state.pgTypes.includes('Boys')} onChange={this.pgTypeChange} name="pgTypes" color="primary" />}
+              label="Boys"
+            />
+            <FormControlLabel
+              control={<Radio type="radio" value="Girls" checked={this.state.pgTypes.includes('Girls')} onChange={this.pgTypeChange} name="pgTypes" color="primary" />}
+              label="Girls"
+            /><br />
+            <InputLabel>Food</InputLabel><br />
+            <FormControlLabel
+              control={<Radio type="radio" value="Veg" checked={this.state.foods.includes('Veg')} onChange={this.foodChange} name="foods" color="primary" />}
+              label="Veg"
+            />
+            <FormControlLabel
+              control={<Radio type="radio" value="Non-veg" checked={this.state.foods.includes('Non-veg')} onChange={this.foodChange} name="foods" color="primary" />}
+              label="Non-veg"
+            />
+            <FormControlLabel
+              control={<Radio type="radio" value="Both" checked={this.state.foods.includes('Both')} onChange={this.foodChange} name="foods" color="primary" />}
+              label="Both"
+            /> <br />
 
-            <InputLabel>Room Types</InputLabel><br/>
-          <FormControlLabel
-            control={<Checkbox type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
-            label="One and Sharing"
-                  />
-                   <FormControlLabel
-            control={<Checkbox type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
-            label="Two and Sharing"
-                  />  
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
-            label="Three and Sharing"
-                  /> 
-             <FormControlLabel
-            control={<Checkbox type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes"  color="primary" />}
-            label="Four and Sharing"
-                  /> <br/>
-                  <InputLabel>Amenities</InputLabel><br/>
-                  <FormControlLabel
-            control={<Checkbox type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities"  color="primary" />}
-            label="Wifi"
-                  /> 
-                  <FormControlLabel
-            control={<Checkbox type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities"  color="primary"/>}
-            label="Laundery"
-                  /> 
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities"   color="primary"/>}
-            label="Mess"
-                  /> 
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities"   color="primary" />}
-            label="TV"
-                  /> 
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities"  color="primary"  />}
-            label="Refrigerator"
-                  /> 
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities"   color="primary"/>}
-            label="Lift"
-                  /> 
-                    <FormControlLabel
-            control={<Checkbox type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities"  color="primary"/>}
-            label="Room Cleaning"
-                  />
-                 
-                         <InputLabel>Image
+            <InputLabel>Room Types</InputLabel><br />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="One And Sharing" checked={this.state.roomTypes.includes('One And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
+              label="One and Sharing"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Two And Sharing" checked={this.state.roomTypes.includes('Two And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
+              label="Two and Sharing"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Three And Sharing" checked={this.state.roomTypes.includes('Three And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
+              label="Three and Sharing"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Four And Sharing" checked={this.state.roomTypes.includes('Four And Sharing')} onChange={this.roomTypeChange} name="roomTypes" color="primary" />}
+              label="Four and Sharing"
+            /> <br />
+            <InputLabel>Amenities</InputLabel><br />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Wifi" checked={this.state.amenities.includes('Wifi')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Wifi"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Laundery" checked={this.state.amenities.includes('Laundery')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Laundery"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Mess" checked={this.state.amenities.includes('Mess')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Mess"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="T.V" checked={this.state.amenities.includes('T.V')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="TV"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Refrigerator" checked={this.state.amenities.includes('Refrigerator')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Refrigerator"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Lift" checked={this.state.amenities.includes('Lift')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Lift"
+            />
+            <FormControlLabel
+              control={<Checkbox type="checkbox" value="Room Cleaning" checked={this.state.amenities.includes('Room Cleaning')} onChange={this.amenitiesChange} name="amenities" color="primary" />}
+              label="Room Cleaning"
+            />
+
+            <InputLabel>Image
                       <Input type="file" multiple name="image" onChange={this.imageChange} />
-                      </InputLabel>
-                  
-          <Button  fullWidth type="submit"  variant="contained" color="primary">
-            Add pg
+            </InputLabel>
+
+            <Button fullWidth type="submit" variant="contained" color="primary">
+              Add pg
           </Button>
-              </form>
-          </Paper>
-          <footer className={classes.footer}>
-                <Typography variant="h6" align="center" gutterBottom>
-                  Footer
+          </form>
+        </Paper>
+        <footer className={classes.footer}>
+          <Typography variant="h6" align="center" gutterBottom>
+            Footer
                 </Typography>
-                <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-                  Something here to give the footer a purpose!
+          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
+            Something here to give the footer a purpose!
                 </Typography>
-                    </footer>
-    </main>
-  )
-}
+        </footer>
+      </main>
+    )
+  }
 }
 
 PgForm.propTypes = {

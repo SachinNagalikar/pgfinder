@@ -16,7 +16,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-
+import FixRating from '../review/fixReview'
+import Reviews from '../review/review'
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -73,7 +74,8 @@ class PgList extends React.Component {
       actualPgs: [],
       isLoaded: false,
       isOpen: false,
-      photoIndex: 0
+      photoIndex: 0,
+      average:0
     }
   }
 
@@ -183,6 +185,7 @@ class PgList extends React.Component {
                     <Typography>
                       {`PG Type:-${pg.pgTypes}`}
                     </Typography>
+                
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>

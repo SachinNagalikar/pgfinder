@@ -62,8 +62,13 @@ class PgForm extends React.Component {
       pgRent: props.pgRent ? props.pgRent : '',
       deposit: props.deposit ? props.deposit : '',
       filename: '',
-      selectedOption: ''
+      selectedOption: null
     }
+  }
+
+  handleChange = (selectedOption) => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
   }
 
   pgNameChange = (e) => {
@@ -149,23 +154,18 @@ class PgForm extends React.Component {
   }
 
   pgSubmitHandle = (e) => {
-    console.log(e)
     e.preventDefault()
     let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
     const data = new FormData()
     data.append("pgName", pgName)
-    //data.append("roomTypes", roomTypes)
     for (let roomType of roomTypes) {
       data.append("roomTypes", roomType)
     }
-
     data.append("pgTypes", pgTypes)
     data.append("foods", foods)
-    //data.append("amenities", amenities)
     for (let amenity of amenities) {
       data.append("amenities", amenity)
     }
-
     data.append("address", address)
     data.append("description", description)
     data.append("rules", rules)
@@ -174,15 +174,11 @@ class PgForm extends React.Component {
     for (let file of this.state.filename) {
       data.append("image", file)
     }
-    console.log([pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit])
-
-    console.log("data", this.state)
     this.props.pgSubmitHandle(data)
   }
 
   render() {
     const { selectedOption } = this.state;
-    console.log('form', this.state)
     const { classes } = this.props;
     return (
       <main className={classes.main}>

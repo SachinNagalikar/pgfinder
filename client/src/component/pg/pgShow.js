@@ -95,13 +95,13 @@ class PgShow extends React.Component {
                     PG Rating
                 </label>
                 <FixRating average={this.state.average} />
-                {this.state.isLoaded &&
+               <br/> {this.state.isLoaded &&
                     <span>Total Reviews {this.state.pg.review.length}</span>
                 }
                 <br />
                 {this.state.isLoaded &&
                     <Reviews id={this.state.pg._id} pg={this.state.pg} calculateRating={this.calculateRating} />
-                }
+                }<br/>
                                 |<Button><Link to="/pg">back</Link></Button>|
                             <Button onClick={this.handleDelete}>delete</Button>
                         </CardBody>

@@ -21,8 +21,8 @@ export default class FixRating extends React.Component {
             <StarRatings
                 rating={this.state.rating}
                 starRatedColor='orange'
-                starDimension="40px"
-                starSpacing="15px"
+                starDimension="20px"
+                starSpacing="5px"
             />
         );
     }

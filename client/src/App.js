@@ -13,7 +13,7 @@ import PgEdit from './component/pg/editPg'
 import Help from './users/help';
 import Home from './users/home'
 import Navbar from './component/home/navbar'
-
+import Materialpg from './component/pg/materiallist'
 class App extends Component {
   render() {
     return (
@@ -27,6 +27,7 @@ class App extends Component {
             <Route path="/users/login" component={Login} exact={true} />
             <Route path="/users/logout" component={Logout} exact={true} />
             <Route path='/help' component={Help} exact={true} />
+            <Route path='/material' component={Materialpg} exact={true}/>
             <Route path="/pg" component={PgList} exact={true} />
             <Route path="/pg/new" component={PgNew} exact={true} />
             <Route path="/pg/:id" component={PgShow} exact={true} />

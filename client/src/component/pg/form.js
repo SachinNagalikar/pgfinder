@@ -61,7 +61,8 @@ class PgForm extends React.Component {
       rules: props.rules ? props.rules : '',
       pgRent: props.pgRent ? props.pgRent : '',
       deposit: props.deposit ? props.deposit : '',
-      filename: ''
+      filename: '',
+      selectedOption: ''
     }
   }
 
@@ -153,10 +154,18 @@ class PgForm extends React.Component {
     let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
     const data = new FormData()
     data.append("pgName", pgName)
-    data.append("roomTypes", roomTypes)
+    //data.append("roomTypes", roomTypes)
+    for (let roomType of roomTypes) {
+      data.append("roomTypes", roomType)
+    }
+
     data.append("pgTypes", pgTypes)
     data.append("foods", foods)
-    data.append("amenities", amenities)
+    //data.append("amenities", amenities)
+    for (let amenity of amenities) {
+      data.append("amenities", amenity)
+    }
+
     data.append("address", address)
     data.append("description", description)
     data.append("rules", rules)
@@ -205,7 +214,7 @@ class PgForm extends React.Component {
             </FormControl>
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="Rent">Rent</InputLabel>
-              <Input name="Rent" type="textarea" value={this.state.pgRent} onChange={this.rentChange}
+              <Input name="Rent" type="number" value={this.state.pgRent} onChange={this.rentChange}
                 placeholder="Rent" autoComplete="Rent" />
             </FormControl>
             <FormControl margin="normal" required fullWidth>

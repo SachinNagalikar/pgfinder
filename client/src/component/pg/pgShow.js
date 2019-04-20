@@ -113,7 +113,7 @@ class PgShow extends React.Component {
                     <div>
                         {this.state.isLoaded &&
                             <CardImg width="200" height="150"
-                                image={this.state.pg.image[0]}
+                                src={this.state.pg.image[0]}
                                 onClick={() => this.setState({ isOpen: true })}
                             />
                         }</div>

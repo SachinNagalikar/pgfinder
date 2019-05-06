@@ -62,6 +62,7 @@ router.post('/', upload.array('image', 4), authenticate, (req, res) => {
 router.put('/:id', authenticate, (req, res) => {
     const id = req.params.id
     const body = req.body
+    console.log(body)
     Pg.findOneAndUpdate({ _id: id }, { $set: body }, { new: true })
         .then((pg) => {
             res.send(pg)

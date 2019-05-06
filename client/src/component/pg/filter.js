@@ -7,6 +7,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio'
 import InputLabel from '@material-ui/core/InputLabel';
+import Input from '@material-ui/core/Input'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -58,10 +59,21 @@ class FilterPg extends React.Component {
     state.pgTypes[e.target.id] = e.target.checked;
     this.setState(() => (state), () => { this.props.onFilterChange(this.state); })
   }
+  // searchHandle(input){ 
+  //   console.log(input)
+  //   this.setState((prevState)=>{
+  //   return {
+  //   filteredTickets : prevState.tickets.filter((ticket)=>
+  //   ticket.ticket_code.indexOf(input) !== -1 ) 
+  //   } 
+  //   }) 
+  //   }
+    
 
   roomTypeChange = (e) => {
     e.persist();
     let state = { ...this.state };
+    console.log(state)
     state.roomTypes[e.target.id].value = e.target.checked;
     this.setState(() => (state), () => { this.props.onFilterChange(this.state); });
   }
@@ -110,7 +122,13 @@ class FilterPg extends React.Component {
           <Typography component="h1" variant="h5">
             Filter
         </Typography>
-          <InputLabel>
+          {/* <InputLabel>
+            Location
+          </InputLabel>
+          <FormControlLabel
+            control={<Input type="text"  name="address"  color="primary" />}
+          />*/}
+          <InputLabel> 
             <h5>PG Type</h5>
           </InputLabel>
           <FormControlLabel

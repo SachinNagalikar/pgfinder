@@ -248,15 +248,17 @@ class PgShow extends React.Component {
         console.log(this.state)
         const { classes } = this.props;
         return ( <main className={classes.main}>
-                <Card className={classes.card}>
-                <CardContent className={classes.cardContent}>
-                        <div>
+            <Card className={classes.card}>
+            <div>
                             {this.state.isLoaded &&
-                            <CardMedia width="200" height="150"
+                            <CardMedia 
                             image={this.state.pg.image[0]}
                             onClick={() => this.setState({ isOpen: true })}
-                          />
+                            />
+                           
                         }</div>
+                <CardContent className={classes.cardContent}>
+                       
                         <Typography>
                         {`PG Name:-${this.state.pg.pgName}`}
                     </Typography>

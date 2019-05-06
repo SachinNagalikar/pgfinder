@@ -293,7 +293,7 @@ class PgForm extends React.Component {
             </InputLabel>
 
             <Button fullWidth type="submit" variant="contained" color="primary">
-              Add pg
+              submit
           </Button>
             <Button size="small" color="primary"><Link to={`/pg`} >back</Link> </Button>
           </form>

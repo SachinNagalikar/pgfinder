@@ -9,8 +9,6 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel'
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -150,11 +148,12 @@ class Login extends React.Component {
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input name="password" id="password" autoComplete="current-password"
                                 type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} />                                        <FormLabel color="danger" error={true}>{this.state.passwordError}</FormLabel>
+                            <Button onClick={this.toggleShow}>Show/Hide</Button>
                         </FormControl>
 
                         <Button fullWidth variant="contained" color="primary" value="submit"
                             className={classes.submit} onClick={this.handleSubmit}>
-                            Sign in
+                            Login
          </Button>
                     </form>
                 </Paper>

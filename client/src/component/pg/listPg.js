@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'
 import FilterPg from './filter'
-import Paper from '@material-ui/core/Paper'
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Button from '@material-ui/core/Button';
@@ -16,8 +15,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import FixRating from '../review/fixReview'
-import Reviews from '../review/review'
+
 const styles = theme => ({
   appBar: {
     position: 'relative',
@@ -75,7 +73,7 @@ class PgList extends React.Component {
       isLoaded: false,
       isOpen: false,
       photoIndex: 0,
-      average:0
+      average: 0
     }
   }
 
@@ -94,8 +92,8 @@ class PgList extends React.Component {
     }
     let localPg = { singleShare: [], twoSharing: [], threeSharing: [], fourSharing: [] };
     let hasFilter = false;
-      if (change.roomTypes.singleSharing.value) {
-        
+    if (change.roomTypes.singleSharing.value) {
+
       localPg.singleShare = pg.filter(x => x.roomTypes.includes(change.roomTypes.singleSharing.name));
       hasFilter = true;
     }
@@ -159,74 +157,79 @@ class PgList extends React.Component {
       <div className={classNames(classes.layout, classes.cardGrid)}>
         <Grid container >
           <Grid item xs={4} sm={4} >
-        
-        <FilterPg onFilterChange={this.onFilterChange.bind(this)}
-                reset={this.reset.bind(this)} />
-           
-                </Grid>
-                <Grid item xs={8} sm={8} lg={8}>
-                <Grid container spacing={24}>
-        {this.state.pgs.map((pg) => {
-            return (
-              <Grid item key={pg._id} sm={3} md={3} lg={4}  >
-                <Card className={classes.card}>
-                  <CardMedia
-                    className={classes.cardMedia}
-                    image={pg.image[0]}
-                    onClick={() => this.setState({ isOpen: true })}
-                  />
-                  <CardContent className={classes.cardContent}>
-                    <Typography gutterBottom component="h2">
-                      {`PG Name:-${pg.pgName}`}
-                    </Typography>
-                    <Typography>
-                      {`PG Address:-${pg.address}`}
-                    </Typography>
-                    <Typography>
-                      {`PG Type:-${pg.pgTypes}`}
-                    </Typography>
-                
-                  </CardContent>
-                  <CardActions>
-                    <Button size="small" color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>
-                  </CardActions>
-                </Card>
-                {isOpen && (
-                  <Lightbox
-                    mainSrc={pg.image[photoIndex]}
-                    nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
-                    prevSrc={pg.image[(photoIndex + pg.image.length - 1) % pg.image.length]}
-                    onCloseRequest={() => this.setState({ isOpen: false })}
-                    onMovePrevRequest={() =>
-                      this.setState({
-                        photoIndex: (photoIndex + pg.image.length - 1) % pg.image.length,
-                      })
-                    }
-                    onMoveNextRequest={() =>
-                      this.setState({
-                        photoIndex: (photoIndex + 1) % pg.image.length,
-                      })
-                    }
-                  />
 
-                )}
+            <FilterPg onFilterChange={this.onFilterChange.bind(this)}
+              reset={this.reset.bind(this)} />
 
-              </Grid>
+          </Grid>
+          <Grid item xs={8} sm={8} lg={8}>
+            <Grid container spacing={24}>
+              {this.state.pgs.map((pg) => {
+                return (
+                  <Grid item key={pg._id} sm={3} md={3} lg={4}  >
+                    <Card className={classes.card}>
+                      <CardMedia
+                        className={classes.cardMedia}
+                        image={pg.image[0]}
+                        onClick={() => this.setState({ isOpen: true })}
+                      />
+                      <CardContent className={classes.cardContent}>
+                        <Typography gutterBottom component="h2">
+                          {`PG Name:-${pg.pgName}`}
+                        </Typography>
+                        <Typography>
+                          {`PG Address:-${pg.address}`}
+                        </Typography>
+                        <Typography>
+                          {`PG Type:-${pg.pgTypes}`}
+                        </Typography>
+                        <Typography>
+                          {`RoomTypes:-${pg.roomTypes}`}
+                        </Typography>
+                        <Typography>
+                          {`Amenities:-${pg.amenities}`}
+                        </Typography>
+                      </CardContent>
+                      <CardActions>
+                        <Button size="small" color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>
+                      </CardActions>
+                    </Card>
+                    {isOpen && (
+                      <Lightbox
+                        mainSrc={pg.image[photoIndex]}
+                        nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
+                        prevSrc={pg.image[(photoIndex + pg.image.length - 1) % pg.image.length]}
+                        onCloseRequest={() => this.setState({ isOpen: false })}
+                        onMovePrevRequest={() =>
+                          this.setState({
+                            photoIndex: (photoIndex + pg.image.length - 1) % pg.image.length,
+                          })
+                        }
+                        onMoveNextRequest={() =>
+                          this.setState({
+                            photoIndex: (photoIndex + 1) % pg.image.length,
+                          })
+                        }
+                      />
 
-            )
-          })
-          }        </Grid>
-        </Grid>
+                    )}
+
+                  </Grid>
+
+                )
+              })
+              }        </Grid>
+          </Grid>
         </Grid>
 
       </div>
       {/* Footer */}
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
-          Footer
-                </Typography>
+
+        </Typography>
         <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-          Something here to give the footer a purpose!
+          Developed By Kumar sundram and Sachin Naglikar
                 </Typography>
       </footer>
 
@@ -239,4 +242,5 @@ class PgList extends React.Component {
 PgList.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+
 export default withStyles(styles)(PgList);

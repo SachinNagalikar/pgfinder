@@ -62,13 +62,8 @@ class PgForm extends React.Component {
       pgRent: props.pgRent ? props.pgRent : '',
       deposit: props.deposit ? props.deposit : '',
       filename: '',
-      selectedOption: null
     }
-  }
-
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    console.log(`Option selected:`, selectedOption);
+    console.log('form',this.state)
   }
 
   pgNameChange = (e) => {
@@ -156,16 +151,19 @@ class PgForm extends React.Component {
   pgSubmitHandle = (e) => {
     e.preventDefault()
     let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
+    console.log(this.state,"sub")
     const data = new FormData()
     data.append("pgName", pgName)
-    for (let roomType of roomTypes) {
-      data.append("roomTypes", roomType)
-    }
+    // for (let roomType of roomTypes) {
+    //   data.append("roomTypes", roomType)
+    // }
+    data.append("roomTypes", roomTypes)
     data.append("pgTypes", pgTypes)
     data.append("foods", foods)
-    for (let amenity of amenities) {
-      data.append("amenities", amenity)
-    }
+    // for (let amenity of amenities) {
+    //   data.append("amenities", amenity)
+    // }
+    data.append("amenities", amenities)
     data.append("address", address)
     data.append("description", description)
     data.append("rules", rules)
@@ -289,23 +287,14 @@ class PgForm extends React.Component {
             />
 
             <InputLabel>Image
-                      <Input type="file" multiple name="image" onChange={this.imageChange} />
+                      <input type="file" multiple name="image" onChange={this.imageChange} />
             </InputLabel>
-
             <Button fullWidth type="submit" variant="contained" color="primary">
               submit
           </Button>
             <Button size="small" color="primary"><Link to={`/pg`} >back</Link> </Button>
           </form>
         </Paper>
-        <footer className={classes.footer}>
-          <Typography variant="h6" align="center" gutterBottom>
-            Footer
-                </Typography>
-          <Typography variant="subtitle1" align="center" color="textSecondary" component="p">
-            Something here to give the footer a purpose!
-                </Typography>
-        </footer>
       </main>
     )
   }

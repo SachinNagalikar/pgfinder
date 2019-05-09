@@ -20,7 +20,7 @@ class PgEdit extends React.Component {
         })
             .then((response) => {
                 const pg = response.data
-                this.setState(() => ({ pg: response.data, isLoaded: true }))
+                this.setState(() => ({ pg, isLoaded: true }))
             })
             .catch((err) => {
                 console.log(err)
@@ -29,9 +29,9 @@ class PgEdit extends React.Component {
 
     submitHandle = (data) => {
         var formData = {}
-        for (var pair of data.entries()) {
-            formData[pair[0]] = pair[1]
-        }
+        // for (var pair of data.entries()) {
+        //     formData[pair[0]] = pair[1]
+        // }
         axios.put(`/pgs/${this.state.pg._id}`, formData, {
             headers: {
                 'x-auth': localStorage.getItem('token')
@@ -47,10 +47,10 @@ class PgEdit extends React.Component {
     }
 
     render() {
-        const { classes } = this.props;
+        //const { classes } = this.props;
         return (
             <div className="container">
-                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities.join('').split(',')} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes.join('').split(',')} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
+                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
             </div>
         )
     }

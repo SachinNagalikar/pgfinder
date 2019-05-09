@@ -38,10 +38,7 @@ class Reviews extends React.Component {
         })
     }
 
-
-
     render() {
-        console.log(this.props)
         return (
             <React.Fragment>
                 {this.state.hide &&
@@ -50,9 +47,9 @@ class Reviews extends React.Component {
                         changeRating={this.changeRating}
                         starRatedColor="blue"
                         numberOfStars={5}
-                    name='rating'
-                    starDimension="20px"
-                    starSpacing="5px"
+                        name='rating'
+                        starDimension="20px"
+                        starSpacing="5px"
                     />
                 }
             </React.Fragment>

@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from '../config/axios'
-import { Link } from 'react-router-dom'
 import PgForm from './form'
 
 class PgNew extends React.Component {
@@ -9,6 +8,7 @@ class PgNew extends React.Component {
         this.submitHandle = this.submitHandle.bind(this)
     }
     submitHandle(data) {
+        console.log(data)
         axios.post('/pgs', data, {
             headers: {
                 'x-auth': localStorage.getItem('token')

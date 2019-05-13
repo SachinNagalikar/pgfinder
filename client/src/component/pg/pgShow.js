@@ -131,7 +131,7 @@ class PgShow extends React.Component {
                 </label>
                     <FixRating average={this.state.average} />
                     <br /> {this.state.isLoaded &&
-                        <span>Total Reviews {this.state.pg.review.length}</span>
+                        <span>Total Rating {this.state.pg.review.length}</span>
                     }
                     <br />
                     {this.state.isLoaded &&

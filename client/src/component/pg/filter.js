@@ -7,7 +7,6 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import Radio from '@material-ui/core/Radio'
 import InputLabel from '@material-ui/core/InputLabel';
-import Input from '@material-ui/core/Input'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -20,7 +19,7 @@ const styles = theme => ({
     marginLeft: theme.spacing.unit * 1,
     marginRight: theme.spacing.unit * 1,
     [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-      width: '60%',
+      width: '80%',
       marginLeft: 'auto',
       marginRight: 'auto',
     },
@@ -54,26 +53,17 @@ class FilterPg extends React.Component {
   pgTypeChange = (e) => {
     e.persist();
     let state = { ...this.state };
+    console.log(state,"filter state")
     state.pgTypes.Girls = false;
     state.pgTypes.Boys = false;
     state.pgTypes[e.target.id] = e.target.checked;
     this.setState(() => (state), () => { this.props.onFilterChange(this.state); })
   }
-  // searchHandle(input){ 
-  //   console.log(input)
-  //   this.setState((prevState)=>{
-  //   return {
-  //   filteredTickets : prevState.tickets.filter((ticket)=>
-  //   ticket.ticket_code.indexOf(input) !== -1 ) 
-  //   } 
-  //   }) 
-  //   }
-    
-
+  
   roomTypeChange = (e) => {
     e.persist();
     let state = { ...this.state };
-    console.log(state)
+    console.log()
     state.roomTypes[e.target.id].value = e.target.checked;
     this.setState(() => (state), () => { this.props.onFilterChange(this.state); });
   }
@@ -122,12 +112,6 @@ class FilterPg extends React.Component {
           <Typography component="h1" variant="h5">
             Filter
         </Typography>
-          {/* <InputLabel>
-            Location
-          </InputLabel>
-          <FormControlLabel
-            control={<Input type="text"  name="address"  color="primary" />}
-          />*/}
           <InputLabel> 
             <h5>PG Type</h5>
           </InputLabel>
@@ -144,19 +128,19 @@ class FilterPg extends React.Component {
           </InputLabel>
           <FormControlLabel
             control={<Checkbox type="checkbox" id="singleSharing" checked={this.state.roomTypes.singleSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-            label="One and Sharing"
+            label="Single Sharing"
           />
           <FormControlLabel
             control={<Checkbox type="checkbox" id="twoSharing" checked={this.state.roomTypes.twoSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-            label="Two and Sharing"
+            label="Two Sharing"
           />
           <FormControlLabel
             control={<Checkbox type="checkbox" id="threeSharing" checked={this.state.roomTypes.threeSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-            label="Three and Sharing"
+            label="Three Sharing"
           />
           <FormControlLabel
             control={<Checkbox type="checkbox" id="fourSharing" checked={this.state.roomTypes.fourSharing.value} name="roomTypes" onChange={this.roomTypeChange.bind(this)} color="primary" />}
-            label="Four and Sharing"
+            label="Four Sharing"
           />
           <Button type="button" fullWidth variant="contained"
             color="primary" onClick={this.reset.bind(this)}>Reset</Button>

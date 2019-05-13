@@ -9,6 +9,7 @@ class PgNew extends React.Component {
         this.submitHandle = this.submitHandle.bind(this)
     }
     submitHandle(data) {
+       
         axios.post('/pgs', data, {
             headers: {
                 'x-auth': localStorage.getItem('token')
@@ -16,6 +17,7 @@ class PgNew extends React.Component {
         })
             .then((response) => {
                 const pg = response.data
+                console.log(pg.roomTypes.join().split(","))
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {

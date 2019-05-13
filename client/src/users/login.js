@@ -7,6 +7,10 @@ import { setUser } from '../component/redux/actions/user'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import FormControl from '@material-ui/core/FormControl';
 import FormLabel from '@material-ui/core/FormLabel'
 import Input from '@material-ui/core/Input';
@@ -54,10 +58,11 @@ class Login extends React.Component {
         this.state = {
             email: '',
             password: '',
-            redirectList: false,
             emailError: '',
             passwordError: '',
-            hidden: true
+            hidden: true,
+            loginError:"",
+            redirectList: false
         }
     }
 
@@ -70,10 +75,11 @@ class Login extends React.Component {
         const password = e.target.value
         this.setState(() => ({ password }))
     }
+    handleClickShowPassword = () => {
+        this.setState(state => ({ showPassword: !state.showPassword }));
+      };
 
-    toggleShow = () => {
-        this.setState({ hidden: !this.state.hidden })
-    }
+    
 
     validate = () => {
         let isError = false;
@@ -108,16 +114,22 @@ class Login extends React.Component {
             }
             axios.post('/users/login', formData)
                 .then((response) => {
-                    const { token } = response.data
-                    console.log(token)
-                    localStorage.setItem('token', token)
-                    this.props.dispatch(setUser(token))
-                    this.setState(() => ({
-                        email: '',
-                        password: '',
-                        redirectList: true
-                    }))
-                })
+                    console.log(response.data)
+                    if (response.data !== "invalid email or password") {
+                        const { token } = response.data
+                        localStorage.setItem('token', token)
+                        this.props.dispatch(setUser(token))
+                        this.setState(() => ({              
+                            redirectList: true
+                        }))
+                    }
+        
+                    else {
+                        this.setState(() => ({
+                            loginError: response.data
+                        }))
+                    }
+                })   
                 .catch((err) => {
                     console.log(err)
                 })
@@ -127,6 +139,7 @@ class Login extends React.Component {
         if (this.state.redirectList) {
             this.props.history.push('/pg')
         }
+        console.log(this.state)
         const { classes } = this.props;
         return (
             <main className={classes.main}>
@@ -138,17 +151,31 @@ class Login extends React.Component {
                     <Typography component="h1" variant="h5">
                         Login
        </Typography>
+                     <FormLabel color="danger" error={true}>{this.state.loginError}</FormLabel>
                     <form className={classes.form} >
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
                             <Input id="email" name="email" autoComplete="email" value={this.state.email} onChange={this.emailChange} autoFocus />
-                            <FormLabel color="danger" error={true}>{this.state.emailError}</FormLabel>
+                            <span style={{color:"red"}}>{this.state.emailError}</span>
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input name="password" id="password" autoComplete="current-password"
-                                type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.passwordChange} />                                        <FormLabel color="danger" error={true}>{this.state.passwordError}</FormLabel>
-                            <Button onClick={this.toggleShow}>Show/Hide</Button>
+                                type={this.state.showPassword ? "text":"password" } value={this.state.password} onChange={this.passwordChange}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="Toggle password visibility"
+                                        onClick={this.handleClickShowPassword}
+                                    >
+                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            } 
+                                  
+                         />
+                            <span style={{color:"red"}}>{this.state.passwordError}</span>
+                         
                         </FormControl>
 
                         <Button fullWidth variant="contained" color="primary" value="submit"

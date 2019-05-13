@@ -8,8 +8,8 @@ const Navbar = (props) => {
     const { isAuthenticated, user } = props.user
     return (
         <div>
-            <nav className="navbar navbar-expand-lg navbar-dark bg-danger ">
-                <Link className="navbar-brand" to='/'>{' '}paying guest</Link>
+            <nav className="navbar navbar-expand-lg navbar-dark  " style={{backgroundColor:'#6a1b9a'}} >
+                <Link className="navbar-brand" to='/'>{' '}Paying Guest</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -21,8 +21,8 @@ const Navbar = (props) => {
                     <div className="form-inline my-2 my-lg-0">
                         {
                             !isAuthenticated ? <>
-                                <Link className="btn btn-warning" to="/users/register" role="button">Register</Link>|
-                                <Link className="btn btn-warning" to='/users/login' role="button">Login</Link>
+                                <Link style={{marginLeft:"5px" } } className="btn btn-warning" to="/users/register" role="button">Register</Link>
+                                <Link style={{marginLeft:"5px" } } className="btn btn-warning" to='/users/login' role="button">Login</Link>
 
                             </>
                                 :

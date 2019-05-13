@@ -32,7 +32,8 @@ router.post('/login', (req, res) => {
             })
         })
         .catch((err) => {
-            res.status('404').send(err)
+            res.send(err)
+            
         })
 })
 

@@ -14,6 +14,8 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Select from 'react-select';
+
 
 const styles = theme => ({
   main: {
@@ -63,7 +65,7 @@ class PgForm extends React.Component {
       deposit: props.deposit ? props.deposit : '',
       filename: '',
     }
-    console.log('form',this.state)
+    
   }
 
   pgNameChange = (e) => {
@@ -80,11 +82,13 @@ class PgForm extends React.Component {
       this.setState((prevState) => ({
         nameType: prevState.roomTypes.push(value)
       }))
+
     } else {
       this.setState((prevState) => ({
         nameType: prevState.roomTypes.splice(prevState.roomTypes.indexOf(value), 1)
       }))
     }
+    
   }
 
   pgTypeChange = (e) => {
@@ -151,16 +155,16 @@ class PgForm extends React.Component {
   pgSubmitHandle = (e) => {
     e.preventDefault()
     let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
-    console.log(this.state,"sub")
+    console.log(this.state.roomTypes)
     const data = new FormData()
     data.append("pgName", pgName)
-    // for (let roomType of roomTypes) {
-    //   data.append("roomTypes", roomType)
+    // for (let i = 1; i < roomTypes.length;i++) {
+    //   data.append("roomTypes[]", roomTypes[i])
     // }
-    data.append("roomTypes", roomTypes)
+     data.append("roomTypes", roomTypes)
     data.append("pgTypes", pgTypes)
     data.append("foods", foods)
-    // for (let amenity of amenities) {
+    // for (let amenity of amenities) 
     //   data.append("amenities", amenity)
     // }
     data.append("amenities", amenities)
@@ -177,6 +181,7 @@ class PgForm extends React.Component {
 
   render() {
     const { selectedOption } = this.state;
+    
     const { classes } = this.props;
     return (
       <main className={classes.main}>
@@ -210,7 +215,19 @@ class PgForm extends React.Component {
               <InputLabel htmlFor="Rent">Rent</InputLabel>
               <Input name="Rent" type="number" value={this.state.pgRent} onChange={this.rentChange}
                 placeholder="Rent" autoComplete="Rent" />
-            </FormControl>
+            </FormControl> 
+            {/* <FormControl margin="normal" required fullWidth>
+            <InputLabel htmlFor="Rent">Rent</InputLabel>
+  <Select
+    defaultValue={[]}
+                isMulti
+    type="number"
+    name="colors"
+
+    className="basic-multi-select"
+    classNamePrefix="select"
+  /> 
+            </FormControl> */}
             <FormControl margin="normal" required fullWidth>
               <InputLabel htmlFor="Deposit">Deposit</InputLabel>
               <Input name="Deposit" type="number" value={this.state.deposit} onChange={this.depositChange}

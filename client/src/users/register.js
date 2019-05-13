@@ -3,6 +3,10 @@ import '../../src/App.css'
 import PropTypes from 'prop-types';
 import axios from '../component/config/axios'
 import { Redirect } from 'react-router-dom'
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment'
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import Checkbox from '@material-ui/core/Checkbox';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -63,6 +67,8 @@ class Register extends React.Component {
             emailError: '',
             passwordError: '',
             mobileError: '',
+            showPassword: false,
+            register:'',
             hidden: true,
             redirectList: false
         }
@@ -76,6 +82,9 @@ class Register extends React.Component {
         const firstName = e.target.value
         this.setState(() => ({ firstName }))
     }
+    handleClickShowPassword = () => {
+        this.setState(state => ({ showPassword: !state.showPassword }));
+      };
     handleMiddle = (e) => {
         const middleName = e.target.value
         this.setState(() => ({ middleName }))
@@ -98,9 +107,7 @@ class Register extends React.Component {
         this.setState(() => ({ mobile }))
     }
 
-    toggleShow = () => {
-        this.setState({ hidden: !this.state.hidden })
-    }
+   
 
     validate = () => {
         let isError = false
@@ -148,18 +155,25 @@ class Register extends React.Component {
                 email: this.state.email,
                 mobile: this.state.mobile
             }
-            alert("form submitted")
+      
             axios.post('/users/register', formData)
                 .then((response) => {
-                    this.setState(() => ({
-                        firstName: '',
-                        middleName: '',
-                        lastName: '',
-                        password: '',
-                        email: '',
-                        mobile: '',
-                        redirectList: true
-                    }))
+                    console.log(response.data)
+                    if (!response.data.errmsg) {
+                        this.setState(() => ({
+                            firstName: '',
+                            middleName: '',
+                            lastName: '',
+                            password: '',
+                            email: '',
+                            mobile: '',
+                            redirectList: true  
+                        }))
+                    }  else {
+                        this.setState(() => ({
+                            register: "user already registered"
+                        }))
+                    }
                 })
                 .catch((err) => {
                     console.log(err)
@@ -171,7 +185,7 @@ class Register extends React.Component {
         if (this.state.redirectList) {
             return <Redirect to="/users/login" />
         }
-        const { classes } = this.props;
+        const { classes} = this.props;
         return (
             <main className={classes.main}>
                 <CssBaseline />
@@ -180,45 +194,55 @@ class Register extends React.Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Register
+                        Register<br/>
+                        <FormLabel color="danger" error={true}>{this.state.register}</FormLabel>
                     </Typography>
                     <form className={classes.form} onSubmit={this.handleSubmit}>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="firstName">First name</InputLabel>
                             <Input id="firstName" name="firstName" autoComplete="firstName" value={this.state.firstName} onChange={this.handleFirst} autoFocus />
-                            <FormLabel color="danger" error={true}>{this.state.firstNameError}</FormLabel>
+                            <span style={{color:"red"}}>{this.state.firstNameError}</span>
                         </FormControl>
-                        <FormControl margin="normal" required fullWidth>
+                        <FormControl margin="normal"  fullWidth>
                             <InputLabel htmlFor="firstname">Middle name</InputLabel>
                             <Input id="middlename" name="middlename" autoComplete="middlename" value={this.state.middleName} onChange={this.handleMiddle} />
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="lastname">Last name</InputLabel>
                             <Input id="lastname" name="lastname" autoComplete="lastname" value={this.state.lastName} onChange={this.handleLast} />
-                            <FormLabel color="danger" error={true}>{this.state.lastNameError}</FormLabel>
+                            <span style={{color:"red"}}>{this.state.lastNameError}</span>
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="mobile">Mobile</InputLabel>
                             <Input name="mobile" id="mobile" autoComplete="mobile"
                                 type="Number" value={this.state.mobile} onChange={this.handleMobile} />
-                            <FormLabel color="danger" error={true}>{this.state.mobileError}</FormLabel>
+                            <span style={{color:"red"}}>{this.state.mobileError}</span>
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="email">Email Address</InputLabel>
                             <Input id="email" name="email" autoComplete="email" value={this.state.email} onChange={this.handleEmail} />
-                            <FormLabel color="danger" error={true}>{this.state.emailError}</FormLabel>
+                            <span style={{color:"red"}}>{this.state.emailError}</span>
                         </FormControl>
                         <FormControl margin="normal" required fullWidth>
                             <InputLabel htmlFor="password">Password</InputLabel>
                             <Input name="password" id="password" autoComplete="current-password"
-                                type={this.state.hidden ? "password" : "text"} value={this.state.password} onChange={this.handlePassword} />
-                            <FormLabel color="danger" error={true}>{this.state.passwordError}</FormLabel>
-                            <Button onClick={this.toggleShow}>Show/Hide</Button>
+                                type={this.state.showPassword ?  "text":"password" } value={this.state.password} onChange={this.handlePassword}
+                            
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        aria-label="Toggle password visibility"
+                                        onClick={this.handleClickShowPassword}
+                                    >
+                                        {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                            } 
+                                  
+                         />
+                           <span style={{color:"red"}}>{this.state.passwordError}</span>
+                         
                         </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
-                        />
                         <Button fullWidth variant="contained" color="primary" value="submit"
                             className={classes.submit} onClick={this.handleSubmit}>
                             Register

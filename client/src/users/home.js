@@ -41,8 +41,8 @@ const styles = theme => ({
   },
 });
 class Home extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       name: "",
       location: ''
@@ -57,6 +57,7 @@ class Home extends React.Component {
   getLocation = (res) => {
     const location = res.target.value
     this.setState(() => ({ location }))
+    this.props.history.push('/pg')
   }
 
   render() {
@@ -73,13 +74,13 @@ class Home extends React.Component {
             location
                     </Typography>
 
-          <InputLabel htmlFor="location">Location</InputLabel>
-          <Input type="text" name="text" onChange={this.handleName} /><br />
+          <br/>
+          <Input type="text" name="text" onChange={this.handleName} placeholder="write your location to find pgs" fullWidth />
           <Button fullWidth variant="contained" color="primary" value="submit"
             className={classes.submit} onClick={this.getLocation}>
-            Location
+            Get the PG's
                         </Button><br />
-          <iframe title="myFrame" width="300" height="300" src={`https://maps.google.com/maps?q=${this.state.name}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe>
+          <iframe title="myFrame" width="300" height="300" src={`https://maps.google.com/maps?q=${this.state.name+` pgs`}&t=&z=13&ie=UTF8&iwloc=&output=embed`} ></iframe>
         </Paper>
         <footer className={classes.footer}>
           <Typography variant="h6" align="center" gutterBottom>

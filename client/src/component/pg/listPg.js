@@ -91,6 +91,7 @@ class PgList extends React.Component {
       pg = pg.filter(x => x.pgTypes === "Girls");
     }
     let localPg = { singleShare: [], twoSharing: [], threeSharing: [], fourSharing: [] };
+    
     let hasFilter = false;
     if (change.roomTypes.singleSharing.value) {
 
@@ -100,7 +101,9 @@ class PgList extends React.Component {
     if (change.roomTypes.twoSharing.value) {
       localPg.twoSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.twoSharing.name));
       hasFilter = true;
+      
     }
+    
     if (change.roomTypes.threeSharing.value) {
       localPg.threeSharing = pg.filter(x => x.roomTypes.includes(change.roomTypes.threeSharing.name));
       hasFilter = true;
@@ -131,7 +134,7 @@ class PgList extends React.Component {
     })
       .then((response) => {
         const pgs = response.data
-
+console.log(pgs)
         this.setState({
           pgs: pgs, actualPgs: pgs, isLoaded: true
         })
@@ -194,7 +197,8 @@ class PgList extends React.Component {
                         <Button size="small" color="primary"><Link to={`/pg/${pg._id}`} >view</Link> </Button>  <Button size="small" color="primary"><Link to={`/pg/edit/${pg._id}`}>edit</Link></Button>
                       </CardActions>
                     </Card>
-                    {isOpen && (
+                    {/* {isOpen && ( 
+                      
                       <Lightbox
                         mainSrc={pg.image[photoIndex]}
                         nextSrc={pg.image[(photoIndex + 1) % pg.image.length]}
@@ -211,8 +215,8 @@ class PgList extends React.Component {
                           })
                         }
                       />
-
-                    )}
+                      
+                    )} */}
 
                   </Grid>
 

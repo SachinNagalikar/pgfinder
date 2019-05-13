@@ -15,7 +15,7 @@ const User = () => {
                     <Link className="nav-link" to="/pg/new">Add PG<span className="sr-only">(current)</span></Link>
                 </li>
             </ul>
-            <Link className="btn btn-primary" to='/users/logout' role="button">Logout</Link>
+            <Link className="btn btn-warning" to='/users/logout' role="button">Logout</Link>
         </>
     )
 }

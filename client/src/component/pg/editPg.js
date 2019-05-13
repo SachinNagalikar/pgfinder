@@ -29,6 +29,8 @@ class PgEdit extends React.Component {
 
     submitHandle = (data) => {
         var formData = {}
+        
+
         for (var pair of data.entries()) {
             formData[pair[0]] = pair[1]
         }
@@ -38,8 +40,9 @@ class PgEdit extends React.Component {
             }
         })
             .then((response) => {
-                console.log(response,"editpg")
+                
                 const pg = response.data
+                console.log(pg.roomTypes.join().split(","))
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {

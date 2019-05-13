@@ -20,7 +20,7 @@ class PgEdit extends React.Component {
         })
             .then((response) => {
                 const pg = response.data
-                this.setState(() => ({ pg: response.data, isLoaded: true }))
+                this.setState(() => ({ pg, isLoaded: true }))
             })
             .catch((err) => {
                 console.log(err)

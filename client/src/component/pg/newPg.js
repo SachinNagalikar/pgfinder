@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from '../config/axios'
-import { Link } from 'react-router-dom'
 import PgForm from './form'
 
 class PgNew extends React.Component {

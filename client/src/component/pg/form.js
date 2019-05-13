@@ -110,7 +110,7 @@ class PgForm extends React.Component {
     var checked = e.target.checked
     var nameType = e.target.name
     var value = e.target.value
-    //console.log(value)
+
     if (checked) {
       this.setState((prevState) => ({
         nameType: prevState.amenities.push(value)

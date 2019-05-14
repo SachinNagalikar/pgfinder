@@ -42,7 +42,7 @@ router.post('/', upload.array('image', 4), authenticate, (req, res) => {
     const images = []
     req.files.forEach(file => {
         const imageUrl = file.destination
-        const link = "http://localhost:3001" + imageUrl.slice(1) + file.filename
+        const link =  process.env.PORT+ imageUrl.slice(1) + file.filename
         images.push(link)
     })
 

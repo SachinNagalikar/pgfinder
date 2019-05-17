@@ -12,6 +12,7 @@
     "jwt-decode": "^2.2.0",
     "loadash": "^1.0.0",
     "lodash": "^4.17.11",
+    "mdbreact": "^4.14.0",
     "react": "^16.8.5",
     "react-dom": "^16.8.5",
     "react-google-location": "^1.2.2",

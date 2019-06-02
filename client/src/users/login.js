@@ -149,7 +149,7 @@ class Login extends React.Component {
                         <LockOutlinedIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Login
+                        SIGN IN
        </Typography>
                      <FormLabel color="danger" error={true}>{this.state.loginError}</FormLabel>
                     <form className={classes.form} >

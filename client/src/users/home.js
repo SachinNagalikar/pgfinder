@@ -5,16 +5,10 @@ import Button from '@material-ui/core/Button';
 import PropTypes from 'prop-types';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
 import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Link from '@material-ui/core/Link';
-
-
-const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
-
+import withStyles from '@material-ui/core/styles/withStyles'
+import LayoutBody from '../homeComponent/LayoutBody';
+import Typography from '../homeComponent/Typography';
 const styles = theme => ({
   background: {
     backgroundImage: `url(${backgroundImage})`,
@@ -64,6 +58,11 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3,
   },
 });
+
+const backgroundImage =
+'https://images.unsplash.com/photo-1557967107-ffa9582f8565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=40'
+
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -85,35 +84,14 @@ class Home extends React.Component {
   }
 
   render() {
-   // console.log(this.state)
+    console.log(this.state)
     const { classes } = this.props;
+
     return (
       <main className={classes.main}>
+          <img style={{ display: 'none' }} src={backgroundImage} alt="" />
+
         <CssBaseline />
-
-        {/* Increase the network loading priority of the background image. */}
-      <img style={{ display: 'none' }} src={backgroundImage} alt="" />
-      <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
-      </Typography>
-      <Typography color="inherit" align="center" variant="h5" className={classes.h5}>
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
-      </Typography>
-      <Button
-        color="secondary"
-        variant="contained"
-        size="large"
-        className={classes.button}
-        component={linkProps => (
-          <Link {...linkProps} href="/premium-themes/onepirate/sign-up" variant="button" />
-        )}
-      >
-        Register
-      </Button>
-      <Typography variant="body2" color="inherit" className={classes.more}>
-        Discover the experience
-      </Typography>
-
         <Paper className={classes.paper}>
           <Avatar className={classes.avatar}>
             <LockOutlinedIcon />

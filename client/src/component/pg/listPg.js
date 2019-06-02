@@ -16,16 +16,31 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 
+//import Link from '@material-ui/core/Link';
+//import Button from '../users/Button';
+//import Typography from '../../users/Typography';
+
+const backgroundImage =
+'https://images.unsplash.com/photo-1557967107-ffa9582f8565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=40'
+
 const styles = theme => ({
+  background: {
+    backgroundImage: `url(${backgroundImage})`,
+    backgroundColor: '#7fc7d9', // Average color of the background image.
+    backgroundPosition: 'center',
+  },
+  more: {
+    marginTop: theme.spacing.unit * 2,
+  },
   appBar: {
     position: "relative"
   },
   icon: {
     marginRight: theme.spacing.unit * 2
   },
-  heroUnit: {
-    backgroundColor: theme.palette.background.paper
-  },
+  // heroUnit: {
+  //   backgroundColor: theme.palette.background.paper
+  // },
   heroContent: {
     maxWidth: 600,
     margin: "0 auto",
@@ -174,8 +189,8 @@ class PgList extends React.Component {
     return (
       <React.Fragment>
         <CssBaseline />
-
-        <div className={classNames(classes.layout, classes.cardGrid)}>
+        <img style={{ display: 'none' }} src={'https://images.unsplash.com/photo-1557967107-ffa9582f8565?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1534&q=40'} alt="" />
+        <div className={classNames(classes.layout, classes.cardGrid)} >
           <Grid container>
             <Grid item xs={4} sm={4}>
               <FilterPg

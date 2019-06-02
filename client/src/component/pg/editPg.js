@@ -42,7 +42,7 @@ class PgEdit extends React.Component {
             .then((response) => {
                 
                 const pg = response.data
-                console.log(pg.roomTypes.join(' ').split(","))
+                console.log(pg.roomTypes.join('').split(","))
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {
@@ -55,7 +55,8 @@ class PgEdit extends React.Component {
         console.log(this.props,"edit")
         return (
             <div className="container">
-            {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities.join('').split(',')} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes.join('').split(',')} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
+                {this.state.isLoaded && <PgForm pgName={this.state.pg.pgName} address={this.state.pg.address} amenities={this.state.pg.amenities.join('').split(',')} deposit={this.state.pg.deposit} description={this.state.pg.description} foods={this.state.pg.foods} pgRent={this.state.pg.pgRent} pgTypes={this.state.pg.pgTypes} roomTypes={this.state.pg.roomTypes.join('').split(',')} filename=
+            {this.state.pg.filename} rules={this.state.pg.rules} pgSubmitHandle={this.submitHandle} />}
         </div>
         )
     }

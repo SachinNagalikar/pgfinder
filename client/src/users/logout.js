@@ -18,7 +18,7 @@ class Logout extends React.Component {
                 console.log(response)
                 this.props.dispatch(removeUser({}))
                 localStorage.removeItem('token')
-                this.props.history.push('/users/login')
+                this.props.history.push('/')
             })
             .catch((err) => {
                 console.log(err)

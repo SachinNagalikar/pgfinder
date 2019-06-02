@@ -5,8 +5,11 @@ const User = () => {
     return (
         <>
             <ul className="navbar-nav mr-auto">
-                <li className="nav-item active">
+            {/* <li className="nav-item active">
                     <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+                </li> */}
+                <li className="nav-item active">
+                    <Link className="nav-link" to="/locationwisepgs">Location Search<span className="sr-only">(current)</span></Link>
                 </li>
                 <li className="nav-item active">
                     <Link className="nav-link " to="/pg">PG'S<span className="sr-only">(current)</span></Link>

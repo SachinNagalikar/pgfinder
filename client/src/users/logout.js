@@ -10,7 +10,6 @@ class Logout extends React.Component {
             loggedToken: localStorage.getItem('token')
         }
     }
-
     componentDidMount() {
         console.log('logout')
         axios.delete('/users/logout', { headers: { 'x-auth': localStorage.getItem('token') } })

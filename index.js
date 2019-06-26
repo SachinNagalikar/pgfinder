@@ -6,8 +6,8 @@ const { pgsRouter } = require('./app/controllers/pgs_controller')
 const { usersRouter } = require('./app/controllers/users_controllers')
 const path=require('path')
 const app = express()
-const port = 3001
-//const port = process.env.PORT || 3001
+//const port = 3001
+const port = process.env.PORT || 3001
 app.use(express.static(path.join(__dirname,"client/build")))
 app.use(express.json())
 app.use(cors())

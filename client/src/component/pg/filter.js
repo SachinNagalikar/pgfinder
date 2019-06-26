@@ -101,6 +101,7 @@ class FilterPg extends React.Component {
   }
 
   render() {
+    
     const { classes } = this.props;
     return (
       <main className={classes.main}>

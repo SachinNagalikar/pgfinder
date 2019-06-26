@@ -42,7 +42,7 @@ class PgEdit extends React.Component {
             .then((response) => {
                 
                 const pg = response.data
-                console.log(pg.roomTypes.join('').split(","))
+                console.log(pg.roomTypes.join(' ').split(","))
                 this.props.history.push(`/pg/${pg._id}`)
             })
             .catch((err) => {

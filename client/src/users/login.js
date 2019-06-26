@@ -118,7 +118,6 @@ class Login extends React.Component {
                     if (response.data !== "invalid email or password") {
                         const { token } = response.data
                         localStorage.setItem('token', token)
-                        this.props.dispatch(setUser(token))
                         this.setState(() => ({              
                             redirectList: true
                         }))
@@ -191,5 +190,4 @@ class Login extends React.Component {
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
 };
-export default withStyles(styles)(
-    connect()(Login))
+export default withStyles(styles)(Login)

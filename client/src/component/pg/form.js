@@ -155,7 +155,7 @@ class PgForm extends React.Component {
   pgSubmitHandle = (e) => {
     e.preventDefault()
     let { pgName, roomTypes, pgTypes, foods, amenities, address, description, rules, pgRent, deposit } = this.state
-    console.log(this.state.roomTypes)
+    //console.log(this.state.roomTypes)
     const data = new FormData()
     data.append("pgName", pgName)
     // for (let i = 1; i < roomTypes.length;i++) {

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import configureStore from './component/redux/store/configstore'
 
 import App from './App';
-
 const store = configureStore()
 
 store.subscribe(() => {

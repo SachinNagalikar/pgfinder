@@ -42,7 +42,7 @@ router.post('/', upload.array('image', 4), authenticate, (req, res) => {
     const images = []
     req.files.forEach(file => {
         const imageUrl = file.destination
-        const link = imageUrl.slice(1) + file.filename
+        const link = "/"+imageUrl.slice(1) + file.filename
         images.push(link)
     })
     console.log(req.files)

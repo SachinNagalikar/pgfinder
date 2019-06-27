@@ -64,7 +64,7 @@ class FilterPg extends React.Component {
     e.persist();
     let state = { ...this.state };
     console.log()
-    state.roomTypes[e.target.id].value = e.target.checked;
+    state.roomTypes[e.target.value].value = e.target.checked;
     this.setState(() => (state), () => { this.props.onFilterChange(this.state); });
   }
 

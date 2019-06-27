@@ -4,6 +4,7 @@ const router = express.Router()
 const { Pg } = require('../models/pg_detail')
 const { upload } = require('../middleware/imageUploads')
 const { authenticate } = require('../middleware/authenticate')
+const {authorization} = require('../middleware/authorization')
 
 router.get('/', authenticate, (req, res) => {
     Pg.find()
@@ -42,7 +43,7 @@ router.post('/', upload.array('image', 4), authenticate, (req, res) => {
     const images = []
     req.files.forEach(file => {
         const imageUrl = file.destination
-        const link = "/"+imageUrl.slice(1) + file.filename
+        const link = "http://localhost:3001"+imageUrl.slice(1) + file.filename
         images.push(link)
     })
     console.log(req.files)
@@ -60,7 +61,7 @@ router.post('/', upload.array('image', 4), authenticate, (req, res) => {
         })
 })
 
-router.put('/:id', authenticate, (req, res) => {
+router.put('/:id', authenticate,authorization, (req, res) => {
     const id = req.params.id
     const body = req.body
     console.log(body)
@@ -73,7 +74,7 @@ router.put('/:id', authenticate, (req, res) => {
         })
 })
 
-router.delete('/:id', authenticate, (req, res) => {
+router.delete('/:id', authenticate,authorization, (req, res) => {
     const id = req.params.id
     Pg.findByIdAndDelete({
         _id: id,

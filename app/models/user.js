@@ -41,11 +41,11 @@ const userSchema = new Schema({
         maxlength: 128,
         required: true
     },
+    
     role: {
         type: String,
-        enum: ['admin', 'user'],
-        default: 'user',
         required: true
+      
     },
     tokens: [
         {
@@ -55,6 +55,29 @@ const userSchema = new Schema({
         }
     ]
 })
+userSchema.pre('validate', function (next){
+    let count
+    if (this.isNew) {
+        this.constructor.countDocuments((err, data) => {
+            if (err) {
+                return next(err)
+            }
+            count=data
+        })
+            .then(() => {
+                if (count == 0) {
+                    this.role = "admin"
+                    next()
+                } else {
+                    this.role = "user"
+                    next()
+            }
+        })
+    } else {
+        next()
+    }
+})
+
 
 userSchema.pre('save', function (next) {
     if (this.isNew) {

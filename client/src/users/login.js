@@ -62,7 +62,6 @@ class Login extends React.Component {
             passwordError: '',
             hidden: true,
             loginError:"",
-            redirectList: false
         }
     }
 
@@ -114,13 +113,11 @@ class Login extends React.Component {
             }
             axios.post('/users/login', formData)
                 .then((response) => {
-                    console.log(response.data)
+                    
                     if (response.data !== "invalid email or password") {
                         const { token } = response.data
                         localStorage.setItem('token', token)
-                        this.setState(() => ({              
-                            redirectList: true
-                        }))
+                        
                     }
         
                     else {
@@ -128,6 +125,7 @@ class Login extends React.Component {
                             loginError: response.data
                         }))
                     }
+                    this.props.history.push('/pg/')
                 })   
                 .catch((err) => {
                     console.log(err)
@@ -135,10 +133,11 @@ class Login extends React.Component {
         }
     }
     render() {
-        if (this.state.redirectList) {
-            this.props.history.push('/pg')
-        }
-        console.log(this.state)
+        console.log(this.props)
+        // if (this.state.redirectList) {
+        //     this.props.history.push('/pg')
+        // }
+        
         const { classes } = this.props;
         return (
             <main className={classes.main}>
